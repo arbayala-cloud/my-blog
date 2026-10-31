@@ -1,83 +1,135 @@
 <!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Ashley's Blog</title><meta name="theme-color" content="#2f3e46"><link rel="manifest" href="manifest.json?v=2"><link rel="icon" href="icons/icon.svg?v=2" type="image/svg+xml"><link rel="icon" href="icons/favicon-32.png?v=2" sizes="32x32"><link rel="apple-touch-icon" href="icons/apple-touch-icon.png?v=2">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Lora:ital@0;1&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#f6f3ee;--card:#fffdf9;--fg:#2b2b2b;--mut:#6f6a62;--acc:#2f3e46;--gold:#a8864e;--line:#e4ded3}
-[data-t=dark]{--bg:#16191b;--card:#1e2225;--fg:#e8e4dc;--mut:#9a958c;--acc:#c9d3d6;--gold:#c9a96e;--line:#2c3236}
-@media(prefers-color-scheme:dark){[data-t=system]{--bg:#16191b;--card:#1e2225;--fg:#e8e4dc;--mut:#9a958c;--acc:#c9d3d6;--gold:#c9a96e;--line:#2c3236}}
-*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--fg);font:18px/1.7 Georgia,'Iowan Old Style',serif}
-header{position:sticky;top:0;background:var(--bg);border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:12px 18px;padding-top:max(12px,env(safe-area-inset-top));z-index:5}
-header a{color:var(--fg);text-decoration:none;font-size:20px;letter-spacing:.02em}
-button,.btn{font:15px system-ui,sans-serif;background:none;border:1px solid var(--line);color:var(--fg);border-radius:10px;padding:9px 14px;cursor:pointer;display:inline-flex;align-items:center;gap:8px}
-button.pri{background:var(--acc);color:var(--bg);border-color:var(--acc)}button.icon{border:0;padding:8px}
-svg.i{width:22px;height:22px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
-main{max-width:680px;margin:0 auto;padding:22px 18px 80px}
-.menu{position:fixed;inset:0;background:rgba(0,0,0,.3);display:none;z-index:9}.menu.on{display:block}
-.menu nav{position:absolute;right:0;top:0;bottom:0;width:min(300px,85vw);background:var(--card);padding:22px;padding-top:max(22px,env(safe-area-inset-top));display:flex;flex-direction:column;gap:6px;border-left:1px solid var(--line)}
-.menu nav a{color:var(--fg);text-decoration:none;font:17px system-ui,sans-serif;padding:12px 6px;border-bottom:1px solid var(--line);display:flex;gap:12px;align-items:center}
-.seg{display:flex;gap:6px;margin-top:14px;font-family:system-ui}.seg button{flex:1;justify-content:center}.seg button.on{background:var(--acc);color:var(--bg)}
-.post{padding:6px 0 26px;border-bottom:1px solid var(--line);margin-bottom:22px}.post h2{margin:0 0 2px;font-weight:normal;font-size:26px;line-height:1.3}.post h2 a{color:var(--fg);text-decoration:none}
-.date{color:var(--mut);font:14px system-ui,sans-serif;margin-bottom:12px}.more{color:var(--gold);font:15px system-ui;text-decoration:none}
-.body img{max-width:100%;height:auto;border-radius:10px;display:block;margin:14px 0}.body p{margin:0 0 1em}
+:root{--bg:#faf6f1;--card:#fffdfa;--fg:#2d2228;--mut:#7a6a72;--acc:#4a2540;--acc2:#6b3a5e;--gold:#a8864e;--line:#ebe2d8;--chip:#f3e9ef}
+[data-t=dark]{--bg:#1c1219;--card:#251a22;--fg:#efe6dd;--mut:#a8979f;--acc:#d9b8cc;--acc2:#c9a0bb;--gold:#d2b47a;--line:#3a2b35;--chip:#33242e}
+@media(prefers-color-scheme:dark){[data-t=system]{--bg:#1c1219;--card:#251a22;--fg:#efe6dd;--mut:#a8979f;--acc:#d9b8cc;--acc2:#c9a0bb;--gold:#d2b47a;--line:#3a2b35;--chip:#33242e}}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--fg);font:18px/1.75 Lora,Georgia,serif;transition:background .2s}
+.sans{font-family:system-ui,-apple-system,sans-serif}
+header{position:sticky;top:0;background:color-mix(in srgb,var(--bg) 92%,transparent);backdrop-filter:blur(6px);border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:10px 18px;padding-top:max(10px,env(safe-area-inset-top));z-index:5}
+.brand{display:flex;align-items:center;gap:10px;color:var(--fg);text-decoration:none;font:600 24px 'Cormorant Garamond',Georgia,serif;letter-spacing:.02em}.brand img{width:30px;height:30px;border-radius:8px}
+button,.btn{font:15px system-ui,sans-serif;background:none;border:1px solid var(--line);color:var(--fg);border-radius:999px;padding:9px 16px;cursor:pointer;display:inline-flex;align-items:center;gap:8px}
+button.pri{background:var(--acc);color:var(--bg);border-color:var(--acc)}button.icon{border:0;padding:8px;color:var(--acc)}
+svg.i{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;flex:none}
+main{max-width:680px;margin:0 auto;padding:22px 20px 90px}
+h1,h2,h3{font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;color:var(--acc);line-height:1.2}
+.hero{text-align:center;padding:26px 6px 30px;margin-bottom:26px;border-bottom:1px solid var(--line)}
+.hero h1{font-size:40px;margin:6px 0 4px}.hero p{color:var(--mut);margin:8px auto 0;max-width:30em;font-style:italic}
+.orn{display:block;margin:14px auto 0;width:140px;height:14px;color:var(--gold)}
+.menu{position:fixed;inset:0;background:rgba(20,8,16,.35);opacity:0;pointer-events:none;transition:opacity .2s;z-index:9}.menu.on{opacity:1;pointer-events:auto}
+.menu nav{position:absolute;right:0;top:0;bottom:0;width:min(310px,86vw);background:var(--card);padding:20px 22px;padding-top:max(20px,env(safe-area-inset-top));display:flex;flex-direction:column;border-left:1px solid var(--line);transform:translateX(100%);transition:transform .22s;overflow:auto}.menu.on nav{transform:none}
+.menu nav a{color:var(--fg);text-decoration:none;font:17px system-ui,sans-serif;padding:13px 4px;border-bottom:1px solid var(--line);display:flex;gap:14px;align-items:center}.menu nav a svg{color:var(--gold)}
+.menu nav a.cur{color:var(--acc);font-weight:600}
+.seg{display:flex;gap:6px;margin-top:10px}.seg button{flex:1;justify-content:center;padding:8px 6px}.seg button.on{background:var(--acc);color:var(--bg);border-color:var(--acc)}
+.post{padding:4px 0 28px;border-bottom:1px solid var(--line);margin-bottom:26px}.post h2{margin:0 0 4px;font-size:30px}.post h2 a{color:var(--acc);text-decoration:none}
+.date{color:var(--mut);font:13px system-ui,sans-serif;letter-spacing:.06em;text-transform:uppercase;margin-bottom:12px}.more{color:var(--gold);font:15px system-ui;text-decoration:none}
+.body img{max-width:100%;height:auto;border-radius:14px;display:block;margin:16px 0}.body p{margin:0 0 1em}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin:12px 0 4px}.chip{font:13px system-ui;background:var(--chip);color:var(--acc2);border-radius:999px;padding:3px 12px;text-decoration:none;border:0;cursor:pointer}
+.chip.x{display:inline-flex;gap:6px;align-items:center}
 .empty{color:var(--mut);text-align:center;padding:50px 0;font-family:system-ui}
-label{display:block;font:14px system-ui;color:var(--mut);margin:14px 0 6px}
-input,textarea{width:100%;font:17px/1.6 Georgia,serif;color:var(--fg);background:var(--card);border:1px solid var(--line);border-radius:10px;padding:11px}textarea{min-height:45vh;resize:vertical}
-.row{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px;align-items:center}.list .it{display:flex;justify-content:space-between;align-items:center;padding:12px 0;border-bottom:1px solid var(--line);gap:10px}
-.list .it span{flex:1}.msg{font:14px system-ui;color:var(--mut);min-height:20px;margin-top:8px}.tag{font:12px system-ui;color:var(--gold);border:1px solid var(--gold);border-radius:6px;padding:1px 6px;margin-left:6px}
+label.l{display:block;font:14px system-ui;color:var(--mut);margin:16px 0 6px}
+input,textarea{width:100%;font:17px/1.6 Lora,Georgia,serif;color:var(--fg);background:var(--card);border:1px solid var(--line);border-radius:12px;padding:11px}textarea{min-height:42vh;resize:vertical}input:focus,textarea:focus{outline:2px solid var(--acc2);outline-offset:1px}
+.row{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px;align-items:center}.list .it{display:flex;justify-content:space-between;align-items:center;padding:13px 0;border-bottom:1px solid var(--line);gap:10px}
+.list .it span{flex:1}.list a.it{color:var(--fg);text-decoration:none}.cnt{font:14px system-ui;color:var(--mut)}
+.msg{font:14px system-ui;color:var(--mut);min-height:20px;margin-top:8px}.tag{font:12px system-ui;color:var(--gold);border:1px solid var(--gold);border-radius:6px;padding:1px 6px;margin-left:6px}
+.pagehead{margin:4px 0 20px}.pagehead h1{font-size:34px;margin:0}.pagehead p{color:var(--mut);margin:4px 0 0;font:15px system-ui}
+footer{text-align:center;color:var(--mut);font:13px system-ui;padding:10px 0 30px}
 </style></head><body data-t="system">
-<header><a href="#/">Ashley's Blog</a><button class="icon" id="mbtn" aria-label="Menu"><svg class="i" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button></header>
+<header><a class="brand" href="#/"><img src="icons/icon-192.png?v=2" alt="">Ashley's Blog</a><button class="icon" id="mbtn" aria-label="Menu"><svg class="i" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button></header>
 <div class="menu" id="menu"><nav>
-<a href="#/"><svg class="i" viewBox="0 0 24 24"><path d="M4 5h16v14H4zM8 9h8M8 13h8"/></svg>Posts</a>
-<a href="#/write"><svg class="i" viewBox="0 0 24 24"><path d="M5 19l1-4L16 5l3 3L9 18zM14 7l3 3"/></svg>Write</a>
-<div style="font:14px system-ui;color:var(--mut);margin-top:18px">Appearance</div>
+<a href="#/" data-r="home"><svg class="i" viewBox="0 0 24 24"><path d="M4 11l8-7 8 7v9h-5v-6H9v6H4z"/></svg>Home</a>
+<a href="#/tags" data-r="tags"><svg class="i" viewBox="0 0 24 24"><path d="M3 12V4h8l9 9-8 8z"/><circle cx="7.5" cy="8.5" r="1.3"/></svg>Categories</a>
+<a href="#/archive" data-r="archive"><svg class="i" viewBox="0 0 24 24"><path d="M4 5h16v4H4zM5 9v10h14V9M10 13h4"/></svg>Archive</a>
+<a href="#/about" data-r="about"><svg class="i" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c1-4 4-6 8-6s7 2 8 6"/></svg>About</a>
+<a href="#/write" data-r="write"><svg class="i" viewBox="0 0 24 24"><path d="M12 3c3 3 4.5 6 4.5 9L12 21 7.5 12C7.5 9 9 6 12 3z"/><path d="M12 13v8"/><circle cx="12" cy="12" r="1.2"/></svg>Write</a>
+<div class="sans" style="font-size:13px;color:var(--mut);margin-top:22px;letter-spacing:.06em;text-transform:uppercase">Appearance</div>
 <div class="seg" id="seg"><button data-v="light">Light</button><button data-v="dark">Dark</button><button data-v="system">System</button></div>
-<div style="margin-top:auto;font:12px system-ui;color:var(--mut)">Version 2026.10.31b</div></nav></div>
+<div class="sans" style="margin-top:auto;padding-top:20px;font-size:12px;color:var(--mut)">Version 2026.10.31c</div></nav></div>
 <main id="app"></main>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
 <script>
+/* ===== Editable text: change these words any time ===== */
+const SITE={
+  heroTitle:"Ashley's Blog",
+  heroLine:"Faith, marriage, and the beauty of biblical womanhood.",
+  aboutTitle:"About Me",
+  about:["Hello, and welcome. I'm Ashley, a Christian wife living in Fort Worth, Texas, originally from St. Albans, Vermont.",
+         "I write about biblical womanhood and marriage, and I speak against feminism. My husband Derek and I run Diamond Hill Grassroots Media together, where I serve as COO.",
+         "I also have a soft spot for the 90s and early 2000s. Thank you for reading."]
+};
+/* ===================================================== */
+
 const SB_URL='https://pbkrwghuwqufosodcxtw.supabase.co',SB_KEY='sb_publishable_bzFGyPbxFyfgU4CQ72ryuQ_S4vwUvt2';
 let sb=null;try{sb=supabase.createClient(SB_URL,SB_KEY,{auth:{persistSession:true,autoRefreshToken:true,storageKey:'blog-auth'}})}catch(e){}
 const $=s=>document.querySelector(s),app=$('#app');
-const esc=s=>String(s||'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const fmt=d=>new Date(d).toLocaleDateString(undefined,{year:'numeric',month:'long',day:'numeric'});
+const ORN='<svg class="orn" viewBox="0 0 140 14"><path d="M2 7h52M86 7h52" stroke="currentColor" stroke-width="1"/><path d="M70 1l6 6-6 6-6-6z" fill="none" stroke="currentColor" stroke-width="1.2"/><circle cx="58" cy="7" r="1.5" fill="currentColor"/><circle cx="82" cy="7" r="1.5" fill="currentColor"/></svg>';
 function render(b){return String(b||'').split(/\n{2,}/).map(p=>{const m=p.trim().match(/^!\[(.*?)\]\((https:\/\/[^\s)]+)\)$/);return m?`<img src="${esc(m[2])}" alt="${esc(m[1])}" loading="lazy">`:'<p>'+esc(p).replace(/!\[(.*?)\]\((https:\/\/[^\s)]+)\)/g,'<img src="$2" alt="$1" loading="lazy">').replace(/\n/g,'<br>')+'</p>'}).join('')}
-function plain(b){return String(b||'').replace(/!\[.*?\]\(.*?\)/g,'').trim()}
-// theme
-function setTheme(v){document.body.dataset.t=v;localStorage.blogTheme=v;document.querySelectorAll('#seg button').forEach(b=>b.classList.toggle('on',b.dataset.v===v))}
+const plain=b=>String(b||'').replace(/!\[.*?\]\(.*?\)/g,'').trim();
+const chips=t=>(t&&t.length)?'<div class="chips">'+t.map(x=>`<a class="chip" href="#/tag/${encodeURIComponent(x)}">${esc(x)}</a>`).join('')+'</div>':'';
+function setTheme(v){document.body.dataset.t=v;localStorage.blogTheme=v;document.querySelectorAll('#seg button').forEach(b=>b.classList.toggle('on',b.dataset.v===v));
+  const dark=v==='dark'||(v==='system'&&matchMedia('(prefers-color-scheme: dark)').matches);document.querySelector('meta[name=theme-color]').content=dark?'#1c1219':'#4a2540'}
 setTheme(localStorage.blogTheme||'system');$('#seg').onclick=e=>{if(e.target.dataset.v)setTheme(e.target.dataset.v)};
+matchMedia('(prefers-color-scheme: dark)').addEventListener('change',()=>setTheme(localStorage.blogTheme||'system'));
 $('#mbtn').onclick=()=>$('#menu').classList.add('on');$('#menu').onclick=e=>{if(e.target.id==='menu'||e.target.closest('a'))$('#menu').classList.remove('on')};
-async function list(){app.innerHTML='<div class="empty">Loading</div>';
-  const {data,error}=await sb.from('posts').select('id,title,body,created_at').eq('published',true).order('created_at',{ascending:false});
-  if(error){app.innerHTML='<div class="empty">Posts are not available yet.</div>';return}
-  if(!data.length){app.innerHTML='<div class="empty">No posts yet.</div>';return}
-  app.innerHTML=data.map(p=>{const t=plain(p.body),long=t.length>600;const img=(p.body.match(/!\[.*?\]\((https:\/\/[^\s)]+)\)/)||[])[1];
-   return `<article class="post"><h2><a href="#/p/${p.id}">${esc(p.title)||'Untitled'}</a></h2><div class="date">${fmt(p.created_at)}</div><div class="body">${long?(img?`<img src="${esc(img)}" loading="lazy">`:'')+'<p>'+esc(t.slice(0,600))+'...</p>':render(p.body)}</div>${long?`<a class="more" href="#/p/${p.id}">Continue reading</a>`:''}</article>`}).join('')}
+let CACHE=null;
+async function pub(){if(CACHE)return CACHE;const {data,error}=await sb.from('posts').select('*').eq('published',true).order('created_at',{ascending:false});if(error)throw error;CACHE=data.map(p=>({...p,tags:Array.isArray(p.tags)?p.tags:[]}));return CACHE}
+function card(p){const t=plain(p.body),long=t.length>600,img=(p.body.match(/!\[.*?\]\((https:\/\/[^\s)]+)\)/)||[])[1];
+  return `<article class="post"><div class="date">${fmt(p.created_at)}</div><h2><a href="#/p/${p.id}">${esc(p.title)||'Untitled'}</a></h2>${chips(p.tags)}<div class="body">${long?(img?`<img src="${esc(img)}" loading="lazy">`:'')+'<p>'+esc(t.slice(0,600))+'...</p>':render(p.body)}</div>${long?`<a class="more" href="#/p/${p.id}">Continue reading</a>`:''}</article>`}
+const head=(t,s)=>`<div class="pagehead"><h1>${esc(t)}</h1>${s?`<p>${s}</p>`:''}</div>`;
+const fail='<div class="empty">Posts could not load. Please try again.</div>';
+async function home(){app.innerHTML=`<section class="hero"><h1>${esc(SITE.heroTitle)}</h1><p>${esc(SITE.heroLine)}</p>${ORN}</section><div id="pl" class="empty">Loading</div>`;
+  try{const d=await pub();$('#pl').outerHTML=d.length?d.map(card).join(''):'<div class="empty">No posts yet.</div>'}catch(e){$('#pl').outerHTML=fail}}
+async function tagPage(t){try{const d=(await pub()).filter(p=>p.tags.includes(t));app.innerHTML=head(t,d.length+(d.length===1?' post':' posts')+' &middot; <a class="more" href="#/tags">All categories</a>')+d.map(card).join('')}catch(e){app.innerHTML=fail}}
+async function tags(){try{const c={};(await pub()).forEach(p=>p.tags.forEach(t=>c[t]=(c[t]||0)+1));const k=Object.keys(c).sort((a,b)=>a.localeCompare(b));
+  app.innerHTML=head('Categories')+(k.length?'<div class="list">'+k.map(t=>`<a class="it" href="#/tag/${encodeURIComponent(t)}"><span>${esc(t)}</span><span class="cnt" style="flex:none">${c[t]}</span></a>`).join('')+'</div>':'<div class="empty">No categories yet.</div>')}catch(e){app.innerHTML=fail}}
+async function archive(){try{const d=await pub(),g={};d.forEach(p=>{const k=new Date(p.created_at).toLocaleDateString(undefined,{year:'numeric',month:'long'});(g[k]=g[k]||[]).push(p)});
+  app.innerHTML=head('Archive')+(d.length?Object.entries(g).map(([m,ps])=>`<h3 style="margin:22px 0 4px;font-size:24px">${esc(m)} <span class="cnt">${ps.length}</span></h3><div class="list">${ps.map(p=>`<a class="it" href="#/p/${p.id}"><span>${esc(p.title)||'Untitled'}</span><span class="cnt" style="flex:none">${new Date(p.created_at).getDate()}</span></a>`).join('')}</div>`).join(''):'<div class="empty">No posts yet.</div>')}catch(e){app.innerHTML=fail}}
+function about(){app.innerHTML=`<section class="hero" style="text-align:left;border:0"><h1>${esc(SITE.aboutTitle)}</h1>${ORN.replace('class="orn"','class="orn" style="margin:10px 0 18px"')}${SITE.about.map(p=>`<p style="font-style:normal;color:var(--fg);max-width:none;margin:0 0 1em">${esc(p)}</p>`).join('')}</section>`}
 async function view(id){const {data}=await sb.from('posts').select('*').eq('id',id).maybeSingle();
-  app.innerHTML=data?`<article class="post" style="border:0"><h2>${esc(data.title)||'Untitled'}</h2><div class="date">${fmt(data.created_at)}</div><div class="body">${render(data.body)}</div></article><a class="more" href="#/">All posts</a>`:'<div class="empty">Post not found.</div>';scrollTo(0,0)}
+  app.innerHTML=data?`<article class="post" style="border:0"><div class="date">${fmt(data.created_at)}</div><h2>${esc(data.title)||'Untitled'}</h2>${chips(data.tags)}<div class="body">${render(data.body)}</div></article><div style="text-align:center">${ORN}</div><p style="text-align:center"><a class="more" href="#/">All posts</a></p>`:'<div class="empty">Post not found.</div>';scrollTo(0,0)}
+let HASTAGS=null,ALL=[];
 async function write(){const {data:{session}}=await sb.auth.getSession();
-  if(!session){app.innerHTML=`<h2 style="font-weight:normal">Sign in</h2><label>Email</label><input id="em" type="email" autocomplete="username"><label>Password</label><input id="pw" type="password" autocomplete="current-password"><div class="row"><button class="pri" id="si">Sign in</button></div><div class="msg" id="msg"></div>`;
+  if(!session){app.innerHTML=head('Sign in')+`<label class="l">Email</label><input id="em" type="email" autocomplete="username"><label class="l">Password</label><input id="pw" type="password" autocomplete="current-password"><div class="row"><button class="pri" id="si">Sign in</button></div><div class="msg" id="msg"></div>`;
     $('#si').onclick=async()=>{$('#msg').textContent='Signing in';const {error}=await sb.auth.signInWithPassword({email:$('#em').value.trim(),password:$('#pw').value});if(error)$('#msg').textContent=error.message;else write()};return}
-  const {data,error}=await sb.from('posts').select('*').order('created_at',{ascending:false});
-  app.innerHTML=`<div class="row" style="margin:0 0 10px;justify-content:space-between"><h2 style="font-weight:normal;margin:0">Your posts</h2><button class="pri" id="nw"><svg class="i" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>New post</button></div>
-  <div class="list">${error?'<div class="msg">'+esc(error.message)+'</div>':(data.map(p=>`<div class="it"><span>${esc(p.title)||'Untitled'}${p.published?'':'<span class="tag">Draft</span>'}<br><small class="date">${fmt(p.created_at)}</small></span><button data-e="${p.id}">Edit</button></div>`).join('')||'<div class="empty">No posts yet.</div>')}</div>
-  <div class="row"><button id="bk"><svg class="i" viewBox="0 0 24 24"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg>Download all posts</button><button id="so">Sign out</button></div>`;
+  const {data,error}=await sb.from('posts').select('*').order('created_at',{ascending:false});ALL=data||[];
+  if(HASTAGS===null){const t=await sb.from('posts').select('tags').limit(1);HASTAGS=!t.error}
+  app.innerHTML=`<div class="row" style="margin:0 0 10px;justify-content:space-between"><h1 style="margin:0;font-size:34px">Your posts</h1><button class="pri" id="nw"><svg class="i" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>New post</button></div>
+  <div class="list">${error?'<div class="msg">'+esc(error.message)+'</div>':(ALL.map(p=>`<div class="it"><span>${esc(p.title)||'Untitled'}${p.published?'':'<span class="tag">Draft</span>'}<br><small class="date">${fmt(p.created_at)}</small></span><button data-e="${p.id}">Edit</button></div>`).join('')||'<div class="empty">No posts yet.</div>')}</div>
+  <div class="row"><button id="bk"><svg class="i" viewBox="0 0 24 24"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg>Download all posts</button><button id="so">Sign out</button></div>
+  ${HASTAGS?'':'<p class="msg">Tags will appear here after the one-time tags setup is run in Supabase.</p>'}`;
   $('#nw').onclick=()=>edit();$('#so').onclick=async()=>{await sb.auth.signOut();write()};
-  app.querySelectorAll('[data-e]').forEach(b=>b.onclick=()=>edit(data.find(p=>p.id===b.dataset.e)));
-  $('#bk').onclick=()=>{const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([JSON.stringify({exported:new Date().toISOString(),posts:data},null,2)],{type:'application/json'}));a.download='blog-backup-'+new Date().toISOString().slice(0,10)+'.json';a.click()}}
-function edit(p){p=p||{title:'',body:'',published:true};
-  app.innerHTML=`<label>Title</label><input id="ti" value="${esc(p.title)}"><label>Post</label><textarea id="bo" placeholder="Write here. Leave a blank line between paragraphs.">${esc(p.body)}</textarea>
-  <div class="row"><label class="btn" style="margin:0;color:var(--fg)"><svg class="i" viewBox="0 0 24 24"><path d="M4 6h16v12H4zM4 15l5-4 4 3 3-2 4 3"/><circle cx="15" cy="9" r="1.5"/></svg>Add photo<input type="file" accept="image/*" id="ph" hidden></label>
-  <label style="margin:0;display:flex;gap:8px;align-items:center;color:var(--fg)"><input type="checkbox" id="pb" style="width:auto" ${p.published?'checked':''}>Published</label></div>
+  app.querySelectorAll('[data-e]').forEach(b=>b.onclick=()=>edit(ALL.find(p=>p.id===b.dataset.e)));
+  $('#bk').onclick=()=>{const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([JSON.stringify({exported:new Date().toISOString(),posts:ALL},null,2)],{type:'application/json'}));a.download='blog-backup-'+new Date().toISOString().slice(0,10)+'.json';a.click()}}
+function edit(p){p=p||{title:'',body:'',published:true,tags:[]};let T=[...(p.tags||[])];
+  const known=[...new Set(ALL.flatMap(x=>x.tags||[]))].sort();
+  app.innerHTML=`<label class="l">Title</label><input id="ti" value="${esc(p.title)}">
+  ${HASTAGS?`<label class="l">Tags</label><div class="chips" id="tc"></div><input id="tg" list="tl" placeholder="Type a tag and press Enter"><datalist id="tl">${known.map(t=>`<option value="${esc(t)}">`).join('')}</datalist><div class="chips" id="sug"></div>`:''}
+  <label class="l">Post</label><textarea id="bo" placeholder="Write here. Leave a blank line between paragraphs.">${esc(p.body)}</textarea>
+  <div class="row"><label class="btn" style="margin:0"><svg class="i" viewBox="0 0 24 24"><path d="M4 6h16v12H4zM4 15l5-4 4 3 3-2 4 3"/><circle cx="15" cy="9" r="1.5"/></svg>Add photo<input type="file" accept="image/*" id="ph" hidden></label>
+  <label class="sans" style="display:flex;gap:8px;align-items:center;font-size:15px"><input type="checkbox" id="pb" style="width:auto" ${p.published?'checked':''}>Published</label></div>
   <div class="row"><button class="pri" id="sv">Save</button><button id="cx">Cancel</button>${p.id?'<button id="dl" style="margin-left:auto">Delete</button>':''}</div><div class="msg" id="msg"></div>`;
+  if(HASTAGS){const draw=()=>{$('#tc').innerHTML=T.map((t,i)=>`<button class="chip x" data-i="${i}">${esc(t)}<svg class="i" style="width:12px;height:12px" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg></button>`).join('');
+      $('#sug').innerHTML=known.filter(t=>!T.includes(t)).map(t=>`<button class="chip" data-a="${esc(t)}" style="background:none;border:1px dashed var(--line)">+ ${esc(t)}</button>`).join('')};
+    const add=v=>{v=v.trim().replace(/\s+/g,' ');if(v&&!T.some(t=>t.toLowerCase()===v.toLowerCase()))T.push(v);$('#tg').value='';draw()};
+    $('#tg').onkeydown=e=>{if(e.key==='Enter'||e.key===','){e.preventDefault();add($('#tg').value)}};$('#tg').onchange=()=>add($('#tg').value);
+    $('#tc').onclick=e=>{const b=e.target.closest('[data-i]');if(b){T.splice(+b.dataset.i,1);draw()}};$('#sug').onclick=e=>{const b=e.target.closest('[data-a]');if(b)add(b.dataset.a)};draw()}
   $('#cx').onclick=write;
   $('#ph').onchange=async e=>{const f=e.target.files[0];if(!f)return;$('#msg').textContent='Uploading photo';
     const path=Date.now()+'-'+f.name.replace(/[^\w.]+/g,'_');const {error}=await sb.storage.from('blog').upload(path,f,{contentType:f.type});
     if(error){$('#msg').textContent=error.message;return}const url=sb.storage.from('blog').getPublicUrl(path).data.publicUrl;
     const t=$('#bo'),i=t.selectionStart;t.value=t.value.slice(0,i)+'\n\n![]('+url+')\n\n'+t.value.slice(i);$('#msg').textContent='Photo added'};
-  $('#sv').onclick=async()=>{$('#msg').textContent='Saving';const row={title:$('#ti').value.trim(),body:$('#bo').value,published:$('#pb').checked,updated_at:new Date().toISOString()};
-    const r=p.id?await sb.from('posts').update(row).eq('id',p.id):await sb.from('posts').insert(row);if(r.error)$('#msg').textContent=r.error.message;else write()};
-  if(p.id)$('#dl').onclick=async()=>{if(!confirm('Delete this post?'))return;const r=await sb.from('posts').delete().eq('id',p.id);if(r.error)$('#msg').textContent=r.error.message;else write()}}
-function route(){if(!sb){app.innerHTML='<div class="empty">Could not load. Check your connection.</div>';return}const h=location.hash;
-  if(h.startsWith('#/p/'))view(h.slice(4));else if(h==='#/write')write();else list()}
+  $('#sv').onclick=async()=>{if(HASTAGS&&$('#tg').value.trim()){T.push($('#tg').value.trim())}$('#msg').textContent='Saving';
+    const row={title:$('#ti').value.trim(),body:$('#bo').value,published:$('#pb').checked,updated_at:new Date().toISOString()};if(HASTAGS)row.tags=T;
+    const r=p.id?await sb.from('posts').update(row).eq('id',p.id):await sb.from('posts').insert(row);if(r.error)$('#msg').textContent=r.error.message;else{CACHE=null;write()}};
+  if(p.id)$('#dl').onclick=async()=>{if(!confirm('Delete this post?'))return;const r=await sb.from('posts').delete().eq('id',p.id);if(r.error)$('#msg').textContent=r.error.message;else{CACHE=null;write()}}}
+function route(){if(!sb){app.innerHTML='<div class="empty">Could not load. Check your connection.</div>';return}const h=location.hash||'#/';let r='home';
+  if(h.startsWith('#/p/'))view(h.slice(4));else if(h.startsWith('#/tag/'))tagPage(decodeURIComponent(h.slice(6))),r='tags';else if(h==='#/tags')tags(),r='tags';
+  else if(h==='#/archive')archive(),r='archive';else if(h==='#/about')about(),r='about';else if(h==='#/write')write(),r='write';else home();
+  document.querySelectorAll('#menu a').forEach(a=>a.classList.toggle('cur',a.dataset.r===r));scrollTo(0,0)}
 addEventListener('hashchange',route);route();
 if('serviceWorker' in navigator)navigator.serviceWorker.register('sw.js');
-</script></body></html>
+</script>
+</body></html>
