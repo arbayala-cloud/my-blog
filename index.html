@@ -135,11 +135,16 @@ a{color:var(--lnk)}
 .skin.on{outline:2px solid var(--lnk)}.sw{display:flex;height:22px;border-radius:4px;overflow:hidden;border:1px solid var(--line)}.sw i{flex:1}
 .fonts{display:grid;gap:6px}.fo{display:flex;gap:8px;align-items:center;font-size:14px}.fo input{width:auto}
 .xbar a.cur{text-decoration:none;background:rgba(255,255,255,.18);border-radius:4px;padding:1px 6px}
+
+.pf .ph{width:132px;height:176px}.pf .ph img{width:100%;height:100%;object-fit:cover}
+.adjf{width:180px;height:240px;margin:6px auto 0;border-radius:8px;overflow:hidden;border:1px solid var(--line);touch-action:none;cursor:grab;position:relative}
+.adjf img{width:100%;height:100%;object-fit:cover;pointer-events:none;user-select:none;-webkit-user-drag:none}
+.nudge{display:flex;gap:6px;justify-content:center;margin-top:8px;flex-wrap:wrap}.nudge button{padding:8px 12px}
 </style></head><body data-t="system">
 <div class="wrap"><div class="xbar" id="mbtn"><span class="xlogo"><svg class="i" style="width:13px;height:13px" viewBox="0 0 24 24"><path d="M12 3c3 3 4.5 6 4.5 9L12 21 7.5 12C7.5 9 9 6 12 3z"/></svg> my blog</span><a href="#/" data-r="home">home</a><a href="#/tags" data-r="tags">categories</a><a href="#/archive" data-r="archive">archives</a><a href="#/write" data-r="write">write</a><a href="#/custom" data-r="custom">customize</a></div>
 <div class="xhead" id="xhead"><a class="brand" href="#/">Ashley's Blog</a><div class="xsub" id="xsub"></div></div>
 <div class="cols"><main id="app"></main><aside id="side"></aside></div>
-<footer class="foot"><div class="seg" id="seg"><button data-v="light">Light</button><button data-v="dark">Dark</button><button data-v="system">System</button></div><div>Ashley's Blog &middot; est. 2026 &middot; Version 2026.10.31m</div></footer></div>
+<footer class="foot"><div class="seg" id="seg"><button data-v="light">Light</button><button data-v="dark">Dark</button><button data-v="system">System</button></div><div>Ashley's Blog &middot; est. 2026 &middot; Version 2026.10.31n</div></footer></div>
 <script>
 /* ===================================================== */
 
@@ -203,6 +208,7 @@ const SKINS={
 const FONTS={verdana:{n:'Verdana (classic)',f:"Verdana,Tahoma,Geneva,sans-serif"},georgia:{n:'Georgia (serif)',f:"Georgia,Lora,'Times New Roman',serif"},trebuchet:{n:'Trebuchet (2000s)',f:"'Trebuchet MS','Fira Sans',Tahoma,sans-serif"},rounded:{n:'Rounded',f:"'Varela Round','Arial Rounded MT Bold',system-ui,sans-serif"}};
 const PFIELDS=[['name','Name'],['metro','Metro'],['interests','Interests'],['since','Member Since']],DEFF={name:'Ashley',metro:'Fort Worth',interests:'',since:'10/31/2026'};
 const PF=()=>PROFILE.fields||{};
+const pfStyle=p=>{p=p||{};const x=p.x??50,y=p.y??25,z=p.z??1;return `object-position:${x}% ${y}%;transform:scale(${z});transform-origin:${x}% ${y}%`};
 let LOOK={};try{LOOK=JSON.parse(LS.getItem('blog.look')||'{}')}catch(e){}
 function vars(o,acc){return Object.entries(o).map(([k,v])=>`--${k}:${(acc&&(k==='lnk'||k==='bar'))?acc:v}`).join(';')+';--bart:#fff'}
 function applyLook(L){L=L||LOOK;const s=SKINS[L.skin]||SKINS.classic,f=(FONTS[L.font]||FONTS.verdana).f;
@@ -301,13 +307,13 @@ async function side(){applyLook();const S=$('#side');if(!LS.getItem('blog.em')){
   const byDay={};d.forEach(p=>{const t=new Date(p.created_at);if(t.getFullYear()===y&&t.getMonth()===m)byDay[t.getDate()]=byDay[t.getDate()]||p.id});
   let cells='';for(let i=0;i<first;i++)cells+='<td></td>';for(let k=1;k<=days;k++){cells+=byDay[k]?`<td class="on"><a href="#/p/${byDay[k]}">${k}</a></td>`:`<td>${k}</td>`;if((first+k)%7===0)cells+='</tr><tr>'}
   const mname=now.toLocaleDateString('en-US',{month:'long',year:'numeric'});
-  S.innerHTML=`<div class="mod pf"><h4>${esc(PROFILE.name||'Ashley')}</h4><div class="in"><div class="ph">${PROFILE.photo?imgTag(PROFILE.photo,'Ashley',1):'<svg class="i" style="width:52px;height:52px" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c1-4 4-6 8-6s7 2 8 6"/></svg>'}</div>
+  S.innerHTML=`<div class="mod pf"><h4>${esc(PROFILE.name||'Ashley')}</h4><div class="in"><div class="ph">${PROFILE.photo?imgTag(PROFILE.photo,'Ashley',1).replace('<img ','<img style="'+pfStyle(PROFILE.photoPos)+'" '):'<svg class="i" style="width:52px;height:52px" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c1-4 4-6 8-6s7 2 8 6"/></svg>'}</div>
    <div class="pl">${PFIELDS.map(([k,l])=>{const v=k in PF()?PF()[k]:DEFF[k];return v?`<span><b>${l}:</b> ${esc(v)}</span>`:''}).join('')}<span><b>Entries:</b> ${d.length}</span></div></div></div>
   <div class="mod"><h4>Archives</h4><div class="in"><table class="cal"><caption><a href="#" data-cm="-1">&lsaquo;</a> ${mname} <a href="#" data-cm="1">&rsaquo;</a></caption><tr>${'SMTWTFS'.split('').map(x=>`<th>${x}</th>`).join('')}</tr><tr>${cells}</tr></table><div style="margin-top:6px"><a href="#/archive">all archives</a></div><div class="sub">Categories</div><div id="catx"></div></div></div>`;
   S.querySelector('#catx').innerHTML=`${Object.keys(c).length?'<ul>'+Object.keys(c).sort().map(t=>`<li><a href="#/tag/${encodeURIComponent(t)}">${esc(t)}</a><span>${c[t]}</span></li>`).join('')+'</ul>':'none yet'}`;
   S.insertAdjacentHTML('beforeend',`<div class="mod"><h4>Storage</h4><div class="in" id="stor">Checking</div></div>`);storage();
   S.querySelectorAll('[data-cm]').forEach(a=>a.onclick=ev=>{ev.preventDefault();CALM=new Date(y,m+ +a.dataset.cm,1);side()})}
-function custom(){let L={...LOOK},F={...DEFF,...PF()};
+async function custom(){try{await all()}catch(e){}let L={...LOOK},F={...DEFF,...PF()};
   const sw=k=>{const s=SKINS[k];return `<button class="skin${(L.skin||'classic')===k?' on':''}" data-sk="${k}"><span class="sw"><i style="background:${s.L.bar}"></i><i style="background:${s.L.bg}"></i><i style="background:${s.L.lnk}"></i><i style="background:${s.D.bg}"></i></span>${s.n}</button>`};
   app.innerHTML=head('Customize','Changes preview right away. Tap Save to keep them on all your devices.')+`
   <div class="cbox"><h4>Skin</h4><div class="skins">${Object.keys(SKINS).map(sw).join('')}</div></div>
@@ -316,6 +322,9 @@ function custom(){let L={...LOOK},F={...DEFF,...PF()};
   <div class="cbox"><h4>Header</h4><label class="l">Subtitle (optional)</label><input id="st" value="${esc(L.subtitle||'')}" placeholder="Leave blank for none">
     <label class="l">Banner photo (optional)</label><div class="row" style="margin:0"><label class="btn">Choose banner<input type="file" accept="image/*" id="bn" hidden></label><button id="bnx" ${L.banner?'':'hidden'}>Remove banner</button></div></div>
   <div class="cbox"><h4>Profile</h4><div class="row" style="margin:0 0 6px"><label class="btn">Choose profile photo<input type="file" accept="image/*" id="pp2" hidden></label></div>
+    <div id="adj" ${PROFILE.photo?'':'hidden'}><label class="l">Adjust photo: drag to move, slide to zoom</label><div class="adjf" id="adjf">${PROFILE.photo?imgTag(PROFILE.photo,'',1):''}</div>
+    <div class="row" style="margin:8px 0 0;justify-content:center"><span class="sans" style="font-size:11px">Zoom</span><input type="range" id="zm" min="1" max="3" step="0.05" style="width:160px;padding:0"></div>
+    <div class="nudge"><button data-n="0,-5" aria-label="Up"><svg class="i" viewBox="0 0 24 24"><path d="M6 15l6-6 6 6"/></svg></button><button data-n="-5,0" aria-label="Left"><svg class="i" viewBox="0 0 24 24"><path d="M15 6l-6 6 6 6"/></svg></button><button data-n="5,0" aria-label="Right"><svg class="i" viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></svg></button><button data-n="0,5" aria-label="Down"><svg class="i" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></button><button id="pcen">Center</button></div></div>
     ${PFIELDS.map(([k,l])=>`<label class="l">${l}</label><input data-pf="${k}" value="${esc(F[k]||'')}">`).join('')}</div>
   <div class="row"><button class="pri" id="csv">Save</button><button id="crs">Reset to classic</button></div><div class="msg" id="msg"></div>`;
   const live=()=>{setLook(L);app.querySelectorAll('.skin').forEach(b=>b.classList.toggle('on',b.dataset.sk===(L.skin||'classic')))};
@@ -326,9 +335,18 @@ function custom(){let L={...LOOK},F={...DEFF,...PF()};
   const up=async(f,pre)=>'drive:'+await mpUpload({name:pre+'-'+Date.now(),parents:['appDataFolder']},f,f.type||'application/octet-stream');
   $('#bn').onchange=async e=>{const f=e.target.files[0];if(!f)return;$('#msg').textContent='Uploading banner';try{L.banner=await up(f,'banner');live();$('#bnx').hidden=false;$('#msg').textContent='Banner ready. Tap Save to keep it.'}catch(x){$('#msg').textContent='Upload failed. Please try again.'}};
   $('#bnx').onclick=()=>{delete L.banner;live();$('#bnx').hidden=true};
-  let PHOTO=null;$('#pp2').onchange=async e=>{const f=e.target.files[0];if(!f)return;$('#msg').textContent='Uploading photo';try{PHOTO=await up(f,'profile');$('#msg').textContent='Photo ready. Tap Save to keep it.'}catch(x){$('#msg').textContent='Upload failed. Please try again.'}};
+  let POS={x:50,y:25,z:1,...(PROFILE.photoPos||{})};const cl=v=>Math.max(0,Math.min(100,v));
+  const drawPos=()=>{const i=$('#adjf img');if(i)i.setAttribute('style',pfStyle(POS));$('#zm').value=POS.z};drawPos();
+  const fr=$('#adjf');let drag=null;
+  fr.addEventListener('pointerdown',e=>{drag={x:e.clientX,y:e.clientY,px:POS.x,py:POS.y};fr.setPointerCapture(e.pointerId);e.preventDefault()});
+  fr.addEventListener('pointermove',e=>{if(!drag)return;const w=fr.clientWidth,hh=fr.clientHeight;POS.x=cl(drag.px-(e.clientX-drag.x)/w*100/POS.z);POS.y=cl(drag.py-(e.clientY-drag.y)/hh*100/POS.z);drawPos()});
+  fr.addEventListener('pointerup',()=>drag=null);fr.addEventListener('pointercancel',()=>drag=null);
+  $('#zm').oninput=e=>{POS.z=+e.target.value;drawPos()};
+  app.querySelector('.nudge').onclick=e=>{const b=e.target.closest('[data-n]');if(b){const [dx,dy]=b.dataset.n.split(',').map(Number);POS.x=cl(POS.x+dx);POS.y=cl(POS.y+dy);drawPos()}};
+  $('#pcen').onclick=()=>{POS={x:50,y:25,z:1};drawPos()};
+  let PHOTO=null;$('#pp2').onchange=async e=>{const f=e.target.files[0];if(!f)return;$('#msg').textContent='Uploading photo';try{PHOTO=await up(f,'profile');POS={x:50,y:25,z:1};$('#adj').hidden=false;$('#adjf').innerHTML=imgTag(PHOTO,'',1);drawPos();$('#msg').textContent='Photo ready. Adjust it, then tap Save.'}catch(x){$('#msg').textContent='Upload failed. Please try again.'}};
   $('#csv').onclick=async()=>{const fields={};app.querySelectorAll('[data-pf]').forEach(i=>fields[i.dataset.pf]=i.value.trim());$('#msg').textContent='Saving';
-    try{await change(a=>{PROFILE={...PROFILE,look:L,fields,...(PHOTO?{photo:PHOTO}:{})};return a});setLook(L);side();$('#msg').textContent='Saved'}catch(x){$('#msg').textContent='Could not save. Please try again.'}};
+    try{await change(a=>{PROFILE={...PROFILE,look:L,fields,photoPos:POS,...(PHOTO?{photo:PHOTO}:{})};return a});setLook(L);side();$('#msg').textContent='Saved'}catch(x){$('#msg').textContent='Could not save. Please try again.'}};
   $('#crs').onclick=()=>{if(!confirm('Reset skin, accent, font and header to classic?'))return;L={};live();custom();$('#msg').textContent='Reset. Tap Save to keep it.'}}
 async function route(){if(!LS.getItem('blog.em')){signin();return}
   try{await token(false)}catch(e){signin(e.message==='offline'?'You appear to be offline.':'Tap Continue to open your blog.');return}$('#mbtn').style.visibility='visible';
