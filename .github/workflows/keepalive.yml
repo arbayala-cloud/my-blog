@@ -7,5 +7,5 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - run: |
-          code=$(curl -s -o /dev/null -w "%{http_code}" "https://pbkrwghuwqufosodcxtw.supabase.co/rest/v1/posts?select=id&limit=1" -H "apikey: sb_publishable_bzFGyPbxFyfgU4CQ72ryuQ_S4vwUvt2")
+          code=$(curl -s -o /dev/null -w "%{http_code}" "https://pbkrwghuwqufosodcxtw.supabase.co/auth/v1/health" -H "apikey: sb_publishable_bzFGyPbxFyfgU4CQ72ryuQ_S4vwUvt2")
           echo "status $code"; test "$code" = 200

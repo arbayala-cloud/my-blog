@@ -44,7 +44,7 @@ footer{text-align:center;color:var(--mut);font:13px system-ui;padding:10px 0 30p
 <a href="#/write" data-r="write"><svg class="i" viewBox="0 0 24 24"><path d="M12 3c3 3 4.5 6 4.5 9L12 21 7.5 12C7.5 9 9 6 12 3z"/><path d="M12 13v8"/><circle cx="12" cy="12" r="1.2"/></svg>Write</a>
 <div class="sans" style="font-size:13px;color:var(--mut);margin-top:22px;letter-spacing:.06em;text-transform:uppercase">Appearance</div>
 <div class="seg" id="seg"><button data-v="light">Light</button><button data-v="dark">Dark</button><button data-v="system">System</button></div>
-<div class="sans" style="margin-top:auto;padding-top:20px;font-size:12px;color:var(--mut)">Version 2026.10.31e</div></nav></div>
+<div class="sans" style="margin-top:auto;padding-top:20px;font-size:12px;color:var(--mut)">Version 2026.10.31f</div></nav></div>
 <main id="app"></main>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
 <script>
@@ -89,7 +89,7 @@ async function write(){const {data:{session}}=await sb.auth.getSession();
   <div class="list">${error?'<div class="msg">'+esc(error.message)+'</div>':(ALL.map(p=>`<div class="it"><span>${esc(p.title)||'Untitled'}${p.published?'':'<span class="tag">Draft</span>'}<br><small class="date">${fmt(p.created_at)}</small></span><button data-e="${p.id}">Edit</button></div>`).join('')||'<div class="empty">No posts yet.</div>')}</div>
   <div class="row"><button id="bk"><svg class="i" viewBox="0 0 24 24"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg>Download all posts</button><button id="so">Sign out</button></div>
 `;
-  $('#nw').onclick=()=>edit();$('#so').onclick=async()=>{await sb.auth.signOut();write()};
+  $('#nw').onclick=()=>edit();$('#so').onclick=async()=>{await sb.auth.signOut();location.hash='#/'};
   app.querySelectorAll('[data-e]').forEach(b=>b.onclick=()=>edit(ALL.find(p=>p.id===b.dataset.e)));
   $('#bk').onclick=()=>{const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([JSON.stringify({exported:new Date().toISOString(),posts:ALL},null,2)],{type:'application/json'}));a.download='blog-backup-'+new Date().toISOString().slice(0,10)+'.json';a.click()}}
 function edit(p){p=p||{title:'',body:'',published:true,tags:[]};let T=[...(p.tags||[])];
@@ -108,16 +108,27 @@ function edit(p){p=p||{title:'',body:'',published:true,tags:[]};let T=[...(p.tag
   $('#cx').onclick=write;
   $('#ph').onchange=async e=>{const f=e.target.files[0];if(!f)return;$('#msg').textContent='Uploading photo';
     const path=Date.now()+'-'+f.name.replace(/[^\w.]+/g,'_');const {error}=await sb.storage.from('blog').upload(path,f,{contentType:f.type});
-    if(error){$('#msg').textContent=error.message;return}const url=sb.storage.from('blog').getPublicUrl(path).data.publicUrl;
+    if(error){$('#msg').textContent=error.message;return}const url=SB_URL+'/storage/v1/object/public/blog/'+encodeURIComponent(path);
     const t=$('#bo'),i=t.selectionStart;t.value=t.value.slice(0,i)+'\n\n![]('+url+')\n\n'+t.value.slice(i);$('#msg').textContent='Photo added'};
   $('#sv').onclick=async()=>{if($('#tg').value.trim())add($('#tg').value);$('#msg').textContent='Saving';
     const row={title:$('#ti').value.trim(),body:(T.length?'<!--tags:'+T.join(',')+'-->\n':'')+$('#bo').value,published:$('#pb').checked,updated_at:new Date().toISOString()};
     const r=p.id?await sb.from('posts').update(row).eq('id',p.id):await sb.from('posts').insert(row);if(r.error)$('#msg').textContent=r.error.message;else{CACHE=null;write()}};
   if(p.id)$('#dl').onclick=async()=>{if(!confirm('Delete this post?'))return;const r=await sb.from('posts').delete().eq('id',p.id);if(r.error)$('#msg').textContent=r.error.message;else{CACHE=null;write()}}}
-function route(){if(!sb){app.innerHTML='<div class="empty">Could not load. Check your connection.</div>';return}const h=location.hash||'#/';let r='home';
+function signin(){$('#mbtn').style.visibility='hidden';app.innerHTML=head('Sign in')+`<label class="l">Email</label><input id="em" type="email" autocomplete="username"><label class="l">Password</label><input id="pw" type="password" autocomplete="current-password"><div class="row"><button class="pri" id="si">Sign in</button></div><div class="msg" id="msg"></div>`;
+  const go=async()=>{$('#msg').textContent='Signing in';const {error}=await sb.auth.signInWithPassword({email:$('#em').value.trim(),password:$('#pw').value});if(error)$('#msg').textContent=error.message;else{CACHE=null;route()}};
+  $('#si').onclick=go;$('#pw').onkeydown=e=>{if(e.key==='Enter')go()}}
+const SIGNED={};
+async function signImgs(){const imgs=[...app.querySelectorAll('img')].filter(i=>!i.dataset.s&&/\/storage\/v1\/object\/(public|sign)\/blog\//.test(i.getAttribute('src')||''));
+  for(const i of imgs){i.dataset.s=1;const path=decodeURIComponent(i.getAttribute('src').split(/\/object\/(?:public|sign)\/blog\//)[1].split('?')[0]);
+    if(!SIGNED[path]){const {data}=await sb.storage.from('blog').createSignedUrl(path,3600);SIGNED[path]=data&&data.signedUrl}if(SIGNED[path])i.src=SIGNED[path]}}
+new MutationObserver(()=>signImgs()).observe(app,{childList:true,subtree:true});
+async function route(){if(!sb){app.innerHTML='<div class="empty">Could not load. Check your connection.</div>';return}
+  const {data:{session}}=await sb.auth.getSession();if(!session){signin();return}$('#mbtn').style.visibility='visible';
+  const h=location.hash||'#/';let r='home';
   if(h.startsWith('#/p/'))view(h.slice(4));else if(h.startsWith('#/tag/'))tagPage(decodeURIComponent(h.slice(6))),r='tags';else if(h==='#/tags')tags(),r='tags';
   else if(h==='#/archive')archive(),r='archive';else if(h==='#/write')write(),r='write';else home();
   document.querySelectorAll('#menu a').forEach(a=>a.classList.toggle('cur',a.dataset.r===r));scrollTo(0,0)}
+sb&&sb.auth.onAuthStateChange(e=>{if(e==='SIGNED_OUT'){CACHE=null;route()}});
 addEventListener('hashchange',route);route();
 if('serviceWorker' in navigator)navigator.serviceWorker.register('sw.js');
 </script>
