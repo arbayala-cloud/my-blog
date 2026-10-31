@@ -141,7 +141,7 @@ a{color:var(--lnk)}
 .adjf img{width:100%;height:100%;object-fit:cover;pointer-events:none;user-select:none;-webkit-user-drag:none}
 .nudge{display:flex;gap:6px;justify-content:center;margin-top:8px;flex-wrap:wrap}.nudge button{padding:8px 12px}
 
-/* ---- 2026.10.31o refined layer ---- */
+/* ---- 2026.10.31p refined layer ---- */
 .wrap{max-width:1000px}
 .xhead{padding:44px 22px 30px;text-align:left}.xhead .brand{font:600 34px/1.15 Lora,Georgia,serif !important;letter-spacing:-.01em}
 .xbar{padding:9px 18px;gap:6px 18px;font-size:11px}.xbar a{padding:2px 2px;letter-spacing:.04em}
@@ -164,11 +164,16 @@ a{color:var(--lnk)}
 .arch details[open]>summary::before{transform:rotate(45deg)}.arch .ma{margin-left:16px}.arch ul{margin:2px 0 6px 31px}.arch li{display:block;padding:2px 0;font-size:12px}
 .cnt{color:var(--mut);font-size:11px}.labs li{display:block;padding:2px 0}
 .foot{padding:30px 0 44px}
+
+.xhead .brand,.entry .eb h2.pt a,.full h1{color:var(--ttl,var(--fg)) !important}.xbar,.xbar a{color:var(--bart,#fff)}
+.entry .cover,.entry .body img{border:1px solid color-mix(in srgb,var(--line) 60%,transparent);box-shadow:0 1px 6px rgba(0,0,0,.06);background:#fff0}
+.cgrid{display:grid;grid-template-columns:1fr 1fr;gap:8px}.cc{display:flex;gap:8px;align-items:center;font-size:12px}.cc input{width:44px;height:32px;padding:2px;flex:none}
+.seg button.on{background:var(--lnk);color:var(--card);border-color:var(--lnk)}
 </style></head><body data-t="system">
 <div class="wrap"><div class="xbar" id="mbtn"><span class="xlogo"><svg class="i" style="width:13px;height:13px" viewBox="0 0 24 24"><path d="M12 3c3 3 4.5 6 4.5 9L12 21 7.5 12C7.5 9 9 6 12 3z"/></svg> my blog</span><a href="#/" data-r="home">home</a><a href="#/tags" data-r="tags">categories</a><a href="#/archive" data-r="archive">archives</a><a href="#/write" data-r="write">write</a><a href="#/custom" data-r="custom">customize</a></div>
 <div class="xhead" id="xhead"><a class="brand" href="#/">Ashley's Blog</a><div class="xsub" id="xsub"></div></div>
 <div class="cols"><main id="app"></main><aside id="side"></aside></div>
-<footer class="foot"><div class="seg" id="seg"><button data-v="light">Light</button><button data-v="dark">Dark</button><button data-v="system">System</button></div><div>Ashley's Blog &middot; est. 2026 &middot; Version 2026.10.31o</div></footer></div>
+<footer class="foot"><div class="seg" id="seg"><button data-v="light">Light</button><button data-v="dark">Dark</button><button data-v="system">System</button></div><div>Ashley's Blog &middot; est. 2026 &middot; Version 2026.10.31p</div></footer></div>
 <script>
 /* ===================================================== */
 
@@ -234,10 +239,32 @@ const PFIELDS=[['name','Name'],['metro','Metro'],['interests','Interests'],['sin
 const PF=()=>PROFILE.fields||{};
 const pfStyle=p=>{p=p||{};const x=p.x??50,y=p.y??25,z=p.z??1;return `object-position:${x}% ${y}%;transform:scale(${z});transform-origin:${x}% ${y}%`};
 let LOOK={};try{LOOK=JSON.parse(LS.getItem('blog.look')||'{}')}catch(e){}
-function vars(o,acc){return Object.entries(o).map(([k,v])=>`--${k}:${(acc&&(k==='lnk'||k==='bar'))?acc:v}`).join(';')+';--bart:#fff'}
+function vars(o,acc){if(o.__c)return Object.entries(o).filter(([k])=>k!=='__c').map(([k,v])=>`--${k}:${v}`).join(';');return Object.entries(o).map(([k,v])=>`--${k}:${(acc&&(k==='lnk'||k==='bar'))?acc:v}`).join(';')+';--bart:#fff'}
+/* ---- custom colors with readability guardrails ---- */
+const hx=c=>{c=String(c||'').replace('#','');if(c.length===3)c=c.split('').map(x=>x+x).join('');const n=parseInt(c,16);return isNaN(n)?[0,0,0]:[n>>16&255,n>>8&255,n&255]};
+const toHex=a=>'#'+a.map(v=>Math.round(Math.max(0,Math.min(255,v))).toString(16).padStart(2,'0')).join('');
+const lum=c=>{const [r,g,b]=hx(c).map(v=>{v/=255;return v<=.03928?v/12.92:Math.pow((v+.055)/1.055,2.4)});return .2126*r+.7152*g+.0722*b};
+const ratio=(a,b)=>{const x=lum(a),y=lum(b);return (Math.max(x,y)+.05)/(Math.min(x,y)+.05)};
+const mix=(a,b,t)=>{const A=hx(a),B=hx(b);return toHex(A.map((v,i)=>v+(B[i]-v)*t))};
+function fit(c,bgs,min){if(bgs.every(b=>ratio(c,b)>=min))return [c,false];const dark=lum(bgs[0])>.4,tgt=dark?'#000000':'#ffffff';
+  for(let t=.05;t<=1.001;t+=.05){const m=mix(c,tgt,t);if(bgs.every(b=>ratio(m,b)>=min))return [m,true]}return [tgt,true]}
+function toDark(p){const d=c=>{const [r,g,b]=hx(c),mx=Math.max(r,g,b)||1;return mix(toHex([r,g,b].map(v=>v/mx*40)),'#000000',.35)};
+  return {bg:d(p.bg),card:d(p.card||p.bg),fg:'#eeeeee',title:mix(p.title||p.fg,'#ffffff',.6),acc:mix(p.acc,'#ffffff',.35),bar:mix(p.bar,'#000000',.45)}}
+let ADJ=[];
+function palette(base,c){if(!c)return null;const p={bg:c.bg||base.bg,card:c.card||base.card,fg:c.fg||base.fg,title:c.title||c.fg||base.fg,acc:c.acc||base.lnk,bar:c.bar||base.bar};const notes=[];let a;
+  if(ratio(p.card,p.bg)<1.04)p.card=mix(p.card,lum(p.bg)>.4?'#000000':'#ffffff',.03);
+  [p.fg,a]=fit(p.fg,[p.bg,p.card],4.5);if(a)notes.push('text');
+  [p.title,a]=fit(p.title,[p.bg,p.card],3);if(a)notes.push('titles');
+  [p.acc,a]=fit(p.acc,[p.bg,p.card],4.5);if(a)notes.push('accent');
+  let bart=ratio('#ffffff',p.bar)>=ratio('#111111',p.bar)?'#ffffff':'#111111';if(ratio(bart,p.bar)<4.5){[p.bar]=fit(p.bar,[bart==='#ffffff'?'#ffffff':'#111111'],4.5);notes.push('bar')}
+  let mut=mix(p.fg,p.bg,.45);[mut]=fit(mut,[p.bg,p.card],4.5);
+  return {o:{__c:1,bg:p.bg,card:p.card,fg:p.fg,mut,line:mix(p.fg,p.bg,.82),chip:mix(p.fg,p.card,.93),lnk:p.acc,bar:p.bar,bart,hd:mix(p.fg,p.card,.96),ttl:p.title},notes}}
+function modePal(s,L,mode){const c=L.colors;if(!c||!(c.L||c.D))return null;const base=mode==='D'?s.D:s.L;
+  const src=mode==='D'?(c.D||(c.L?toDark({...{bg:s.L.bg,card:s.L.card,fg:s.L.fg,acc:s.L.lnk,bar:s.L.bar},...c.L}):null)):c.L;return src?palette(base,src):null}
 function applyLook(L){L=L||LOOK;const s=SKINS[L.skin]||SKINS.classic,f=(FONTS[L.font]||FONTS.verdana).f;
   let el=document.getElementById('skincss');if(!el){el=document.createElement('style');el.id='skincss';document.head.appendChild(el)}
-  el.textContent=`body[data-t=light],body[data-t=system]{${vars(s.L,L.accent)}}body[data-t=dark]{${vars(s.D,L.accent)}}@media(prefers-color-scheme:dark){body[data-t=system]{${vars(s.D,L.accent)}}}
+  const PL=modePal(s,L,'L'),PD=modePal(s,L,'D');ADJ=[...new Set([...(PL?PL.notes:[]),...(PD?PD.notes:[])])];const vl=PL?vars(PL.o):vars(s.L,L.accent),vd=PD?vars(PD.o):vars(s.D,L.accent);
+  el.textContent=`body[data-t=light],body[data-t=system]{${vl}}body[data-t=dark]{${vd}}@media(prefers-color-scheme:dark){body[data-t=system]{${vd}}}
   body,.mod .in,.entry .body,.entry h2,.entry .day,.mod h4,.xhead .brand,input,textarea,button,.btn,label.l,.ef,.mood,.cur2,.xbar{font-family:${f}}`;
   const xs=document.getElementById('xsub');if(xs){xs.textContent=L.subtitle||'';xs.hidden=!L.subtitle}
   const xh=document.getElementById('xhead');if(xh){xh.classList.toggle('hasban',!!L.banner);if(L.banner){if(L.banner.startsWith('drive:')&&typeof driveImg==='function'&&LS.getItem('blog.em'))driveImg(L.banner.slice(6)).then(u=>xh.style.backgroundImage=`linear-gradient(rgba(0,0,0,.25),rgba(0,0,0,.35)),url(${u})`).catch(()=>{})}else xh.style.backgroundImage=''}}
@@ -347,6 +374,11 @@ async function custom(){try{await all()}catch(e){}let L={...LOOK},F={...DEFF,...
   app.innerHTML=head('Customize','Changes preview right away. Tap Save to keep them on all your devices.')+`
   <div class="cbox"><h4>Skin</h4><div class="skins">${Object.keys(SKINS).map(sw).join('')}</div></div>
   <div class="cbox"><h4>Accent color</h4><div class="row" style="margin:0"><input type="color" id="ac" value="${L.accent||SKINS[L.skin||'classic'].L.bar}" style="width:56px;height:36px;padding:2px"><button id="acx">Use skin color</button></div></div>
+  <div class="cbox"><h4>Your own colors</h4><p class="mutd" style="margin:0 0 10px">Optional. Colors are checked for readability and gently adjusted if needed.</p>
+    <div class="seg" id="cmode" style="max-width:240px;margin:0 0 10px"><button data-m="L" class="on">Light mode</button><button data-m="D">Dark mode</button></div>
+    <div class="cgrid"><label class="cc"><input type="color" data-cc="bg"><span>Page background</span></label><label class="cc"><input type="color" data-cc="card"><span>Post background</span></label><label class="cc"><input type="color" data-cc="fg"><span>Text</span></label><label class="cc"><input type="color" data-cc="title"><span>Titles</span></label><label class="cc"><input type="color" data-cc="acc"><span>Accent (links, eProps, labels)</span></label><label class="cc"><input type="color" data-cc="bar"><span>Top bar</span></label></div>
+    <div class="msg" id="cnote" style="min-height:0"></div><p class="mutd" id="cdhint" style="margin:6px 0 0"></p>
+    <div class="row" style="margin-top:8px"><button id="ccx">Reset to skin</button></div></div>
   <div class="cbox"><h4>Font</h4><div class="fonts">${Object.entries(FONTS).map(([k,f])=>`<label class="fo"><input type="radio" name="fo" value="${k}" ${(L.font||'verdana')===k?'checked':''}><span style="font-family:${f.f}">${f.n}</span></label>`).join('')}</div></div>
   <div class="cbox"><h4>Header</h4><label class="l">Subtitle (optional)</label><input id="st" value="${esc(L.subtitle||'')}" placeholder="Leave blank for none">
     <label class="l">Banner photo (optional)</label><div class="row" style="margin:0"><label class="btn">Choose banner<input type="file" accept="image/*" id="bn" hidden></label><button id="bnx" ${L.banner?'':'hidden'}>Remove banner</button></div></div>
@@ -356,7 +388,13 @@ async function custom(){try{await all()}catch(e){}let L={...LOOK},F={...DEFF,...
     <div class="nudge"><button data-n="0,-5" aria-label="Up"><svg class="i" viewBox="0 0 24 24"><path d="M6 15l6-6 6 6"/></svg></button><button data-n="-5,0" aria-label="Left"><svg class="i" viewBox="0 0 24 24"><path d="M15 6l-6 6 6 6"/></svg></button><button data-n="5,0" aria-label="Right"><svg class="i" viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></svg></button><button data-n="0,5" aria-label="Down"><svg class="i" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></button><button id="pcen">Center</button></div></div>
     ${PFIELDS.map(([k,l])=>`<label class="l">${l}</label><input data-pf="${k}" value="${esc(F[k]||'')}">`).join('')}</div>
   <div class="row"><button class="pri" id="csv">Save</button><button id="crs">Reset to classic</button></div><div class="msg" id="msg"></div>`;
-  const live=()=>{setLook(L);app.querySelectorAll('.skin').forEach(b=>b.classList.toggle('on',b.dataset.sk===(L.skin||'classic')))};
+  let CM='L';const drawCC=()=>{const s=SKINS[L.skin||'classic'],base=CM==='D'?s.D:s.L,c=(L.colors||{})[CM]||{},defs={bg:base.bg,card:base.card,fg:base.fg,title:base.fg,acc:L.accent||base.lnk,bar:L.accent||base.bar};
+    app.querySelectorAll('[data-cc]').forEach(i=>i.value=c[i.dataset.cc]||(CM==='D'&&!(L.colors||{}).D&&(L.colors||{}).L?'#222222':defs[i.dataset.cc]));
+    $('#cnote').textContent=ADJ.length?'Adjusted for readability: '+ADJ.join(', ')+'.':'';$('#cdhint').textContent=CM==='D'&&!(L.colors||{}).D&&(L.colors||{}).L?'Dark mode is made automatically from your light colors. Pick here to set it yourself.':''};
+  const live=()=>{setLook(L);app.querySelectorAll('.skin').forEach(b=>b.classList.toggle('on',b.dataset.sk===(L.skin||'classic')));drawCC()};
+  setTimeout(()=>{$('#cmode').onclick=e=>{const b=e.target.closest('[data-m]');if(!b)return;CM=b.dataset.m;$('#cmode').querySelectorAll('button').forEach(x=>x.classList.toggle('on',x===b));setTheme(CM==='D'?'dark':'light');drawCC()};
+    app.querySelectorAll('[data-cc]').forEach(i=>i.oninput=()=>{L.colors={...(L.colors||{})};L.colors[CM]={...(L.colors[CM]||{}),[i.dataset.cc]:i.value};setLook(L);$('#cnote').textContent=ADJ.length?'Adjusted for readability: '+ADJ.join(', ')+'.':'';});
+    $('#ccx').onclick=()=>{delete L.colors;live()};drawCC()},0);
   app.querySelectorAll('.skin').forEach(b=>b.onclick=()=>{L.skin=b.dataset.sk;delete L.accent;$('#ac').value=SKINS[L.skin].L.bar;live()});
   $('#ac').oninput=e=>{L.accent=e.target.value;live()};$('#acx').onclick=()=>{delete L.accent;$('#ac').value=SKINS[L.skin||'classic'].L.bar;live()};
   app.querySelectorAll('[name=fo]').forEach(r=>r.onchange=()=>{L.font=r.value;live()});
