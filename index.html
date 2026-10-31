@@ -141,7 +141,7 @@ a{color:var(--lnk)}
 .adjf img{width:100%;height:100%;object-fit:cover;pointer-events:none;user-select:none;-webkit-user-drag:none}
 .nudge{display:flex;gap:6px;justify-content:center;margin-top:8px;flex-wrap:wrap}.nudge button{padding:8px 12px}
 
-/* ---- 2026.10.31p refined layer ---- */
+/* ---- 2026.10.31q refined layer ---- */
 .wrap{max-width:1000px}
 .xhead{padding:44px 22px 30px;text-align:left}.xhead .brand{font:600 34px/1.15 Lora,Georgia,serif !important;letter-spacing:-.01em}
 .xbar{padding:9px 18px;gap:6px 18px;font-size:11px}.xbar a{padding:2px 2px;letter-spacing:.04em}
@@ -169,11 +169,13 @@ a{color:var(--lnk)}
 .entry .cover,.entry .body img{border:1px solid color-mix(in srgb,var(--line) 60%,transparent);box-shadow:0 1px 6px rgba(0,0,0,.06);background:#fff0}
 .cgrid{display:grid;grid-template-columns:1fr 1fr;gap:8px}.cc{display:flex;gap:8px;align-items:center;font-size:12px}.cc input{width:44px;height:32px;padding:2px;flex:none}
 .seg button.on{background:var(--lnk);color:var(--card);border-color:var(--lnk)}
+.dnote{font-size:14px;color:var(--mut);border:1px solid var(--line);border-radius:8px;padding:8px 12px;margin:0 0 12px;display:flex;gap:10px;align-items:center;flex-wrap:wrap}.dnote button{padding:5px 10px;font-size:13px}
+.saved{font-size:12px;color:var(--mut);opacity:0;transition:opacity .4s}.saved.on{opacity:1}
 </style></head><body data-t="system">
 <div class="wrap"><div class="xbar" id="mbtn"><span class="xlogo"><svg class="i" style="width:13px;height:13px" viewBox="0 0 24 24"><path d="M12 3c3 3 4.5 6 4.5 9L12 21 7.5 12C7.5 9 9 6 12 3z"/></svg> my blog</span><a href="#/" data-r="home">home</a><a href="#/tags" data-r="tags">categories</a><a href="#/archive" data-r="archive">archives</a><a href="#/write" data-r="write">write</a><a href="#/custom" data-r="custom">customize</a></div>
 <div class="xhead" id="xhead"><a class="brand" href="#/">Ashley's Blog</a><div class="xsub" id="xsub"></div></div>
 <div class="cols"><main id="app"></main><aside id="side"></aside></div>
-<footer class="foot"><div class="seg" id="seg"><button data-v="light">Light</button><button data-v="dark">Dark</button><button data-v="system">System</button></div><div>Ashley's Blog &middot; est. 2026 &middot; Version 2026.10.31p</div></footer></div>
+<footer class="foot"><div class="seg" id="seg"><button data-v="light">Light</button><button data-v="dark">Dark</button><button data-v="system">System</button></div><div>Ashley's Blog &middot; est. 2026 &middot; Version 2026.10.31q</div></footer></div>
 <script>
 /* ===================================================== */
 
@@ -309,43 +311,53 @@ let HASTAGS=true,ALL=[];
 async function write(){let error=null;try{ALL=await all()}catch(x){error=x;ALL=[]}
   
   app.innerHTML=`<div class="row" style="margin:0 0 10px;justify-content:space-between"><h1 style="margin:0;font-size:34px">Your posts</h1><button class="pri" id="nw"><svg class="i" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>New post</button></div>
-  <div class="list">${error?'<div class="msg">Could not load your posts. Check your connection.</div>':(ALL.map(p=>`<div class="it"><span>${esc(p.title)||'Untitled'}${p.published?'':'<span class="tag">Draft</span>'}<br><small class="date">${fmt(p.created_at)}</small></span><button data-e="${p.id}">Edit</button></div>`).join('')||'<div class="empty">No posts yet.</div>')}</div>
+  ${getDraft()?'<div class="dnote sans">You have an unfinished new post. <button id="cd">Continue writing</button></div>':''}<div class="list">${error?'<div class="msg">Could not load your posts. Check your connection.</div>':(ALL.map(p=>`<div class="it"><span>${esc(p.title)||'Untitled'}${p.published?'':'<span class="tag">Draft</span>'}<br><small class="date">${fmt(p.created_at)}</small></span><button data-e="${p.id}">Edit</button></div>`).join('')||'<div class="empty">No posts yet.</div>')}</div>
   <div class="row"><button id="bk"><svg class="i" viewBox="0 0 24 24"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg>Download all posts</button><label class="btn" style="margin:0">Set profile photo<input type="file" accept="image/*" id="pp" hidden></label><button id="so">Sign out</button></div>
 `;
-  $('#nw').onclick=()=>edit();
+  $('#nw').onclick=()=>edit();if($('#cd'))$('#cd').onclick=()=>edit();
   $('#pp').onchange=async e=>{const f=e.target.files[0];if(!f)return;try{const id=await mpUpload({name:'profile-'+Date.now(),parents:['appDataFolder']},f,f.type||'application/octet-stream');await change(a=>{PROFILE={...PROFILE,photo:'drive:'+id};return a});side()}catch(x){alert('Could not save the photo. Please try again.')}};$('#so').onclick=()=>{if(!confirm('Sign out of your blog on this device?'))return;try{google.accounts.oauth2.revoke(tok,()=>{})}catch(e){}dropTok();['blog.em','blog.fid','blog.cache'].forEach(k=>LS.removeItem(k));CACHE=null;location.hash='#/';route()};
   app.querySelectorAll('[data-e]').forEach(b=>b.onclick=()=>edit(ALL.find(p=>p.id===b.dataset.e)));
   $('#bk').onclick=()=>{const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([JSON.stringify({exported:new Date().toISOString(),posts:ALL},null,2)],{type:'application/json'}));a.download='blog-backup-'+new Date().toISOString().slice(0,10)+'.json';a.click()}}
-function edit(p){p=p||{title:'',body:'',published:true,tags:[]};let COVER=p.cover||'';let T=[...(p.tags||[])];
+const DK=id=>'blog.draft.'+(id||'new');
+function getDraft(id){try{return JSON.parse(LS.getItem(DK(id))||'null')}catch(e){return null}}
+function edit(p,fresh){p=p||{title:'',body:'',published:true,tags:[]};const orig=p;const dr=fresh?null:getDraft(p.id);if(dr)p={...p,...dr.d};let COVER=p.cover||'';let T=[...(p.tags||[])];
   const known=[...new Set(ALL.flatMap(x=>x.tags||[]))].sort();
-  app.innerHTML=`<label class="l">Title</label><input id="ti" value="${esc(p.title)}">
+  app.innerHTML=`${dr?`<div class="dnote sans" id="dn">Draft restored from ${new Date(dr.t).toLocaleString('en-US',{month:'short',day:'numeric',hour:'numeric',minute:'2-digit'})}. <button id="dd">Discard draft</button></div>`:''}<label class="l">Title</label><input id="ti" value="${esc(p.title)}">
   ${HASTAGS?`<label class="l">Tags</label><div class="chips" id="tc"></div><input id="tg" list="tl" placeholder="Type a tag and press Enter"><datalist id="tl">${known.map(t=>`<option value="${esc(t)}">`).join('')}</datalist><div class="chips" id="sug"></div>`:''}
   <div class="row" style="gap:8px;margin-top:0"><div style="flex:1;min-width:140px"><label class="l">Mood (optional)</label><input id="md" value="${esc(p.mood||'')}"></div><div style="flex:1;min-width:140px"><label class="l">Now listening (optional)</label><input id="ls" value="${esc(p.listening||'')}"></div></div>
   <label class="l">Cover photo (optional)</label><div class="coverbox" id="cvb"></div><div class="row" style="margin-top:0"><label class="btn" style="margin:0"><svg class="i" viewBox="0 0 24 24"><path d="M4 6h16v12H4zM4 15l5-4 4 3 3-2 4 3"/><circle cx="15" cy="9" r="1.5"/></svg><span id="cvl">Choose cover</span><input type="file" accept="image/*" id="cv" hidden></label><button id="cvx" hidden>Remove cover</button></div>
   <label class="l">Post</label><div class="fmt"><button data-f="b" aria-label="Bold"><b>B</b></button><button data-f="i" aria-label="Italic"><i>I</i></button><button data-f="h" aria-label="Heading"><svg class="i" viewBox="0 0 24 24"><path d="M6 5v14M18 5v14M6 12h12"/></svg></button><button data-f="q" aria-label="Quote"><svg class="i" viewBox="0 0 24 24"><path d="M7 7h4v4c0 3-2 5-4 6M14 7h4v4c0 3-2 5-4 6"/></svg></button><label class="btn" style="margin:0;padding:7px 12px;border-radius:6px" aria-label="Image"><svg class="i" viewBox="0 0 24 24"><path d="M4 6h16v12H4zM4 15l5-4 4 3 3-2 4 3"/><circle cx="15" cy="9" r="1.5"/></svg><input type="file" accept="image/*" id="ph2" hidden></label></div><textarea id="bo" placeholder="Write here. Leave a blank line between paragraphs.">${esc(p.body)}</textarea>
   <div class="row"><label class="btn" style="margin:0"><svg class="i" viewBox="0 0 24 24"><path d="M4 6h16v12H4zM4 15l5-4 4 3 3-2 4 3"/><circle cx="15" cy="9" r="1.5"/></svg>Add photo<input type="file" accept="image/*" id="ph" hidden></label>
   <label class="sans" style="display:flex;gap:8px;align-items:center;font-size:15px"><input type="checkbox" id="pb" style="width:auto" ${p.published?'checked':''}>Published</label></div>
-  <div class="row"><button class="pri" id="sv">Save</button><button id="cx">Cancel</button>${p.id?'<button id="dl" style="margin-left:auto">Delete</button>':''}</div><div class="msg" id="msg"></div>`;
+  <div class="row"><button class="pri" id="sv">Save</button><button id="cx">Cancel</button>${p.id?'<button id="dl" style="margin-left:auto">Delete</button>':''}</div><span class="saved sans" id="ds"></span><div class="msg" id="msg"></div>`;
   if(HASTAGS){const draw=()=>{$('#tc').innerHTML=T.map((t,i)=>`<button class="chip x" data-i="${i}">${esc(t)}<svg class="i" style="width:12px;height:12px" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg></button>`).join('');
       $('#sug').innerHTML=known.filter(t=>!T.includes(t)).map(t=>`<button class="chip" data-a="${esc(t)}" style="background:none;border:1px dashed var(--line)">+ ${esc(t)}</button>`).join('')};
     const add=v=>{v=v.replace(/,|-->|<!--/g,' ').trim().replace(/\s+/g,' ');if(v&&!T.some(t=>t.toLowerCase()===v.toLowerCase()))T.push(v);$('#tg').value='';draw()};
     $('#tg').onkeydown=e=>{if(e.key==='Enter'||e.key===','){e.preventDefault();add($('#tg').value)}};$('#tg').onchange=()=>add($('#tg').value);
     $('#tc').onclick=e=>{const b=e.target.closest('[data-i]');if(b){T.splice(+b.dataset.i,1);draw()}};$('#sug').onclick=e=>{const b=e.target.closest('[data-a]');if(b)add(b.dataset.a)};draw()}
   const drawCv=()=>{$('#cvb').innerHTML=COVER?imgTag(COVER,''):'';$('#cvx').hidden=!COVER;$('#cvl').textContent=COVER?'Change cover':'Choose cover'};drawCv();
+  const snap=()=>({title:$('#ti').value,body:$('#bo').value,cover:COVER,mood:$('#md').value,listening:$('#ls').value,tags:[...T],published:$('#pb').checked});
+  const base=JSON.stringify({title:orig.title||'',body:orig.body||'',cover:orig.cover||'',mood:orig.mood||'',listening:orig.listening||'',tags:orig.tags||[],published:!!orig.published});
+  let last=JSON.stringify(snap()),done=false;
+  const autosave=()=>{if(done||!document.body.contains($('#ti')))return;const d=snap(),j=JSON.stringify(d);if(j===last)return;last=j;
+    try{if(j===base)LS.removeItem(DK(orig.id));else LS.setItem(DK(orig.id),JSON.stringify({t:Date.now(),d}));const el=$('#ds');el.textContent='Saved on this device';el.classList.add('on');clearTimeout(el._t);el._t=setTimeout(()=>el.classList.remove('on'),1800)}catch(e){}};
+  const iv=setInterval(()=>{if(!document.body.contains($('#ti'))){clearInterval(iv);removeEventListener('pagehide',autosave);return}autosave()},3000);
+  addEventListener('pagehide',autosave);document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='hidden')autosave()});
+  if(dr)$('#dd').onclick=()=>{if(!confirm('Discard this draft?'))return;LS.removeItem(DK(orig.id));done=true;clearInterval(iv);edit(orig.id?orig:null,true)};
   const upImg=async f=>{const id=await mpUpload({name:'img-'+Date.now()+'-'+f.name.replace(/[^\w.]+/g,'_'),parents:['appDataFolder']},f,f.type||'application/octet-stream');return 'drive:'+id};
   $('#cv').onchange=async e=>{const f=e.target.files[0];if(!f)return;$('#msg').textContent='Uploading cover';try{COVER=await upImg(f);drawCv();$('#msg').textContent='Cover added'}catch(x){$('#msg').textContent='Cover upload failed. Please try again.'}};
   $('#cvx').onclick=()=>{COVER='';drawCv()};
   $('#ph2').onchange=e=>{$('#ph').onchange({target:e.target})};
   app.querySelector('.fmt').onclick=e=>{const b=e.target.closest('[data-f]');if(!b)return;const t=$('#bo'),s=t.selectionStart,en=t.selectionEnd,sel=t.value.slice(s,en)||'text',f=b.dataset.f;
     const out=f==='b'?'**'+sel+'**':f==='i'?'*'+sel+'*':f==='h'?'\n\n## '+sel+'\n\n':'\n\n> '+sel+'\n\n';t.value=t.value.slice(0,s)+out+t.value.slice(en);t.focus();t.selectionStart=t.selectionEnd=s+out.length};
-  $('#cx').onclick=write;
+  $('#cx').onclick=()=>{autosave();write()};
   $('#ph').onchange=async e=>{const f=e.target.files[0];if(!f)return;$('#msg').textContent='Uploading photo';
     try{const id=await mpUpload({name:'img-'+Date.now()+'-'+f.name.replace(/[^\w.]+/g,'_'),parents:['appDataFolder']},f,f.type||'application/octet-stream');
     const t=$('#bo'),i=t.selectionStart;t.value=t.value.slice(0,i)+'\n\n![](drive:'+id+')\n\n'+t.value.slice(i);$('#msg').textContent='Photo added'}catch(x){$('#msg').textContent='Photo upload failed. Please try again.'}};
   $('#sv').onclick=async()=>{if($('#tg').value.trim())add($('#tg').value);$('#msg').textContent='Saving';
     const row={title:$('#ti').value.trim(),body:$('#bo').value,cover:COVER,mood:$('#md').value.trim(),listening:$('#ls').value.trim(),tags:T,published:$('#pb').checked,updated_at:new Date().toISOString()};
-    try{await change(a=>{const i=a.findIndex(x=>x.id===p.id);if(p.id&&i>=0)a[i]={...a[i],...row};else a.push({id:crypto.randomUUID(),created_at:new Date().toISOString(),...row});return a});write()}catch(x){$('#msg').textContent='Could not save. Your text is still here; please try again.'}};
-  if(p.id)$('#dl').onclick=async()=>{if(!confirm('Delete this post?'))return;try{await change(a=>a.filter(x=>x.id!==p.id));write()}catch(x){$('#msg').textContent='Could not delete. Please try again.'}}}
+    try{await change(a=>{const i=a.findIndex(x=>x.id===p.id);if(p.id&&i>=0)a[i]={...a[i],...row};else a.push({id:crypto.randomUUID(),created_at:new Date().toISOString(),...row});return a});done=true;clearInterval(iv);LS.removeItem(DK(orig.id));write()}catch(x){$('#msg').textContent='Could not save. Your text is still here; please try again.'}};
+  if(p.id)$('#dl').onclick=async()=>{if(!confirm('Delete this post?'))return;try{await change(a=>a.filter(x=>x.id!==p.id));done=true;clearInterval(iv);LS.removeItem(DK(orig.id));write()}catch(x){$('#msg').textContent='Could not delete. Please try again.'}}}
 function signin(msg){$('#side').innerHTML='';$('#mbtn').style.visibility='hidden';app.innerHTML=head('Ashley\'s Blog')+`<p class="sans" style="color:var(--mut)">${msg||'Private. Sign in to continue.'}</p><div class="row"><button class="pri" id="gs"><svg class="i" viewBox="0 0 24 24"><path d="M7 18.5h10.5a4 4 0 0 0 .6-7.95A6 6 0 0 0 6.5 9.6 4.5 4.5 0 0 0 7 18.5z"/></svg>${LS.getItem('blog.em')?'Continue':'Sign in with Google'}</button></div><div class="msg" id="msg"></div>`;
   $('#gs').onclick=async()=>{$('#msg').textContent='Opening Google';try{await token(true);CACHE=null;route()}catch(e){$('#msg').textContent=e.message==='offline'?'You appear to be offline.':'Sign-in did not finish. Please try again.'}}}
 let CALM=null;
@@ -367,7 +379,6 @@ async function side(){applyLook();const S=$('#side');if(!LS.getItem('blog.em')){
   const labs=Object.keys(c).sort();
   S.innerHTML=S.innerHTML.replace(/<div class="mod"><h4>Archives<\/h4>[\s\S]*$/,'')+`<div class="mod"><h4>Blog Archive</h4><div class="in arch">${archH}</div></div>
   <div class="mod"><h4>Labels</h4><div class="in">${labs.length?'<ul class="labs">'+labs.map(t=>`<li><a href="#/tag/${encodeURIComponent(t)}">${esc(t)}</a> <span class="cnt">(${c[t]})</span></li>`).join('')+'</ul>':'<span class="mutd">No labels yet</span>'}</div></div>`;
-  S.insertAdjacentHTML('beforeend',`<div class="mod"><h4>Storage</h4><div class="in" id="stor">Checking</div></div>`);storage();
 }
 async function custom(){try{await all()}catch(e){}let L={...LOOK},F={...DEFF,...PF()};
   const sw=k=>{const s=SKINS[k];return `<button class="skin${(L.skin||'classic')===k?' on':''}" data-sk="${k}"><span class="sw"><i style="background:${s.L.bar}"></i><i style="background:${s.L.bg}"></i><i style="background:${s.L.lnk}"></i><i style="background:${s.D.bg}"></i></span>${s.n}</button>`};
