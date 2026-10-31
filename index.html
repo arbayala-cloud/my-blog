@@ -53,11 +53,39 @@ main{max-width:680px;padding:30px 20px 40px}
 .foot{max-width:680px;margin:0 auto;padding:0 20px 40px;text-align:center;color:var(--mut);font:12px system-ui}.foot .seg{max-width:300px;margin:22px auto 14px}
 .fmt{display:flex;gap:6px;flex-wrap:wrap;margin:0 0 8px}.fmt button{padding:7px 12px;border-radius:6px}
 .coverbox img{width:100%;aspect-ratio:16/10;object-fit:cover;border-radius:4px;display:block;margin-bottom:8px}
+
+body{font:13px/1.6 Verdana,Tahoma,Geneva,sans-serif}
+.wrap{max-width:900px;margin:0 auto;padding:12px 10px 0;padding-top:max(12px,env(safe-area-inset-top))}
+.banner{position:static;display:block;border:1px solid var(--line);padding:26px 18px 20px;text-align:center;background:repeating-linear-gradient(45deg,var(--chip) 0 6px,var(--bg) 6px 12px)}
+.banner .brand{display:inline-block;background:var(--bg);border:1px solid var(--line);padding:6px 18px;font:bold 26px Georgia,'Times New Roman',serif;color:var(--fg);text-decoration:none;letter-spacing:.02em}
+.banner .sub{font:italic 11px Verdana,sans-serif;color:var(--mut);margin-top:8px}
+.nav{display:flex;gap:0;justify-content:center;border:1px solid var(--line);border-top:0;padding:0;max-width:none;position:static;flex-wrap:wrap}
+.nav a{display:flex;align-items:center;gap:5px;font:11px Verdana,sans-serif;letter-spacing:.04em;text-transform:lowercase;color:var(--fg);padding:7px 12px;border:0;border-right:1px solid var(--line)}.nav a:last-child{border-right:0}
+.nav a.cur{background:var(--fg);color:var(--bg)}
+.cols{display:grid;grid-template-columns:200px 1fr;gap:12px;margin-top:12px}#side{grid-row:1;grid-column:1}main{grid-column:2;max-width:none;margin:0;padding:0 0 20px}
+@media(max-width:700px){.cols{grid-template-columns:1fr}#side{grid-row:auto;grid-column:1}main{grid-column:1}}
+.mod{border:1px solid var(--line);margin-bottom:12px;background:var(--card)}.mod h4{margin:0;font:bold 11px Verdana,sans-serif;text-transform:lowercase;letter-spacing:.06em;background:var(--chip);border-bottom:1px solid var(--line);padding:5px 8px;color:var(--fg)}
+.mod .in{padding:8px;font-size:11px}.mod a{color:var(--fg)}.mod ul{list-style:none;margin:0;padding:0}.mod li{padding:2px 0;display:flex;justify-content:space-between}
+.pf{text-align:center}.pf .ph{width:110px;height:110px;margin:4px auto 8px;border:1px solid var(--line);display:flex;align-items:center;justify-content:center;color:var(--mut);overflow:hidden}.pf .ph img{width:100%;height:100%;object-fit:cover}.pf b{font-size:13px}
+.entry{border:1px solid var(--line);margin-bottom:14px;background:var(--card)}
+.entry .day{font:bold 12px Verdana,sans-serif;background:var(--chip);border-bottom:1px solid var(--line);padding:5px 10px}
+.entry .eb{padding:10px 12px}.entry h2{font:bold 15px Verdana,sans-serif;margin:0 0 8px;color:var(--fg)}.entry h2 a{color:var(--fg);text-decoration:none}
+.entry .body{font-size:13px;line-height:1.65}.entry .body img{border-radius:0;border:1px solid var(--line);margin:12px 0}.entry .cover{aspect-ratio:auto;border-radius:0;border:1px solid var(--line);margin:0 0 10px}
+.entry .body h3{font:bold 14px Verdana,sans-serif;margin:1.2em 0 .4em}.entry .body blockquote{font:italic 13px/1.6 Georgia,serif;border-left:2px solid var(--mut);margin:12px 0;padding:2px 0 2px 12px}
+.mood{font-size:11px;color:var(--mut);margin:-2px 0 8px;display:flex;gap:12px;flex-wrap:wrap}.mood span{display:inline-flex;gap:4px;align-items:center}
+.ef{border-top:1px dotted var(--line);padding:5px 12px;font-size:10px;color:var(--mut);display:flex;gap:8px;flex-wrap:wrap}.ef a{color:var(--mut)}
+.chip{font:10px Verdana,sans-serif;border-radius:0;border:1px solid var(--line);background:none;padding:1px 6px;color:var(--fg)}
+.pagehead h1{font:bold 15px Verdana,sans-serif;margin:0;color:var(--fg)}.pagehead p{font-size:11px}
+h1,h2,h3{font-family:Verdana,Tahoma,sans-serif;color:var(--fg)}
+input,textarea{font:13px/1.6 Verdana,sans-serif;border-radius:0}button,.btn{font:11px Verdana,sans-serif;border-radius:0;padding:6px 10px}label.l{font:11px Verdana,sans-serif}
+.list .it{padding:7px 0;font-size:12px}.more{font:11px Verdana,sans-serif;text-transform:lowercase;letter-spacing:0;border:0;text-decoration:underline}
+.foot{font:10px Verdana,sans-serif;padding:6px 0 30px}.foot .seg{margin:10px auto}
+.empty{font:12px Verdana,sans-serif}
 </style></head><body data-t="system">
-<header class="mast"><a class="brand" href="#/">Ashley's Blog</a><div class="rule"></div>
-<nav class="nav" id="mbtn"><a href="#/" data-r="home">Home</a><a href="#/tags" data-r="tags">Categories</a><a href="#/archive" data-r="archive">Archive</a><a href="#/write" data-r="write">Write</a></nav></header>
-<main id="app"></main>
-<footer class="foot"><div class="rule"></div><div class="seg" id="seg"><button data-v="light">Light</button><button data-v="dark">Dark</button><button data-v="system">System</button></div><div>Ashley's Blog &middot; Version 2026.10.31h</div></footer>
+<div class="wrap"><header class="banner"><a class="brand" href="#/">Ashley's Blog</a></header>
+<nav class="nav" id="mbtn"><a href="#/" data-r="home"><svg class="i" style="width:14px;height:14px" viewBox="0 0 24 24"><path d="M4 11l8-7 8 7v9h-5v-6H9v6H4z"/></svg>Home</a><a href="#/tags" data-r="tags"><svg class="i" style="width:14px;height:14px" viewBox="0 0 24 24"><path d="M3 12V4h8l9 9-8 8z"/><circle cx="7.5" cy="8.5" r="1.3"/></svg>Categories</a><a href="#/archive" data-r="archive"><svg class="i" style="width:14px;height:14px" viewBox="0 0 24 24"><path d="M4 5h16v4H4zM5 9v10h14V9M10 13h4"/></svg>Archive</a><a href="#/write" data-r="write"><svg class="i" style="width:14px;height:14px" viewBox="0 0 24 24"><path d="M5 19l1-4L16 5l3 3L9 18z"/></svg>Write</a></nav>
+<div class="cols"><main id="app"></main><aside id="side"></aside></div>
+<footer class="foot"><div class="seg" id="seg"><button data-v="light">Light</button><button data-v="dark">Dark</button><button data-v="system">System</button></div><div>Ashley's Blog &middot; est. 2026 &middot; Version 2026.10.31i</div></footer></div>
 <script>
 /* ===================================================== */
 
@@ -76,10 +104,11 @@ async function fileId(){let id=LS.getItem('blog.fid');if(id)return id;const r=aw
 async function mpUpload(meta,blob,type){const b='blog'+Date.now(),pre='--'+b+'\r\nContent-Type: application/json; charset=UTF-8\r\n\r\n'+JSON.stringify(meta)+'\r\n--'+b+'\r\nContent-Type: '+type+'\r\n\r\n';
   return (await(await api(UP+'?uploadType=multipart&fields=id',{method:'POST',headers:{'Content-Type':'multipart/related; boundary='+b},body:new Blob([pre,blob,'\r\n--'+b+'--'])})).json()).id}
 const SEED=[{id:'eddb8fd3-d77a-4bee-8ebf-5df8ea1418eb',title:'Hi guys!',body:'Yada yada whoooo',tags:[],published:true,created_at:'2026-10-31T20:36:20.323Z',updated_at:'2026-10-31T20:36:18.589Z'}];
+let PROFILE={};
 async function loadAll(){let id=await fileId();if(id){const r=await fetch(DR+'/'+id+'?alt=media',{headers:{Authorization:'Bearer '+await token(false)}});
-    if(r.status===404){LS.removeItem('blog.fid');id=null}else if(r.status===401){dropTok();throw new Error('auth')}else if(!r.ok)throw new Error('http '+r.status);else{const d=await r.json();const p=(d.posts||[]).map(norm);LS.setItem('blog.cache',JSON.stringify(p));return p}}
+    if(r.status===404){LS.removeItem('blog.fid');id=null}else if(r.status===401){dropTok();throw new Error('auth')}else if(!r.ok)throw new Error('http '+r.status);else{const d=await r.json();PROFILE=d.profile||{};const p=(d.posts||[]).map(norm);LS.setItem('blog.cache',JSON.stringify(p));return p}}
   await saveAll(SEED);return SEED}
-async function saveAll(posts){const body=JSON.stringify({app:'my-blog',v:1,saved:Date.now(),posts});const id=await fileId();
+async function saveAll(posts){const body=JSON.stringify({app:'my-blog',v:1,saved:Date.now(),profile:PROFILE,posts});const id=await fileId();
   if(id)await api(UP+'/'+id+'?uploadType=media',{method:'PATCH',headers:{'Content-Type':'application/json'},body});
   else{const nid=await mpUpload({name:FN,parents:['appDataFolder']},body,'application/json');LS.setItem('blog.fid',nid)}LS.setItem('blog.cache',JSON.stringify(posts))}
 async function change(fn){const cur=await loadAll();const next=fn(cur.slice());await saveAll(next);CACHE=null;return next}
@@ -88,6 +117,7 @@ function loadImgs(){app.querySelectorAll('img[data-d]').forEach(i=>{const id=i.d
 new MutationObserver(loadImgs).observe(document.getElementById('app'),{childList:true,subtree:true});
 const $=s=>document.querySelector(s),app=$('#app');
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const LONG=d=>new Date(d).toLocaleDateString(undefined,{weekday:'long',year:'numeric',month:'long',day:'numeric'}),TIME=d=>new Date(d).toLocaleTimeString(undefined,{hour:'numeric',minute:'2-digit'});
 const fmt=d=>new Date(d).toLocaleDateString(undefined,{year:'numeric',month:'long',day:'numeric'});
 const ORN='<svg class="orn" viewBox="0 0 140 14"><path d="M2 7h52M86 7h52" stroke="currentColor" stroke-width="1"/><path d="M70 1l6 6-6 6-6-6z" fill="none" stroke="currentColor" stroke-width="1.2"/><circle cx="58" cy="7" r="1.5" fill="currentColor"/><circle cx="82" cy="7" r="1.5" fill="currentColor"/></svg>';
 const imgTag=(u,a)=>u.startsWith('drive:')?`<img data-d="${esc(u.slice(6))}" alt="${esc(a||'')}" loading="lazy">`:`<img src="${esc(u)}" alt="${esc(a||'')}" loading="lazy">`;
@@ -111,8 +141,13 @@ let CACHE=null;
 const byDate=a=>a.slice().sort((x,y)=>new Date(y.created_at)-new Date(x.created_at));
 async function all(){if(CACHE)return CACHE;CACHE=byDate(await loadAll());return CACHE}
 async function pub(){return (await all()).filter(p=>p.published)}
-function card(p){const t=plain(p.body),ex=t.length>260?t.slice(0,260).replace(/\s\S*$/,'')+'...':t;
-  return `<article class="post">${coverOf(p)?`<a href="#/p/${p.id}">${coverTag(coverOf(p))}</a>`:''}<div class="meta">${fmt(p.created_at)} &middot; ${rt(p.body)}</div><h2><a href="#/p/${p.id}">${esc(p.title)||'Untitled'}</a></h2>${chips(p.tags)}<p class="excerpt">${esc(ex)}</p><a class="more" href="#/p/${p.id}">Continue reading</a></article><div class="sep">&middot; &middot; &middot;</div>`}
+const MOODI='<svg class="i" style="width:12px;height:12px" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M9 14c1.5 1.5 4.5 1.5 6 0M9.5 10h0M14.5 10h0"/></svg>',MUSI='<svg class="i" style="width:12px;height:12px" viewBox="0 0 24 24"><path d="M9 18V6l10-2v12"/><circle cx="7" cy="18" r="2"/><circle cx="17" cy="16" r="2"/></svg>';
+function entry(p,full){const long=!full&&plain(p.body).length>1500;
+  const mm=(p.mood||p.listening)?`<div class="mood">${p.mood?`<span>${MOODI}Mood: ${esc(p.mood)}</span>`:''}${p.listening?`<span>${MUSI}Now listening: ${esc(p.listening)}</span>`:''}</div>`:'';
+  const bodyH=long?'<p>'+esc(plain(p.body).slice(0,1500).replace(/\s\S*$/,''))+'...</p><p><a class="more" href="#/p/'+p.id+'">read more</a></p>':render(p.body);
+  return `<div class="entry"><div class="day">${LONG(p.created_at)}</div><div class="eb"><h2><a href="#/p/${p.id}">${esc(p.title)||'Untitled'}</a></h2>${mm}${p.cover?coverTag(p.cover):''}<div class="body">${bodyH}</div></div>
+  <div class="ef"><span>posted at ${TIME(p.created_at)}</span>${(p.tags||[]).length?'<span>&middot;</span><span>tags: '+p.tags.map(t=>`<a href="#/tag/${encodeURIComponent(t)}">${esc(t)}</a>`).join(', ')+'</span>':''}<span>&middot;</span><a href="#/p/${p.id}">permalink</a></div></div>`}
+const card=p=>entry(p,false);
 const head=(t,s)=>`<div class="pagehead"><h1>${esc(t)}</h1>${s?`<p>${s}</p>`:''}</div>`;
 const fail='<div class="empty">Posts could not load. Please try again.</div>';
 async function home(){app.innerHTML=`<div id="pl" class="empty">Loading</div>`;
@@ -123,21 +158,23 @@ async function tags(){try{const c={};(await pub()).forEach(p=>p.tags.forEach(t=>
 async function archive(){try{const d=await pub(),g={};d.forEach(p=>{const k=new Date(p.created_at).toLocaleDateString(undefined,{year:'numeric',month:'long'});(g[k]=g[k]||[]).push(p)});
   app.innerHTML=head('Archive')+(d.length?Object.entries(g).map(([m,ps])=>`<h3 style="margin:22px 0 4px;font-size:24px">${esc(m)} <span class="cnt">${ps.length}</span></h3><div class="list">${ps.map(p=>`<a class="it" href="#/p/${p.id}"><span>${esc(p.title)||'Untitled'}</span><span class="cnt" style="flex:none">${new Date(p.created_at).getDate()}</span></a>`).join('')}</div>`).join(''):'<div class="empty">No posts yet.</div>')}catch(e){app.innerHTML=fail}}
 async function view(id){let data=null;try{data=(await all()).find(p=>p.id===id)}catch(e){}
-  app.innerHTML=data?`<article class="full"><div class="meta">${fmt(data.created_at)} &middot; ${rt(data.body)}</div><h1>${esc(data.title)||'Untitled'}</h1>${chips(data.tags)}${data.cover?`<div style="margin-top:22px">${coverTag(data.cover)}</div>`:''}<div class="body">${render(data.body)}</div></article><div class="sep" style="margin:40px 0 20px">&middot; &middot; &middot;</div><p style="text-align:center"><a class="more" href="#/">All posts</a></p>`:'<div class="empty">Post not found.</div>';scrollTo(0,0)}
+  app.innerHTML=data?entry(data,true)+'<p><a class="more" href="#/">back to all entries</a></p>':'<div class="empty">Entry not found.</div>';scrollTo(0,0)}
 let HASTAGS=true,ALL=[];
 async function write(){let error=null;try{ALL=await all()}catch(x){error=x;ALL=[]}
   
   app.innerHTML=`<div class="row" style="margin:0 0 10px;justify-content:space-between"><h1 style="margin:0;font-size:34px">Your posts</h1><button class="pri" id="nw"><svg class="i" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>New post</button></div>
   <div class="list">${error?'<div class="msg">Could not load your posts. Check your connection.</div>':(ALL.map(p=>`<div class="it"><span>${esc(p.title)||'Untitled'}${p.published?'':'<span class="tag">Draft</span>'}<br><small class="date">${fmt(p.created_at)}</small></span><button data-e="${p.id}">Edit</button></div>`).join('')||'<div class="empty">No posts yet.</div>')}</div>
-  <div class="row"><button id="bk"><svg class="i" viewBox="0 0 24 24"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg>Download all posts</button><button id="so">Sign out</button></div>
+  <div class="row"><button id="bk"><svg class="i" viewBox="0 0 24 24"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg>Download all posts</button><label class="btn" style="margin:0">Set profile photo<input type="file" accept="image/*" id="pp" hidden></label><button id="so">Sign out</button></div>
 `;
-  $('#nw').onclick=()=>edit();$('#so').onclick=()=>{if(!confirm('Sign out of your blog on this device?'))return;try{google.accounts.oauth2.revoke(tok,()=>{})}catch(e){}dropTok();['blog.em','blog.fid','blog.cache'].forEach(k=>LS.removeItem(k));CACHE=null;location.hash='#/';route()};
+  $('#nw').onclick=()=>edit();
+  $('#pp').onchange=async e=>{const f=e.target.files[0];if(!f)return;try{const id=await mpUpload({name:'profile-'+Date.now(),parents:['appDataFolder']},f,f.type||'application/octet-stream');await change(a=>{PROFILE={...PROFILE,photo:'drive:'+id};return a});side()}catch(x){alert('Could not save the photo. Please try again.')}};$('#so').onclick=()=>{if(!confirm('Sign out of your blog on this device?'))return;try{google.accounts.oauth2.revoke(tok,()=>{})}catch(e){}dropTok();['blog.em','blog.fid','blog.cache'].forEach(k=>LS.removeItem(k));CACHE=null;location.hash='#/';route()};
   app.querySelectorAll('[data-e]').forEach(b=>b.onclick=()=>edit(ALL.find(p=>p.id===b.dataset.e)));
   $('#bk').onclick=()=>{const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([JSON.stringify({exported:new Date().toISOString(),posts:ALL},null,2)],{type:'application/json'}));a.download='blog-backup-'+new Date().toISOString().slice(0,10)+'.json';a.click()}}
 function edit(p){p=p||{title:'',body:'',published:true,tags:[]};let COVER=p.cover||'';let T=[...(p.tags||[])];
   const known=[...new Set(ALL.flatMap(x=>x.tags||[]))].sort();
   app.innerHTML=`<label class="l">Title</label><input id="ti" value="${esc(p.title)}">
   ${HASTAGS?`<label class="l">Tags</label><div class="chips" id="tc"></div><input id="tg" list="tl" placeholder="Type a tag and press Enter"><datalist id="tl">${known.map(t=>`<option value="${esc(t)}">`).join('')}</datalist><div class="chips" id="sug"></div>`:''}
+  <div class="row" style="gap:8px;margin-top:0"><div style="flex:1;min-width:140px"><label class="l">Mood (optional)</label><input id="md" value="${esc(p.mood||'')}"></div><div style="flex:1;min-width:140px"><label class="l">Now listening (optional)</label><input id="ls" value="${esc(p.listening||'')}"></div></div>
   <label class="l">Cover photo (optional)</label><div class="coverbox" id="cvb"></div><div class="row" style="margin-top:0"><label class="btn" style="margin:0"><svg class="i" viewBox="0 0 24 24"><path d="M4 6h16v12H4zM4 15l5-4 4 3 3-2 4 3"/><circle cx="15" cy="9" r="1.5"/></svg><span id="cvl">Choose cover</span><input type="file" accept="image/*" id="cv" hidden></label><button id="cvx" hidden>Remove cover</button></div>
   <label class="l">Post</label><div class="fmt"><button data-f="b" aria-label="Bold"><b>B</b></button><button data-f="i" aria-label="Italic"><i>I</i></button><button data-f="h" aria-label="Heading"><svg class="i" viewBox="0 0 24 24"><path d="M6 5v14M18 5v14M6 12h12"/></svg></button><button data-f="q" aria-label="Quote"><svg class="i" viewBox="0 0 24 24"><path d="M7 7h4v4c0 3-2 5-4 6M14 7h4v4c0 3-2 5-4 6"/></svg></button><label class="btn" style="margin:0;padding:7px 12px;border-radius:6px" aria-label="Image"><svg class="i" viewBox="0 0 24 24"><path d="M4 6h16v12H4zM4 15l5-4 4 3 3-2 4 3"/><circle cx="15" cy="9" r="1.5"/></svg><input type="file" accept="image/*" id="ph2" hidden></label></div><textarea id="bo" placeholder="Write here. Leave a blank line between paragraphs.">${esc(p.body)}</textarea>
   <div class="row"><label class="btn" style="margin:0"><svg class="i" viewBox="0 0 24 24"><path d="M4 6h16v12H4zM4 15l5-4 4 3 3-2 4 3"/><circle cx="15" cy="9" r="1.5"/></svg>Add photo<input type="file" accept="image/*" id="ph" hidden></label>
@@ -160,17 +197,22 @@ function edit(p){p=p||{title:'',body:'',published:true,tags:[]};let COVER=p.cove
     try{const id=await mpUpload({name:'img-'+Date.now()+'-'+f.name.replace(/[^\w.]+/g,'_'),parents:['appDataFolder']},f,f.type||'application/octet-stream');
     const t=$('#bo'),i=t.selectionStart;t.value=t.value.slice(0,i)+'\n\n![](drive:'+id+')\n\n'+t.value.slice(i);$('#msg').textContent='Photo added'}catch(x){$('#msg').textContent='Photo upload failed. Please try again.'}};
   $('#sv').onclick=async()=>{if($('#tg').value.trim())add($('#tg').value);$('#msg').textContent='Saving';
-    const row={title:$('#ti').value.trim(),body:$('#bo').value,cover:COVER,tags:T,published:$('#pb').checked,updated_at:new Date().toISOString()};
+    const row={title:$('#ti').value.trim(),body:$('#bo').value,cover:COVER,mood:$('#md').value.trim(),listening:$('#ls').value.trim(),tags:T,published:$('#pb').checked,updated_at:new Date().toISOString()};
     try{await change(a=>{const i=a.findIndex(x=>x.id===p.id);if(p.id&&i>=0)a[i]={...a[i],...row};else a.push({id:crypto.randomUUID(),created_at:new Date().toISOString(),...row});return a});write()}catch(x){$('#msg').textContent='Could not save. Your text is still here; please try again.'}};
   if(p.id)$('#dl').onclick=async()=>{if(!confirm('Delete this post?'))return;try{await change(a=>a.filter(x=>x.id!==p.id));write()}catch(x){$('#msg').textContent='Could not delete. Please try again.'}}}
-function signin(msg){$('#mbtn').style.visibility='hidden';app.innerHTML=head('Ashley\'s Blog')+`<p class="sans" style="color:var(--mut)">${msg||'Private. Sign in to continue.'}</p><div class="row"><button class="pri" id="gs"><svg class="i" viewBox="0 0 24 24"><path d="M7 18.5h10.5a4 4 0 0 0 .6-7.95A6 6 0 0 0 6.5 9.6 4.5 4.5 0 0 0 7 18.5z"/></svg>${LS.getItem('blog.em')?'Continue':'Sign in with Google'}</button></div><div class="msg" id="msg"></div>`;
+function signin(msg){$('#side').innerHTML='';$('#mbtn').style.visibility='hidden';app.innerHTML=head('Ashley\'s Blog')+`<p class="sans" style="color:var(--mut)">${msg||'Private. Sign in to continue.'}</p><div class="row"><button class="pri" id="gs"><svg class="i" viewBox="0 0 24 24"><path d="M7 18.5h10.5a4 4 0 0 0 .6-7.95A6 6 0 0 0 6.5 9.6 4.5 4.5 0 0 0 7 18.5z"/></svg>${LS.getItem('blog.em')?'Continue':'Sign in with Google'}</button></div><div class="msg" id="msg"></div>`;
   $('#gs').onclick=async()=>{$('#msg').textContent='Opening Google';try{await token(true);CACHE=null;route()}catch(e){$('#msg').textContent=e.message==='offline'?'You appear to be offline.':'Sign-in did not finish. Please try again.'}}}
+async function side(){const S=$('#side');if(!LS.getItem('blog.em')){S.innerHTML='';return}let d=[];try{d=await pub()}catch(e){}
+  const c={};d.forEach(p=>(p.tags||[]).forEach(t=>c[t]=(c[t]||0)+1));const g={};d.forEach(p=>{const k=new Date(p.created_at).toLocaleDateString(undefined,{year:'numeric',month:'long'});g[k]=(g[k]||0)+1});
+  S.innerHTML=`<div class="mod pf"><h4>profile</h4><div class="in"><div class="ph" id="pfph">${PROFILE.photo?imgTag(PROFILE.photo,'Ashley'):'<svg class="i" style="width:46px;height:46px" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c1-4 4-6 8-6s7 2 8 6"/></svg>'}</div><b>${esc(PROFILE.name||'Ashley')}</b><div style="color:var(--mut)">${d.length} ${d.length===1?'entry':'entries'}</div></div></div>
+  <div class="mod"><h4>categories</h4><div class="in">${Object.keys(c).length?'<ul>'+Object.keys(c).sort().map(t=>`<li><a href="#/tag/${encodeURIComponent(t)}">${esc(t)}</a><span>${c[t]}</span></li>`).join('')+'</ul>':'<span style="color:var(--mut)">none yet</span>'}</div></div>
+  <div class="mod"><h4>archive</h4><div class="in">${Object.keys(g).length?'<ul>'+Object.entries(g).map(([m,n])=>`<li><a href="#/archive">${esc(m)}</a><span>${n}</span></li>`).join('')+'</ul>':'<span style="color:var(--mut)">none yet</span>'}</div></div>`}
 async function route(){if(!LS.getItem('blog.em')){signin();return}
   try{await token(false)}catch(e){signin(e.message==='offline'?'You appear to be offline.':'Tap Continue to open your blog.');return}$('#mbtn').style.visibility='visible';
   const h=location.hash||'#/';let r='home';
   if(h.startsWith('#/p/'))view(h.slice(4));else if(h.startsWith('#/tag/'))tagPage(decodeURIComponent(h.slice(6))),r='tags';else if(h==='#/tags')tags(),r='tags';
   else if(h==='#/archive')archive(),r='archive';else if(h==='#/write')write(),r='write';else home();
-  document.querySelectorAll('.nav a').forEach(a=>a.classList.toggle('cur',a.dataset.r===r));scrollTo(0,0)}
+  side();document.querySelectorAll('.nav a').forEach(a=>a.classList.toggle('cur',a.dataset.r===r));scrollTo(0,0)}
 addEventListener('hashchange',route);route();
 if('serviceWorker' in navigator)navigator.serviceWorker.register('sw.js');
 </script>
