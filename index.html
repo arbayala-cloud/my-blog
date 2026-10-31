@@ -45,7 +45,7 @@ footer{text-align:center;color:var(--mut);font:13px system-ui;padding:10px 0 30p
 <a href="#/write" data-r="write"><svg class="i" viewBox="0 0 24 24"><path d="M12 3c3 3 4.5 6 4.5 9L12 21 7.5 12C7.5 9 9 6 12 3z"/><path d="M12 13v8"/><circle cx="12" cy="12" r="1.2"/></svg>Write</a>
 <div class="sans" style="font-size:13px;color:var(--mut);margin-top:22px;letter-spacing:.06em;text-transform:uppercase">Appearance</div>
 <div class="seg" id="seg"><button data-v="light">Light</button><button data-v="dark">Dark</button><button data-v="system">System</button></div>
-<div class="sans" style="margin-top:auto;padding-top:20px;font-size:12px;color:var(--mut)">Version 2026.10.31c</div></nav></div>
+<div class="sans" style="margin-top:auto;padding-top:20px;font-size:12px;color:var(--mut)">Version 2026.10.31d</div></nav></div>
 <main id="app"></main>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
 <script>
@@ -74,8 +74,9 @@ function setTheme(v){document.body.dataset.t=v;localStorage.blogTheme=v;document
 setTheme(localStorage.blogTheme||'system');$('#seg').onclick=e=>{if(e.target.dataset.v)setTheme(e.target.dataset.v)};
 matchMedia('(prefers-color-scheme: dark)').addEventListener('change',()=>setTheme(localStorage.blogTheme||'system'));
 $('#mbtn').onclick=()=>$('#menu').classList.add('on');$('#menu').onclick=e=>{if(e.target.id==='menu'||e.target.closest('a'))$('#menu').classList.remove('on')};
+function norm(p){const m=String(p.body||'').match(/^<!--tags:(.*?)-->\n?/);return {...p,tags:m?m[1].split(',').map(s=>s.trim()).filter(Boolean):[],body:m?p.body.slice(m[0].length):(p.body||'')}}
 let CACHE=null;
-async function pub(){if(CACHE)return CACHE;const {data,error}=await sb.from('posts').select('*').eq('published',true).order('created_at',{ascending:false});if(error)throw error;CACHE=data.map(p=>({...p,tags:Array.isArray(p.tags)?p.tags:[]}));return CACHE}
+async function pub(){if(CACHE)return CACHE;const {data,error}=await sb.from('posts').select('*').eq('published',true).order('created_at',{ascending:false});if(error)throw error;CACHE=data.map(norm);return CACHE}
 function card(p){const t=plain(p.body),long=t.length>600,img=(p.body.match(/!\[.*?\]\((https:\/\/[^\s)]+)\)/)||[])[1];
   return `<article class="post"><div class="date">${fmt(p.created_at)}</div><h2><a href="#/p/${p.id}">${esc(p.title)||'Untitled'}</a></h2>${chips(p.tags)}<div class="body">${long?(img?`<img src="${esc(img)}" loading="lazy">`:'')+'<p>'+esc(t.slice(0,600))+'...</p>':render(p.body)}</div>${long?`<a class="more" href="#/p/${p.id}">Continue reading</a>`:''}</article>`}
 const head=(t,s)=>`<div class="pagehead"><h1>${esc(t)}</h1>${s?`<p>${s}</p>`:''}</div>`;
@@ -88,18 +89,17 @@ async function tags(){try{const c={};(await pub()).forEach(p=>p.tags.forEach(t=>
 async function archive(){try{const d=await pub(),g={};d.forEach(p=>{const k=new Date(p.created_at).toLocaleDateString(undefined,{year:'numeric',month:'long'});(g[k]=g[k]||[]).push(p)});
   app.innerHTML=head('Archive')+(d.length?Object.entries(g).map(([m,ps])=>`<h3 style="margin:22px 0 4px;font-size:24px">${esc(m)} <span class="cnt">${ps.length}</span></h3><div class="list">${ps.map(p=>`<a class="it" href="#/p/${p.id}"><span>${esc(p.title)||'Untitled'}</span><span class="cnt" style="flex:none">${new Date(p.created_at).getDate()}</span></a>`).join('')}</div>`).join(''):'<div class="empty">No posts yet.</div>')}catch(e){app.innerHTML=fail}}
 function about(){app.innerHTML=`<section class="hero" style="text-align:left;border:0"><h1>${esc(SITE.aboutTitle)}</h1>${ORN.replace('class="orn"','class="orn" style="margin:10px 0 18px"')}${SITE.about.map(p=>`<p style="font-style:normal;color:var(--fg);max-width:none;margin:0 0 1em">${esc(p)}</p>`).join('')}</section>`}
-async function view(id){const {data}=await sb.from('posts').select('*').eq('id',id).maybeSingle();
+async function view(id){let {data}=await sb.from('posts').select('*').eq('id',id).maybeSingle();if(data)data=norm(data);
   app.innerHTML=data?`<article class="post" style="border:0"><div class="date">${fmt(data.created_at)}</div><h2>${esc(data.title)||'Untitled'}</h2>${chips(data.tags)}<div class="body">${render(data.body)}</div></article><div style="text-align:center">${ORN}</div><p style="text-align:center"><a class="more" href="#/">All posts</a></p>`:'<div class="empty">Post not found.</div>';scrollTo(0,0)}
-let HASTAGS=null,ALL=[];
+let HASTAGS=true,ALL=[];
 async function write(){const {data:{session}}=await sb.auth.getSession();
   if(!session){app.innerHTML=head('Sign in')+`<label class="l">Email</label><input id="em" type="email" autocomplete="username"><label class="l">Password</label><input id="pw" type="password" autocomplete="current-password"><div class="row"><button class="pri" id="si">Sign in</button></div><div class="msg" id="msg"></div>`;
     $('#si').onclick=async()=>{$('#msg').textContent='Signing in';const {error}=await sb.auth.signInWithPassword({email:$('#em').value.trim(),password:$('#pw').value});if(error)$('#msg').textContent=error.message;else write()};return}
-  const {data,error}=await sb.from('posts').select('*').order('created_at',{ascending:false});ALL=data||[];
-  if(HASTAGS===null){const t=await sb.from('posts').select('tags').limit(1);HASTAGS=!t.error}
+  const {data,error}=await sb.from('posts').select('*').order('created_at',{ascending:false});ALL=(data||[]).map(norm);
   app.innerHTML=`<div class="row" style="margin:0 0 10px;justify-content:space-between"><h1 style="margin:0;font-size:34px">Your posts</h1><button class="pri" id="nw"><svg class="i" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>New post</button></div>
   <div class="list">${error?'<div class="msg">'+esc(error.message)+'</div>':(ALL.map(p=>`<div class="it"><span>${esc(p.title)||'Untitled'}${p.published?'':'<span class="tag">Draft</span>'}<br><small class="date">${fmt(p.created_at)}</small></span><button data-e="${p.id}">Edit</button></div>`).join('')||'<div class="empty">No posts yet.</div>')}</div>
   <div class="row"><button id="bk"><svg class="i" viewBox="0 0 24 24"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg>Download all posts</button><button id="so">Sign out</button></div>
-  ${HASTAGS?'':'<p class="msg">Tags will appear here after the one-time tags setup is run in Supabase.</p>'}`;
+`;
   $('#nw').onclick=()=>edit();$('#so').onclick=async()=>{await sb.auth.signOut();write()};
   app.querySelectorAll('[data-e]').forEach(b=>b.onclick=()=>edit(ALL.find(p=>p.id===b.dataset.e)));
   $('#bk').onclick=()=>{const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([JSON.stringify({exported:new Date().toISOString(),posts:ALL},null,2)],{type:'application/json'}));a.download='blog-backup-'+new Date().toISOString().slice(0,10)+'.json';a.click()}}
@@ -113,7 +113,7 @@ function edit(p){p=p||{title:'',body:'',published:true,tags:[]};let T=[...(p.tag
   <div class="row"><button class="pri" id="sv">Save</button><button id="cx">Cancel</button>${p.id?'<button id="dl" style="margin-left:auto">Delete</button>':''}</div><div class="msg" id="msg"></div>`;
   if(HASTAGS){const draw=()=>{$('#tc').innerHTML=T.map((t,i)=>`<button class="chip x" data-i="${i}">${esc(t)}<svg class="i" style="width:12px;height:12px" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg></button>`).join('');
       $('#sug').innerHTML=known.filter(t=>!T.includes(t)).map(t=>`<button class="chip" data-a="${esc(t)}" style="background:none;border:1px dashed var(--line)">+ ${esc(t)}</button>`).join('')};
-    const add=v=>{v=v.trim().replace(/\s+/g,' ');if(v&&!T.some(t=>t.toLowerCase()===v.toLowerCase()))T.push(v);$('#tg').value='';draw()};
+    const add=v=>{v=v.replace(/,|-->|<!--/g,' ').trim().replace(/\s+/g,' ');if(v&&!T.some(t=>t.toLowerCase()===v.toLowerCase()))T.push(v);$('#tg').value='';draw()};
     $('#tg').onkeydown=e=>{if(e.key==='Enter'||e.key===','){e.preventDefault();add($('#tg').value)}};$('#tg').onchange=()=>add($('#tg').value);
     $('#tc').onclick=e=>{const b=e.target.closest('[data-i]');if(b){T.splice(+b.dataset.i,1);draw()}};$('#sug').onclick=e=>{const b=e.target.closest('[data-a]');if(b)add(b.dataset.a)};draw()}
   $('#cx').onclick=write;
@@ -121,8 +121,8 @@ function edit(p){p=p||{title:'',body:'',published:true,tags:[]};let T=[...(p.tag
     const path=Date.now()+'-'+f.name.replace(/[^\w.]+/g,'_');const {error}=await sb.storage.from('blog').upload(path,f,{contentType:f.type});
     if(error){$('#msg').textContent=error.message;return}const url=sb.storage.from('blog').getPublicUrl(path).data.publicUrl;
     const t=$('#bo'),i=t.selectionStart;t.value=t.value.slice(0,i)+'\n\n![]('+url+')\n\n'+t.value.slice(i);$('#msg').textContent='Photo added'};
-  $('#sv').onclick=async()=>{if(HASTAGS&&$('#tg').value.trim()){T.push($('#tg').value.trim())}$('#msg').textContent='Saving';
-    const row={title:$('#ti').value.trim(),body:$('#bo').value,published:$('#pb').checked,updated_at:new Date().toISOString()};if(HASTAGS)row.tags=T;
+  $('#sv').onclick=async()=>{if($('#tg').value.trim())add($('#tg').value);$('#msg').textContent='Saving';
+    const row={title:$('#ti').value.trim(),body:(T.length?'<!--tags:'+T.join(',')+'-->\n':'')+$('#bo').value,published:$('#pb').checked,updated_at:new Date().toISOString()};
     const r=p.id?await sb.from('posts').update(row).eq('id',p.id):await sb.from('posts').insert(row);if(r.error)$('#msg').textContent=r.error.message;else{CACHE=null;write()}};
   if(p.id)$('#dl').onclick=async()=>{if(!confirm('Delete this post?'))return;const r=await sb.from('posts').delete().eq('id',p.id);if(r.error)$('#msg').textContent=r.error.message;else{CACHE=null;write()}}}
 function route(){if(!sb){app.innerHTML='<div class="empty">Could not load. Check your connection.</div>';return}const h=location.hash||'#/';let r='home';
