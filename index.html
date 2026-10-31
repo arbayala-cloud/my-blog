@@ -139,7 +139,7 @@ a{color:var(--lnk)}
 <div class="wrap"><div class="xbar" id="mbtn"><span class="xlogo"><svg class="i" style="width:13px;height:13px" viewBox="0 0 24 24"><path d="M12 3c3 3 4.5 6 4.5 9L12 21 7.5 12C7.5 9 9 6 12 3z"/></svg> my blog</span><a href="#/" data-r="home">home</a><a href="#/tags" data-r="tags">categories</a><a href="#/archive" data-r="archive">archives</a><a href="#/write" data-r="write">write</a><a href="#/custom" data-r="custom">customize</a></div>
 <div class="xhead" id="xhead"><a class="brand" href="#/">Ashley's Blog</a><div class="xsub" id="xsub"></div></div>
 <div class="cols"><main id="app"></main><aside id="side"></aside></div>
-<footer class="foot"><div class="seg" id="seg"><button data-v="light">Light</button><button data-v="dark">Dark</button><button data-v="system">System</button></div><div>Ashley's Blog &middot; est. 2026 &middot; Version 2026.10.31l</div></footer></div>
+<footer class="foot"><div class="seg" id="seg"><button data-v="light">Light</button><button data-v="dark">Dark</button><button data-v="system">System</button></div><div>Ashley's Blog &middot; est. 2026 &middot; Version 2026.10.31m</div></footer></div>
 <script>
 /* ===================================================== */
 
@@ -155,7 +155,7 @@ async function token(interactive){if(tok&&Date.now()<tokExp-60000)return tok;awa
 function dropTok(){tok=null;tokExp=0;LS.removeItem('blog.tok')}
 async function api(u,o={}){const t=await token(false);const r=await fetch(u,{...o,headers:{...(o.headers||{}),Authorization:'Bearer '+t}});if(r.status===401){dropTok();throw new Error('auth')}if(!r.ok)throw new Error('http '+r.status);return r}
 async function fileId(){let id=LS.getItem('blog.fid');if(id)return id;const r=await(await api(DR+'?spaces=appDataFolder&fields=files(id)&orderBy=modifiedTime desc&q='+encodeURIComponent("name='"+FN+"'"))).json();id=r.files&&r.files[0]&&r.files[0].id;if(id)LS.setItem('blog.fid',id);return id||null}
-async function mpUpload(meta,blob,type){const b='blog'+Date.now(),pre='--'+b+'\r\nContent-Type: application/json; charset=UTF-8\r\n\r\n'+JSON.stringify(meta)+'\r\n--'+b+'\r\nContent-Type: '+type+'\r\n\r\n';
+async function mpUpload(meta,blob,type){if(!type||type==='application/octet-stream'){const n=(meta.name||'')+' '+(blob.name||'');type=/\.png/i.test(n)?'image/png':/\.webp/i.test(n)?'image/webp':/\.gif/i.test(n)?'image/gif':/\.hei[cf]/i.test(n)?'image/heic':(blob.name?'image/jpeg':type||'application/octet-stream')}if(type.startsWith('image/'))meta={...meta,mimeType:type};const b='blog'+Date.now(),pre='--'+b+'\r\nContent-Type: application/json; charset=UTF-8\r\n\r\n'+JSON.stringify(meta)+'\r\n--'+b+'\r\nContent-Type: '+type+'\r\n\r\n';
   return (await(await api(UP+'?uploadType=multipart&fields=id',{method:'POST',headers:{'Content-Type':'multipart/related; boundary='+b},body:new Blob([pre,blob,'\r\n--'+b+'--'])})).json()).id}
 const SEED=[{id:'eddb8fd3-d77a-4bee-8ebf-5df8ea1418eb',title:'Hi guys!',body:'Yada yada whoooo',tags:[],published:true,created_at:'2026-10-31T20:36:20.323Z',updated_at:'2026-10-31T20:36:18.589Z'}];
 let PROFILE={};
@@ -166,15 +166,22 @@ async function saveAll(posts){const body=JSON.stringify({app:'my-blog',v:1,saved
   if(id)await api(UP+'/'+id+'?uploadType=media',{method:'PATCH',headers:{'Content-Type':'application/json'},body});
   else{const nid=await mpUpload({name:FN,parents:['appDataFolder']},body,'application/json');LS.setItem('blog.fid',nid)}LS.setItem('blog.cache',JSON.stringify(posts))}
 async function change(fn){const cur=await loadAll();const next=fn(cur.slice());await saveAll(next);CACHE=null;STOR=null;return next}
-const IMG={};async function driveImg(id){if(!IMG[id]){IMG[id]=(async()=>{const r=await api(DR+'/'+id+'?alt=media');return URL.createObjectURL(await r.blob())})().catch(e=>{delete IMG[id];throw e})}return IMG[id]}
-function loadImgs(){app.querySelectorAll('img[data-d]').forEach(i=>{const id=i.dataset.d;i.removeAttribute('data-d');driveImg(id).then(u=>i.src=u).catch(()=>{})})}
-new MutationObserver(loadImgs).observe(document.getElementById('app'),{childList:true,subtree:true});
+const IMG={},ICACHE='blog-img-v1';
+const SIL="data:image/svg+xml,"+encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><rect width="24" height="24" fill="#eee"/><circle cx="12" cy="9" r="3.6" fill="none" stroke="#999" stroke-width="1.3"/><path d="M5.5 20c1-3.6 3.6-5.4 6.5-5.4s5.5 1.8 6.5 5.4" fill="none" stroke="#999" stroke-width="1.3"/></svg>');
+const BLANK='data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==';
+async function fetchDrive(id){for(let i=0;i<2;i++){try{const r=await api(DR+'/'+id+'?alt=media');let b=await r.blob();if(!/^image\//.test(b.type))b=new Blob([b],{type:'image/jpeg'});return b}catch(e){if(e.message!=='auth'||i)throw e}}}
+async function driveImg(id){if(!IMG[id]){IMG[id]=(async()=>{let c=null;try{c=await caches.open(ICACHE);const hit=await c.match('/img/'+id);if(hit)return URL.createObjectURL(await hit.blob())}catch(e){}
+    const b=await fetchDrive(id);try{c&&await c.put('/img/'+id,new Response(b,{headers:{'Content-Type':b.type}}))}catch(e){}return URL.createObjectURL(b)})().catch(e=>{delete IMG[id];throw e})}return IMG[id]}
+function loadImgs(){document.querySelectorAll('img[data-d]').forEach(i=>{const id=i.dataset.d;i.removeAttribute('data-d');const ph=i.dataset.ph;
+  driveImg(id).then(u=>{i.onerror=()=>{i.onerror=null;if(ph)i.src=SIL;else i.style.display='none'};i.src=u}).catch(()=>{if(ph)i.src=SIL;else i.style.display='none'})})}
+new MutationObserver(loadImgs).observe(document.body,{childList:true,subtree:true});
+
 const $=s=>document.querySelector(s),app=$('#app');
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const LONG=d=>new Date(d).toLocaleDateString('en-US',{weekday:'long',year:'numeric',month:'long',day:'2-digit'}),TIME=d=>new Date(d).toLocaleTimeString(undefined,{hour:'numeric',minute:'2-digit'});
 const fmt=d=>new Date(d).toLocaleDateString(undefined,{year:'numeric',month:'long',day:'numeric'});
 const ORN='<svg class="orn" viewBox="0 0 140 14"><path d="M2 7h52M86 7h52" stroke="currentColor" stroke-width="1"/><path d="M70 1l6 6-6 6-6-6z" fill="none" stroke="currentColor" stroke-width="1.2"/><circle cx="58" cy="7" r="1.5" fill="currentColor"/><circle cx="82" cy="7" r="1.5" fill="currentColor"/></svg>';
-const imgTag=(u,a)=>u.startsWith('drive:')?`<img data-d="${esc(u.slice(6))}" alt="${esc(a||'')}" loading="lazy">`:`<img src="${esc(u)}" alt="${esc(a||'')}" loading="lazy">`;
+const imgTag=(u,a,ph)=>u.startsWith('drive:')?`<img data-d="${esc(u.slice(6))}" ${ph?'data-ph="1" ':''}src="${ph?SIL:BLANK}" alt="${esc(a||'')}">`:`<img src="${esc(u)}" alt="${esc(a||'')}" loading="lazy">`;
 const inl=s=>s.replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>').replace(/(^|[^*])\*([^*\n]+)\*/g,'$1<em>$2</em>');
 const IMGRE=/!\[(.*?)\]\(((?:https:\/\/|drive:)[^\s)]+)\)/g;
 function render(b){return String(b||'').split(/\n{2,}/).map(p=>{p=p.trim();const m=p.match(/^!\[(.*?)\]\(((?:https:\/\/|drive:)[^\s)]+)\)$/);if(m)return imgTag(m[2],m[1]);
@@ -294,7 +301,7 @@ async function side(){applyLook();const S=$('#side');if(!LS.getItem('blog.em')){
   const byDay={};d.forEach(p=>{const t=new Date(p.created_at);if(t.getFullYear()===y&&t.getMonth()===m)byDay[t.getDate()]=byDay[t.getDate()]||p.id});
   let cells='';for(let i=0;i<first;i++)cells+='<td></td>';for(let k=1;k<=days;k++){cells+=byDay[k]?`<td class="on"><a href="#/p/${byDay[k]}">${k}</a></td>`:`<td>${k}</td>`;if((first+k)%7===0)cells+='</tr><tr>'}
   const mname=now.toLocaleDateString('en-US',{month:'long',year:'numeric'});
-  S.innerHTML=`<div class="mod pf"><h4>${esc(PROFILE.name||'Ashley')}</h4><div class="in"><div class="ph">${PROFILE.photo?imgTag(PROFILE.photo,'Ashley'):'<svg class="i" style="width:52px;height:52px" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c1-4 4-6 8-6s7 2 8 6"/></svg>'}</div>
+  S.innerHTML=`<div class="mod pf"><h4>${esc(PROFILE.name||'Ashley')}</h4><div class="in"><div class="ph">${PROFILE.photo?imgTag(PROFILE.photo,'Ashley',1):'<svg class="i" style="width:52px;height:52px" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c1-4 4-6 8-6s7 2 8 6"/></svg>'}</div>
    <div class="pl">${PFIELDS.map(([k,l])=>{const v=k in PF()?PF()[k]:DEFF[k];return v?`<span><b>${l}:</b> ${esc(v)}</span>`:''}).join('')}<span><b>Entries:</b> ${d.length}</span></div></div></div>
   <div class="mod"><h4>Archives</h4><div class="in"><table class="cal"><caption><a href="#" data-cm="-1">&lsaquo;</a> ${mname} <a href="#" data-cm="1">&rsaquo;</a></caption><tr>${'SMTWTFS'.split('').map(x=>`<th>${x}</th>`).join('')}</tr><tr>${cells}</tr></table><div style="margin-top:6px"><a href="#/archive">all archives</a></div><div class="sub">Categories</div><div id="catx"></div></div></div>`;
   S.querySelector('#catx').innerHTML=`${Object.keys(c).length?'<ul>'+Object.keys(c).sort().map(t=>`<li><a href="#/tag/${encodeURIComponent(t)}">${esc(t)}</a><span>${c[t]}</span></li>`).join('')+'</ul>':'none yet'}`;
