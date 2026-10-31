@@ -81,11 +81,39 @@ input,textarea{font:13px/1.6 Verdana,sans-serif;border-radius:0}button,.btn{font
 .list .it{padding:7px 0;font-size:12px}.more{font:11px Verdana,sans-serif;text-transform:lowercase;letter-spacing:0;border:0;text-decoration:underline}
 .foot{font:10px Verdana,sans-serif;padding:6px 0 30px}.foot .seg{margin:10px auto}
 .empty{font:12px Verdana,sans-serif}
+
+body{font:12px/1.45 Verdana,Arial,Helvetica,sans-serif;background:var(--bg)}
+:root{--bg:#ffffff;--card:#ffffff;--fg:#000000;--mut:#666666;--line:#999999;--chip:#eeeeee;--lnk:#003399;--bar:#336699;--bart:#ffffff;--hd:#dddddd}
+[data-t=dark]{--bg:#000000;--card:#000000;--fg:#ffffff;--mut:#aaaaaa;--line:#555555;--chip:#1a1a1a;--lnk:#99bbff;--bar:#1c2c3c;--bart:#ffffff;--hd:#222222}
+@media(prefers-color-scheme:dark){[data-t=system]{--bg:#000000;--card:#000000;--fg:#ffffff;--mut:#aaaaaa;--line:#555555;--chip:#1a1a1a;--lnk:#99bbff;--bar:#1c2c3c;--bart:#ffffff;--hd:#222222}}
+a{color:var(--lnk)}
+.wrap{max-width:780px;padding:0 0 0;padding-top:env(safe-area-inset-top)}
+.xbar{background:var(--bar);color:var(--bart);display:flex;flex-wrap:wrap;align-items:center;gap:2px 12px;padding:4px 8px;font:bold 10px Verdana,sans-serif;border-bottom:1px solid #000}
+.xbar a{color:var(--bart);text-decoration:none;font-weight:normal}.xbar a.cur{text-decoration:underline;font-weight:bold}.xlogo{display:inline-flex;gap:4px;align-items:center;margin-right:6px;letter-spacing:.03em}
+.xhead{width:100%;border-collapse:collapse;margin:8px 0 0}.xhead td{padding:14px 10px 10px}
+.xhead .brand{font:bold 22px Verdana,Arial,sans-serif;color:var(--fg);text-decoration:none;letter-spacing:-.02em}
+.cols{grid-template-columns:190px 1fr;gap:10px;padding:0 8px}
+.mod{border:1px solid var(--line);margin-bottom:10px;background:var(--card)}
+.mod h4{text-transform:none;letter-spacing:0;font:bold 11px Verdana,sans-serif;background:var(--hd);color:var(--fg);padding:3px 6px;border-bottom:1px solid var(--line);text-align:left}
+.mod .in{font-size:10px;padding:6px}.mod .in b{font-weight:bold}.mod li{padding:1px 0}.mod a{color:var(--lnk)}
+.pf{text-align:left}.pf .ph{width:150px;height:150px;margin:2px auto 6px}.pf .pl{display:flex;flex-direction:column;gap:2px;margin-top:4px}.pf .lk{text-align:center;font-size:10px;margin-bottom:4px}
+.cal{width:100%;border-collapse:collapse;font-size:9px;text-align:center}.cal th{font-weight:normal;color:var(--mut)}.cal td{padding:1px 0}.cal td.on a{font-weight:bold}.cal caption{font-weight:bold;font-size:10px;padding-bottom:3px}
+.entry{border:0;background:none;margin-bottom:22px}
+.entry .day{font:bold 11px Verdana,sans-serif;background:none;border:0;border-bottom:1px solid var(--line);padding:0 0 3px;margin-bottom:8px}
+.entry .eb{padding:0}.entry h2{font:bold 12px Verdana,sans-serif;margin:0 0 6px}.entry .body{font-size:12px;line-height:1.5}
+.entry .cover,.entry .body img{border:0;max-width:100%}
+.mood{font-size:11px;color:var(--fg);margin:8px 0 0}
+.cur2{border:1px solid var(--line);margin:10px 0 0;font-size:10px;max-width:300px}.cur2 b{display:block;background:var(--hd);padding:2px 6px;border-bottom:1px solid var(--line)}.cur2 div{padding:5px 6px;display:flex;gap:6px;align-items:center}
+.ef{border:0;padding:8px 0 0;font-size:10px;color:var(--fg);gap:0}.ef a,.ef button{color:var(--lnk)}.ef .s{padding:0 4px;color:var(--mut)}
+.heart{background:none;border:0;padding:0;font:10px Verdana,sans-serif;cursor:pointer;display:inline-flex;gap:3px;align-items:center}.heart.on svg{fill:currentColor}
+.foot .seg button{font:10px Verdana,sans-serif}
+.pf .pl b{font-size:10px}
+@media(max-width:700px){.cols{grid-template-columns:1fr}}
 </style></head><body data-t="system">
-<div class="wrap"><header class="banner"><a class="brand" href="#/">Ashley's Blog</a></header>
-<nav class="nav" id="mbtn"><a href="#/" data-r="home"><svg class="i" style="width:14px;height:14px" viewBox="0 0 24 24"><path d="M4 11l8-7 8 7v9h-5v-6H9v6H4z"/></svg>Home</a><a href="#/tags" data-r="tags"><svg class="i" style="width:14px;height:14px" viewBox="0 0 24 24"><path d="M3 12V4h8l9 9-8 8z"/><circle cx="7.5" cy="8.5" r="1.3"/></svg>Categories</a><a href="#/archive" data-r="archive"><svg class="i" style="width:14px;height:14px" viewBox="0 0 24 24"><path d="M4 5h16v4H4zM5 9v10h14V9M10 13h4"/></svg>Archive</a><a href="#/write" data-r="write"><svg class="i" style="width:14px;height:14px" viewBox="0 0 24 24"><path d="M5 19l1-4L16 5l3 3L9 18z"/></svg>Write</a></nav>
+<div class="wrap"><div class="xbar" id="mbtn"><span class="xlogo"><svg class="i" style="width:13px;height:13px" viewBox="0 0 24 24"><path d="M12 3c3 3 4.5 6 4.5 9L12 21 7.5 12C7.5 9 9 6 12 3z"/></svg> my blog</span><a href="#/" data-r="home">home</a><a href="#/tags" data-r="tags">categories</a><a href="#/archive" data-r="archive">archives</a><a href="#/write" data-r="write">write</a></div>
+<table class="xhead"><tr><td><a class="brand" href="#/">Ashley's Blog</a></td></tr></table>
 <div class="cols"><main id="app"></main><aside id="side"></aside></div>
-<footer class="foot"><div class="seg" id="seg"><button data-v="light">Light</button><button data-v="dark">Dark</button><button data-v="system">System</button></div><div>Ashley's Blog &middot; est. 2026 &middot; Version 2026.10.31i</div></footer></div>
+<footer class="foot"><div class="seg" id="seg"><button data-v="light">Light</button><button data-v="dark">Dark</button><button data-v="system">System</button></div><div>Ashley's Blog &middot; est. 2026 &middot; Version 2026.10.31j</div></footer></div>
 <script>
 /* ===================================================== */
 
@@ -117,7 +145,7 @@ function loadImgs(){app.querySelectorAll('img[data-d]').forEach(i=>{const id=i.d
 new MutationObserver(loadImgs).observe(document.getElementById('app'),{childList:true,subtree:true});
 const $=s=>document.querySelector(s),app=$('#app');
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-const LONG=d=>new Date(d).toLocaleDateString(undefined,{weekday:'long',year:'numeric',month:'long',day:'numeric'}),TIME=d=>new Date(d).toLocaleTimeString(undefined,{hour:'numeric',minute:'2-digit'});
+const LONG=d=>new Date(d).toLocaleDateString('en-US',{weekday:'long',year:'numeric',month:'long',day:'2-digit'}),TIME=d=>new Date(d).toLocaleTimeString(undefined,{hour:'numeric',minute:'2-digit'});
 const fmt=d=>new Date(d).toLocaleDateString(undefined,{year:'numeric',month:'long',day:'numeric'});
 const ORN='<svg class="orn" viewBox="0 0 140 14"><path d="M2 7h52M86 7h52" stroke="currentColor" stroke-width="1"/><path d="M70 1l6 6-6 6-6-6z" fill="none" stroke="currentColor" stroke-width="1.2"/><circle cx="58" cy="7" r="1.5" fill="currentColor"/><circle cx="82" cy="7" r="1.5" fill="currentColor"/></svg>';
 const imgTag=(u,a)=>u.startsWith('drive:')?`<img data-d="${esc(u.slice(6))}" alt="${esc(a||'')}" loading="lazy">`:`<img src="${esc(u)}" alt="${esc(a||'')}" loading="lazy">`;
@@ -142,11 +170,15 @@ const byDate=a=>a.slice().sort((x,y)=>new Date(y.created_at)-new Date(x.created_
 async function all(){if(CACHE)return CACHE;CACHE=byDate(await loadAll());return CACHE}
 async function pub(){return (await all()).filter(p=>p.published)}
 const MOODI='<svg class="i" style="width:12px;height:12px" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M9 14c1.5 1.5 4.5 1.5 6 0M9.5 10h0M14.5 10h0"/></svg>',MUSI='<svg class="i" style="width:12px;height:12px" viewBox="0 0 24 24"><path d="M9 18V6l10-2v12"/><circle cx="7" cy="18" r="2"/><circle cx="17" cy="16" r="2"/></svg>';
-function entry(p,full){const long=!full&&plain(p.body).length>1500;
-  const mm=(p.mood||p.listening)?`<div class="mood">${p.mood?`<span>${MOODI}Mood: ${esc(p.mood)}</span>`:''}${p.listening?`<span>${MUSI}Now listening: ${esc(p.listening)}</span>`:''}</div>`:'';
-  const bodyH=long?'<p>'+esc(plain(p.body).slice(0,1500).replace(/\s\S*$/,''))+'...</p><p><a class="more" href="#/p/'+p.id+'">read more</a></p>':render(p.body);
-  return `<div class="entry"><div class="day">${LONG(p.created_at)}</div><div class="eb"><h2><a href="#/p/${p.id}">${esc(p.title)||'Untitled'}</a></h2>${mm}${p.cover?coverTag(p.cover):''}<div class="body">${bodyH}</div></div>
-  <div class="ef"><span>posted at ${TIME(p.created_at)}</span>${(p.tags||[]).length?'<span>&middot;</span><span>tags: '+p.tags.map(t=>`<a href="#/tag/${encodeURIComponent(t)}">${esc(t)}</a>`).join(', ')+'</span>':''}<span>&middot;</span><a href="#/p/${p.id}">permalink</a></div></div>`}
+function entry(p,full){const long=!full&&plain(p.body).length>2000;
+  const bodyH=long?'<p>'+esc(plain(p.body).slice(0,2000).replace(/\s\S*$/,''))+'...</p><p><a href="#/p/'+p.id+'">read more</a></p>':render(p.body);
+  const mood=p.mood?`<div class="mood">Mood - ${esc(p.mood)}</div>`:'';
+  const cur=p.listening?`<div class="cur2"><b>Currently</b><div>${MUSI}<span>listening to: ${esc(p.listening)}</span></div></div>`:'';
+  const tg=(p.tags||[]).length?'<span class="s">-</span><span>tags: '+p.tags.map(t=>`<a href="#/tag/${encodeURIComponent(t)}">${esc(t)}</a>`).join(', ')+'</span>':'';
+  return `<div class="entry"><div class="day">${LONG(p.created_at)}</div><div class="eb">${p.title?`<h2><a href="#/p/${p.id}" style="color:var(--fg);text-decoration:none">${esc(p.title)}</a></h2>`:''}${p.cover?coverTag(p.cover):''}<div class="body">${bodyH}</div>${mood}${cur}</div>
+  <div class="ef"><span>${TIME(p.created_at)}</span><span class="s">-</span><button class="heart${p.hearts?' on':''}" data-h="${p.id}" aria-label="Heart"><svg class="i" style="width:11px;height:11px" viewBox="0 0 24 24"><path d="M12 20s-7-4.5-7-10a4 4 0 0 1 7-2.5A4 4 0 0 1 19 10c0 5.5-7 10-7 10z"/></svg>${p.hearts?p.hearts+' eprops':'add eprops'}</button>${tg}<span class="s">-</span><a href="#/p/${p.id}">permalink</a></div></div>`}
+document.addEventListener('click',async e=>{const b=e.target.closest('[data-h]');if(!b)return;const id=b.dataset.h;
+  try{await change(a=>a.map(x=>x.id===id?{...x,hearts:(x.hearts||0)+1}:x));const n=(CACHE||await all()).find(x=>x.id===id).hearts;b.classList.add('on');b.lastChild.textContent=n+' eprops'}catch(x){}});
 const card=p=>entry(p,false);
 const head=(t,s)=>`<div class="pagehead"><h1>${esc(t)}</h1>${s?`<p>${s}</p>`:''}</div>`;
 const fail='<div class="empty">Posts could not load. Please try again.</div>';
@@ -202,17 +234,26 @@ function edit(p){p=p||{title:'',body:'',published:true,tags:[]};let COVER=p.cove
   if(p.id)$('#dl').onclick=async()=>{if(!confirm('Delete this post?'))return;try{await change(a=>a.filter(x=>x.id!==p.id));write()}catch(x){$('#msg').textContent='Could not delete. Please try again.'}}}
 function signin(msg){$('#side').innerHTML='';$('#mbtn').style.visibility='hidden';app.innerHTML=head('Ashley\'s Blog')+`<p class="sans" style="color:var(--mut)">${msg||'Private. Sign in to continue.'}</p><div class="row"><button class="pri" id="gs"><svg class="i" viewBox="0 0 24 24"><path d="M7 18.5h10.5a4 4 0 0 0 .6-7.95A6 6 0 0 0 6.5 9.6 4.5 4.5 0 0 0 7 18.5z"/></svg>${LS.getItem('blog.em')?'Continue':'Sign in with Google'}</button></div><div class="msg" id="msg"></div>`;
   $('#gs').onclick=async()=>{$('#msg').textContent='Opening Google';try{await token(true);CACHE=null;route()}catch(e){$('#msg').textContent=e.message==='offline'?'You appear to be offline.':'Sign-in did not finish. Please try again.'}}}
+let CALM=null;
 async function side(){const S=$('#side');if(!LS.getItem('blog.em')){S.innerHTML='';return}let d=[];try{d=await pub()}catch(e){}
-  const c={};d.forEach(p=>(p.tags||[]).forEach(t=>c[t]=(c[t]||0)+1));const g={};d.forEach(p=>{const k=new Date(p.created_at).toLocaleDateString(undefined,{year:'numeric',month:'long'});g[k]=(g[k]||0)+1});
-  S.innerHTML=`<div class="mod pf"><h4>profile</h4><div class="in"><div class="ph" id="pfph">${PROFILE.photo?imgTag(PROFILE.photo,'Ashley'):'<svg class="i" style="width:46px;height:46px" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c1-4 4-6 8-6s7 2 8 6"/></svg>'}</div><b>${esc(PROFILE.name||'Ashley')}</b><div style="color:var(--mut)">${d.length} ${d.length===1?'entry':'entries'}</div></div></div>
-  <div class="mod"><h4>categories</h4><div class="in">${Object.keys(c).length?'<ul>'+Object.keys(c).sort().map(t=>`<li><a href="#/tag/${encodeURIComponent(t)}">${esc(t)}</a><span>${c[t]}</span></li>`).join('')+'</ul>':'<span style="color:var(--mut)">none yet</span>'}</div></div>
-  <div class="mod"><h4>archive</h4><div class="in">${Object.keys(g).length?'<ul>'+Object.entries(g).map(([m,n])=>`<li><a href="#/archive">${esc(m)}</a><span>${n}</span></li>`).join('')+'</ul>':'<span style="color:var(--mut)">none yet</span>'}</div></div>`}
+  const c={};d.forEach(p=>(p.tags||[]).forEach(t=>c[t]=(c[t]||0)+1));
+  const now=CALM||new Date(d[0]?d[0].created_at:Date.now());CALM=now;const y=now.getFullYear(),m=now.getMonth(),first=new Date(y,m,1).getDay(),days=new Date(y,m+1,0).getDate();
+  const byDay={};d.forEach(p=>{const t=new Date(p.created_at);if(t.getFullYear()===y&&t.getMonth()===m)byDay[t.getDate()]=byDay[t.getDate()]||p.id});
+  let cells='';for(let i=0;i<first;i++)cells+='<td></td>';for(let k=1;k<=days;k++){cells+=byDay[k]?`<td class="on"><a href="#/p/${byDay[k]}">${k}</a></td>`:`<td>${k}</td>`;if((first+k)%7===0)cells+='</tr><tr>'}
+  const mname=now.toLocaleDateString('en-US',{month:'long',year:'numeric'});
+  S.innerHTML=`<div class="mod pf"><h4>${esc(PROFILE.name||'Ashley')}</h4><div class="in"><div class="ph">${PROFILE.photo?imgTag(PROFILE.photo,'Ashley'):'<svg class="i" style="width:52px;height:52px" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c1-4 4-6 8-6s7 2 8 6"/></svg>'}</div>
+   <div class="pl"><span><b>Name:</b> Ashley</span><span><b>Metro:</b> Fort Worth</span><span><b>Member Since:</b> 10/31/2026</span><span><b>Entries:</b> ${d.length}</span></div></div></div>
+  <div class="mod"><h4>Recent Entries</h4><div class="in">${d.length?'<ul>'+d.slice(0,5).map(p=>`<li><a href="#/p/${p.id}">${esc(p.title||LONG(p.created_at))}</a></li>`).join('')+'</ul>':'none yet'}</div></div>
+  <div class="mod"><h4>Archives</h4><div class="in"><table class="cal"><caption><a href="#" data-cm="-1">&lsaquo;</a> ${mname} <a href="#" data-cm="1">&rsaquo;</a></caption><tr>${'SMTWTFS'.split('').map(x=>`<th>${x}</th>`).join('')}</tr><tr>${cells}</tr></table><div style="margin-top:4px"><a href="#/archive">all archives</a></div></div></div>
+  <div class="mod"><h4>Categories</h4><div class="in">${Object.keys(c).length?'<ul>'+Object.keys(c).sort().map(t=>`<li><a href="#/tag/${encodeURIComponent(t)}">${esc(t)}</a><span>${c[t]}</span></li>`).join('')+'</ul>':'none yet'}</div></div>
+  <div class="mod"><h4>Subscriptions</h4><div class="in" style="color:var(--mut)">just me, for now</div></div>`;
+  S.querySelectorAll('[data-cm]').forEach(a=>a.onclick=ev=>{ev.preventDefault();CALM=new Date(y,m+ +a.dataset.cm,1);side()})}
 async function route(){if(!LS.getItem('blog.em')){signin();return}
   try{await token(false)}catch(e){signin(e.message==='offline'?'You appear to be offline.':'Tap Continue to open your blog.');return}$('#mbtn').style.visibility='visible';
   const h=location.hash||'#/';let r='home';
   if(h.startsWith('#/p/'))view(h.slice(4));else if(h.startsWith('#/tag/'))tagPage(decodeURIComponent(h.slice(6))),r='tags';else if(h==='#/tags')tags(),r='tags';
   else if(h==='#/archive')archive(),r='archive';else if(h==='#/write')write(),r='write';else home();
-  side();document.querySelectorAll('.nav a').forEach(a=>a.classList.toggle('cur',a.dataset.r===r));scrollTo(0,0)}
+  side();document.querySelectorAll('.xbar a').forEach(a=>a.classList.toggle('cur',a.dataset.r===r));scrollTo(0,0)}
 addEventListener('hashchange',route);route();
 if('serviceWorker' in navigator)navigator.serviceWorker.register('sw.js');
 </script>
