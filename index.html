@@ -140,11 +140,35 @@ a{color:var(--lnk)}
 .adjf{width:180px;height:240px;margin:6px auto 0;border-radius:8px;overflow:hidden;border:1px solid var(--line);touch-action:none;cursor:grab;position:relative}
 .adjf img{width:100%;height:100%;object-fit:cover;pointer-events:none;user-select:none;-webkit-user-drag:none}
 .nudge{display:flex;gap:6px;justify-content:center;margin-top:8px;flex-wrap:wrap}.nudge button{padding:8px 12px}
+
+/* ---- 2026.10.31o refined layer ---- */
+.wrap{max-width:1000px}
+.xhead{padding:44px 22px 30px;text-align:left}.xhead .brand{font:600 34px/1.15 Lora,Georgia,serif !important;letter-spacing:-.01em}
+.xbar{padding:9px 18px;gap:6px 18px;font-size:11px}.xbar a{padding:2px 2px;letter-spacing:.04em}
+.cols{grid-template-columns:minmax(0,1fr) 260px;gap:48px;padding:6px 22px 0}main{grid-column:1;grid-row:1}#side{grid-column:2;grid-row:1}
+@media(max-width:760px){.cols{grid-template-columns:1fr;gap:26px;padding:0 18px}#side{grid-column:1;grid-row:2}.xhead{padding:30px 18px 18px}.xhead .brand{font-size:28px !important}}
+.entry{margin:0 0 56px;padding-bottom:40px;border-bottom:1px solid color-mix(in srgb,var(--line) 55%,transparent)}
+.entry .day{background:none;border:0;border-radius:0;padding:0;margin:0 0 10px;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--mut);font-weight:600}
+.entry .eb h2.pt{font:600 28px/1.25 Lora,Georgia,serif;margin:0 0 18px;letter-spacing:-.005em}.entry .eb h2.pt a{color:var(--fg);text-decoration:none}
+.entry .body{font-size:16px;line-height:1.8}.entry .body p{margin:0 0 1.15em}
+.entry .cover,.entry .body img{border-radius:6px;box-shadow:none;margin:6px 0 22px;width:100%}
+.mood{margin-top:18px;font-size:12px}.cur2{margin-top:10px;border-radius:6px;max-width:340px}
+.ef{margin-top:20px;padding:0;font-size:11px;color:var(--mut);gap:2px}.ef .s{padding:0 7px}.lbls a{color:var(--lnk)}
+.pager{display:flex;justify-content:space-between;align-items:center;font-size:12px;padding:6px 0 30px}.pager a{display:inline-flex;gap:4px;align-items:center;text-decoration:none}
+.mod{border:0;box-shadow:none;border-radius:0;background:none;margin-bottom:34px;border-top:1px solid color-mix(in srgb,var(--line) 70%,transparent)}
+.mod h4{background:none;border:0;padding:12px 0 8px;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--mut)}
+.mod .in{padding:0;font-size:13px}
+.pf .ph{margin:6px 0 12px;border-radius:6px;border:0;background:var(--chip);width:140px;height:186px}.pf .pl{gap:3px}.pf .pl b,.pf .pl span{font-size:12px}
+.arch details{margin:2px 0}.arch summary{cursor:pointer;list-style:none;padding:3px 0}.arch summary::-webkit-details-marker{display:none}
+.arch summary::before{content:'';display:inline-block;width:6px;height:6px;border-right:1.5px solid var(--mut);border-bottom:1.5px solid var(--mut);transform:rotate(-45deg);margin-right:9px;transition:transform .15s;position:relative;top:-1px}
+.arch details[open]>summary::before{transform:rotate(45deg)}.arch .ma{margin-left:16px}.arch ul{margin:2px 0 6px 31px}.arch li{display:block;padding:2px 0;font-size:12px}
+.cnt{color:var(--mut);font-size:11px}.labs li{display:block;padding:2px 0}
+.foot{padding:30px 0 44px}
 </style></head><body data-t="system">
 <div class="wrap"><div class="xbar" id="mbtn"><span class="xlogo"><svg class="i" style="width:13px;height:13px" viewBox="0 0 24 24"><path d="M12 3c3 3 4.5 6 4.5 9L12 21 7.5 12C7.5 9 9 6 12 3z"/></svg> my blog</span><a href="#/" data-r="home">home</a><a href="#/tags" data-r="tags">categories</a><a href="#/archive" data-r="archive">archives</a><a href="#/write" data-r="write">write</a><a href="#/custom" data-r="custom">customize</a></div>
 <div class="xhead" id="xhead"><a class="brand" href="#/">Ashley's Blog</a><div class="xsub" id="xsub"></div></div>
 <div class="cols"><main id="app"></main><aside id="side"></aside></div>
-<footer class="foot"><div class="seg" id="seg"><button data-v="light">Light</button><button data-v="dark">Dark</button><button data-v="system">System</button></div><div>Ashley's Blog &middot; est. 2026 &middot; Version 2026.10.31n</div></footer></div>
+<footer class="foot"><div class="seg" id="seg"><button data-v="light">Light</button><button data-v="dark">Dark</button><button data-v="system">System</button></div><div>Ashley's Blog &middot; est. 2026 &middot; Version 2026.10.31o</div></footer></div>
 <script>
 /* ===================================================== */
 
@@ -233,16 +257,20 @@ function entry(p,full){const long=!full&&plain(p.body).length>2000;
   const bodyH=long?'<p>'+esc(plain(p.body).slice(0,2000).replace(/\s\S*$/,''))+'...</p><p><a href="#/p/'+p.id+'">read more</a></p>':render(p.body);
   const mood=p.mood?`<div class="mood">Mood - ${esc(p.mood)}</div>`:'';
   const cur=p.listening?`<div class="cur2"><b>Currently</b><div>${MUSI}<span>listening to: ${esc(p.listening)}</span></div></div>`:'';
-  const tg=(p.tags||[]).length?'<span class="s">-</span><span>tags: '+p.tags.map(t=>`<a href="#/tag/${encodeURIComponent(t)}">${esc(t)}</a>`).join(', ')+'</span>':'';
-  return `<div class="entry"><div class="day">${LONG(p.created_at)}</div><div class="eb">${p.title?`<h2><a href="#/p/${p.id}" style="color:var(--fg);text-decoration:none">${esc(p.title)}</a></h2>`:''}${p.cover?coverTag(p.cover):''}<div class="body">${bodyH}</div>${mood}${cur}</div>
-  <div class="ef"><span>${TIME(p.created_at)}</span><span class="s">-</span><button class="heart${p.hearts?' on':''}" data-h="${p.id}" aria-label="Heart"><svg class="i" style="width:11px;height:11px" viewBox="0 0 24 24"><path d="M12 20s-7-4.5-7-10a4 4 0 0 1 7-2.5A4 4 0 0 1 19 10c0 5.5-7 10-7 10z"/></svg>${p.hearts?p.hearts+' eprops':'add eprops'}</button>${tg}</div></div>`}
+  const tg=(p.tags||[]).length?'<span class="s">&middot;</span><span class="lbls">Labels: '+p.tags.map(t=>`<a href="#/tag/${encodeURIComponent(t)}">${esc(t)}</a>`).join(', ')+'</span>':'';
+  return `<div class="entry"><div class="day">${LONG(p.created_at)}</div><div class="eb">${p.title?`<h2 class="pt"><a href="#/p/${p.id}">${esc(p.title)}</a></h2>`:''}${p.cover?coverTag(p.cover):''}<div class="body">${bodyH}</div>${mood}${cur}</div>
+  <div class="ef"><span>posted at ${TIME(p.created_at)}</span><span class="s">&middot;</span><button class="heart${p.hearts?' on':''}" data-h="${p.id}" aria-label="Heart"><svg class="i" style="width:11px;height:11px" viewBox="0 0 24 24"><path d="M12 20s-7-4.5-7-10a4 4 0 0 1 7-2.5A4 4 0 0 1 19 10c0 5.5-7 10-7 10z"/></svg>${p.hearts?p.hearts+' eprops':'add eprops'}</button>${tg}</div></div>`}
 document.addEventListener('click',async e=>{const b=e.target.closest('[data-h]');if(!b)return;const id=b.dataset.h;
   try{await change(a=>a.map(x=>x.id===id?{...x,hearts:(x.hearts||0)+1}:x));const n=(CACHE||await all()).find(x=>x.id===id).hearts;b.classList.add('on');b.lastChild.textContent=n+' eprops'}catch(x){}});
 const card=p=>entry(p,false);
 const head=(t,s)=>`<div class="pagehead"><h1>${esc(t)}</h1>${s?`<p>${s}</p>`:''}</div>`;
 const fail='<div class="empty">Posts could not load. Please try again.</div>';
-async function home(){app.innerHTML=`<div id="pl" class="empty">Loading</div>`;
-  try{const d=await pub();$('#pl').outerHTML=d.length?d.map(card).join(''):'<div class="empty">No posts yet.</div>'}catch(e){$('#pl').outerHTML=fail}}
+const PER=5;
+async function home(pg){pg=Math.max(1,+pg||1);app.innerHTML=`<div id="pl" class="empty">Loading</div>`;
+  try{const d=await pub(),n=Math.max(1,Math.ceil(d.length/PER));pg=Math.min(pg,n);const part=d.slice((pg-1)*PER,pg*PER);
+   const nav=n>1?`<nav class="pager">${pg>1?`<a href="#/page/${pg-1}">${PREV} Newer posts</a>`:'<span></span>'}<a href="#/">Home</a>${pg<n?`<a href="#/page/${pg+1}">Older posts ${NEXT}</a>`:'<span></span>'}</nav>`:'';
+   $('#pl').outerHTML=d.length?part.map(card).join('')+nav:'<div class="empty">No posts yet.</div>'}catch(e){$('#pl').outerHTML=fail}}
+const PREV='<svg class="i" style="width:12px;height:12px" viewBox="0 0 24 24"><path d="M15 6l-6 6 6 6"/></svg>',NEXT='<svg class="i" style="width:12px;height:12px" viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></svg>';
 async function tagPage(t){try{const d=(await pub()).filter(p=>p.tags.includes(t));app.innerHTML=head(t,d.length+(d.length===1?' post':' posts')+' &middot; <a class="more" href="#/tags">All categories</a>')+d.map(card).join('')}catch(e){app.innerHTML=fail}}
 async function tags(){try{const c={};(await pub()).forEach(p=>p.tags.forEach(t=>c[t]=(c[t]||0)+1));const k=Object.keys(c).sort((a,b)=>a.localeCompare(b));
   app.innerHTML=head('Categories')+(k.length?'<div class="list">'+k.map(t=>`<a class="it" href="#/tag/${encodeURIComponent(t)}"><span>${esc(t)}</span><span class="cnt" style="flex:none">${c[t]}</span></a>`).join('')+'</div>':'<div class="empty">No categories yet.</div>')}catch(e){app.innerHTML=fail}}
@@ -303,16 +331,17 @@ async function storage(){const el=$('#stor');if(!el)return;try{if(!STOR){let tot
   else if(q&&q.usage)x+=`<div style="margin-top:8px"><b>Google:</b> ${SZ(+q.usage)} used</div>`;el.innerHTML=x}catch(e){el.textContent='Not available right now'}}
 async function side(){applyLook();const S=$('#side');if(!LS.getItem('blog.em')){S.innerHTML='';return}let d=[];try{d=await pub()}catch(e){}
   const c={};d.forEach(p=>(p.tags||[]).forEach(t=>c[t]=(c[t]||0)+1));
-  const now=CALM||new Date(d[0]?d[0].created_at:Date.now());CALM=now;const y=now.getFullYear(),m=now.getMonth(),first=new Date(y,m,1).getDay(),days=new Date(y,m+1,0).getDate();
-  const byDay={};d.forEach(p=>{const t=new Date(p.created_at);if(t.getFullYear()===y&&t.getMonth()===m)byDay[t.getDate()]=byDay[t.getDate()]||p.id});
-  let cells='';for(let i=0;i<first;i++)cells+='<td></td>';for(let k=1;k<=days;k++){cells+=byDay[k]?`<td class="on"><a href="#/p/${byDay[k]}">${k}</a></td>`:`<td>${k}</td>`;if((first+k)%7===0)cells+='</tr><tr>'}
-  const mname=now.toLocaleDateString('en-US',{month:'long',year:'numeric'});
   S.innerHTML=`<div class="mod pf"><h4>${esc(PROFILE.name||'Ashley')}</h4><div class="in"><div class="ph">${PROFILE.photo?imgTag(PROFILE.photo,'Ashley',1).replace('<img ','<img style="'+pfStyle(PROFILE.photoPos)+'" '):'<svg class="i" style="width:52px;height:52px" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c1-4 4-6 8-6s7 2 8 6"/></svg>'}</div>
    <div class="pl">${PFIELDS.map(([k,l])=>{const v=k in PF()?PF()[k]:DEFF[k];return v?`<span><b>${l}:</b> ${esc(v)}</span>`:''}).join('')}<span><b>Entries:</b> ${d.length}</span></div></div></div>
-  <div class="mod"><h4>Archives</h4><div class="in"><table class="cal"><caption><a href="#" data-cm="-1">&lsaquo;</a> ${mname} <a href="#" data-cm="1">&rsaquo;</a></caption><tr>${'SMTWTFS'.split('').map(x=>`<th>${x}</th>`).join('')}</tr><tr>${cells}</tr></table><div style="margin-top:6px"><a href="#/archive">all archives</a></div><div class="sub">Categories</div><div id="catx"></div></div></div>`;
-  S.querySelector('#catx').innerHTML=`${Object.keys(c).length?'<ul>'+Object.keys(c).sort().map(t=>`<li><a href="#/tag/${encodeURIComponent(t)}">${esc(t)}</a><span>${c[t]}</span></li>`).join('')+'</ul>':'none yet'}`;
+  <div class="mod"><h4>Archives</h4><div class="in"><table class="cal"><caption><a href="#" data-cm="-1">&lsaquo;</a>  <a href="#" data-cm="1">&rsaquo;</a></caption><tr>${'SMTWTFS'.split('').map(x=>`<th>${x}</th>`).join('')}</tr><tr></tr></table><div style="margin-top:6px"><a href="#/archive">all archives</a></div><div class="sub">Categories</div><div id="catx"></div></div></div>`;
+  const Y={};d.forEach(p=>{const t=new Date(p.created_at),y=t.getFullYear(),m=t.toLocaleDateString('en-US',{month:'long'});((Y[y]=Y[y]||{})[m]=Y[y][m]||[]).push(p)});
+  const ys=Object.keys(Y).sort((a,b)=>b-a);
+  const archH=ys.length?ys.map((y,yi)=>{const ms=Y[y],cnt=Object.values(ms).reduce((t,a)=>t+a.length,0);return `<details class="ya" ${yi===0?'open':''}><summary>${y} <span class="cnt">(${cnt})</span></summary>${Object.entries(ms).map(([m,ps],mi)=>`<details class="ma" ${yi===0&&mi===0?'open':''}><summary>${m} <span class="cnt">(${ps.length})</span></summary><ul>${ps.map(p=>`<li><a href="#/p/${p.id}">${esc(p.title||LONG(p.created_at))}</a></li>`).join('')}</ul></details>`).join('')}</details>`}).join(''):'<span class="mutd">No posts yet</span>';
+  const labs=Object.keys(c).sort();
+  S.innerHTML=S.innerHTML.replace(/<div class="mod"><h4>Archives<\/h4>[\s\S]*$/,'')+`<div class="mod"><h4>Blog Archive</h4><div class="in arch">${archH}</div></div>
+  <div class="mod"><h4>Labels</h4><div class="in">${labs.length?'<ul class="labs">'+labs.map(t=>`<li><a href="#/tag/${encodeURIComponent(t)}">${esc(t)}</a> <span class="cnt">(${c[t]})</span></li>`).join('')+'</ul>':'<span class="mutd">No labels yet</span>'}</div></div>`;
   S.insertAdjacentHTML('beforeend',`<div class="mod"><h4>Storage</h4><div class="in" id="stor">Checking</div></div>`);storage();
-  S.querySelectorAll('[data-cm]').forEach(a=>a.onclick=ev=>{ev.preventDefault();CALM=new Date(y,m+ +a.dataset.cm,1);side()})}
+}
 async function custom(){try{await all()}catch(e){}let L={...LOOK},F={...DEFF,...PF()};
   const sw=k=>{const s=SKINS[k];return `<button class="skin${(L.skin||'classic')===k?' on':''}" data-sk="${k}"><span class="sw"><i style="background:${s.L.bar}"></i><i style="background:${s.L.bg}"></i><i style="background:${s.L.lnk}"></i><i style="background:${s.D.bg}"></i></span>${s.n}</button>`};
   app.innerHTML=head('Customize','Changes preview right away. Tap Save to keep them on all your devices.')+`
@@ -351,7 +380,7 @@ async function custom(){try{await all()}catch(e){}let L={...LOOK},F={...DEFF,...
 async function route(){if(!LS.getItem('blog.em')){signin();return}
   try{await token(false)}catch(e){signin(e.message==='offline'?'You appear to be offline.':'Tap Continue to open your blog.');return}$('#mbtn').style.visibility='visible';
   const h=location.hash||'#/';let r='home';
-  if(h.startsWith('#/p/'))view(h.slice(4));else if(h.startsWith('#/tag/'))tagPage(decodeURIComponent(h.slice(6))),r='tags';else if(h==='#/tags')tags(),r='tags';
+  if(h.startsWith('#/page/'))home(h.slice(7));else if(h.startsWith('#/p/'))view(h.slice(4));else if(h.startsWith('#/tag/'))tagPage(decodeURIComponent(h.slice(6))),r='tags';else if(h==='#/tags')tags(),r='tags';
   else if(h==='#/archive')archive(),r='archive';else if(h==='#/write')write(),r='write';else if(h==='#/custom')custom(),r='custom';else home();
   side();document.querySelectorAll('.xbar a').forEach(a=>a.classList.toggle('cur',a.dataset.r===r));scrollTo(0,0)}
 addEventListener('hashchange',route);route();
