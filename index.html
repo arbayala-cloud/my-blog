@@ -35,17 +35,29 @@ input,textarea{width:100%;font:17px/1.6 Lora,Georgia,serif;color:var(--fg);backg
 .msg{font:14px system-ui;color:var(--mut);min-height:20px;margin-top:8px}.tag{font:12px system-ui;color:var(--gold);border:1px solid var(--gold);border-radius:6px;padding:1px 6px;margin-left:6px}
 .pagehead{margin:4px 0 20px}.pagehead h1{font-size:34px;margin:0}.pagehead p{color:var(--mut);margin:4px 0 0;font:15px system-ui}
 footer{text-align:center;color:var(--mut);font:13px system-ui;padding:10px 0 30px}
+
+header.mast{position:static;display:block;text-align:center;background:var(--bg);border:0;padding:34px 18px 0;padding-top:max(34px,env(safe-area-inset-top))}
+.mast .brand{display:inline-block;font:500 46px/1.1 'Cormorant Garamond',Georgia,serif;letter-spacing:.01em;color:var(--fg)}
+.rule{height:1px;background:var(--line);max-width:680px;margin:18px auto 0}
+.nav{display:flex;justify-content:center;gap:22px;flex-wrap:wrap;padding:12px 0;border-bottom:1px solid var(--line);max-width:680px;margin:0 auto;position:sticky;top:0}
+.nav a{font:13px system-ui,sans-serif;letter-spacing:.14em;text-transform:uppercase;color:var(--mut);text-decoration:none;padding:4px 0;border-bottom:1px solid transparent}.nav a.cur{color:var(--fg);border-color:var(--fg)}
+main{max-width:680px;padding:30px 20px 40px}
+.post{padding:0 0 38px;margin-bottom:38px}.cover{display:block;width:100%;aspect-ratio:16/10;object-fit:cover;border-radius:4px;margin:0 0 18px;background:var(--chip)}
+.post h2{font-size:32px;margin:6px 0 6px;color:var(--fg)}.post h2 a{color:var(--fg)}.meta{color:var(--mut);font:12px system-ui;letter-spacing:.12em;text-transform:uppercase}
+.excerpt{margin:10px 0 12px;color:var(--fg)}.more{color:var(--fg);font:13px system-ui;letter-spacing:.12em;text-transform:uppercase;text-decoration:none;border-bottom:1px solid var(--fg);padding-bottom:2px}
+.sep{text-align:center;color:var(--mut);letter-spacing:.6em;margin:-14px 0 34px}
+.full h1{font:500 42px/1.15 'Cormorant Garamond',Georgia,serif;margin:4px 0 10px;color:var(--fg)}.full .body{font-size:19px;line-height:1.85;margin-top:26px}
+.body h3{font-size:26px;margin:1.6em 0 .4em;color:var(--fg)}.body img{margin:28px 0;border-radius:4px}
+.body blockquote{margin:30px 0;padding:6px 0 6px 22px;border-left:2px solid var(--fg);font:italic 24px/1.5 'Cormorant Garamond',Georgia,serif}
+.chip{border-radius:2px;letter-spacing:.06em}
+.foot{max-width:680px;margin:0 auto;padding:0 20px 40px;text-align:center;color:var(--mut);font:12px system-ui}.foot .seg{max-width:300px;margin:22px auto 14px}
+.fmt{display:flex;gap:6px;flex-wrap:wrap;margin:0 0 8px}.fmt button{padding:7px 12px;border-radius:6px}
+.coverbox img{width:100%;aspect-ratio:16/10;object-fit:cover;border-radius:4px;display:block;margin-bottom:8px}
 </style></head><body data-t="system">
-<header><a class="brand" href="#/">Ashley's Blog</a><button class="icon" id="mbtn" aria-label="Menu"><svg class="i" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button></header>
-<div class="menu" id="menu"><nav>
-<a href="#/" data-r="home"><svg class="i" viewBox="0 0 24 24"><path d="M4 11l8-7 8 7v9h-5v-6H9v6H4z"/></svg>Home</a>
-<a href="#/tags" data-r="tags"><svg class="i" viewBox="0 0 24 24"><path d="M3 12V4h8l9 9-8 8z"/><circle cx="7.5" cy="8.5" r="1.3"/></svg>Categories</a>
-<a href="#/archive" data-r="archive"><svg class="i" viewBox="0 0 24 24"><path d="M4 5h16v4H4zM5 9v10h14V9M10 13h4"/></svg>Archive</a>
-<a href="#/write" data-r="write"><svg class="i" viewBox="0 0 24 24"><path d="M12 3c3 3 4.5 6 4.5 9L12 21 7.5 12C7.5 9 9 6 12 3z"/><path d="M12 13v8"/><circle cx="12" cy="12" r="1.2"/></svg>Write</a>
-<div class="sans" style="font-size:13px;color:var(--mut);margin-top:22px;letter-spacing:.06em;text-transform:uppercase">Appearance</div>
-<div class="seg" id="seg"><button data-v="light">Light</button><button data-v="dark">Dark</button><button data-v="system">System</button></div>
-<div class="sans" style="margin-top:auto;padding-top:20px;font-size:12px;color:var(--mut)">Version 2026.10.31g</div></nav></div>
+<header class="mast"><a class="brand" href="#/">Ashley's Blog</a><div class="rule"></div>
+<nav class="nav" id="mbtn"><a href="#/" data-r="home">Home</a><a href="#/tags" data-r="tags">Categories</a><a href="#/archive" data-r="archive">Archive</a><a href="#/write" data-r="write">Write</a></nav></header>
 <main id="app"></main>
+<footer class="foot"><div class="rule"></div><div class="seg" id="seg"><button data-v="light">Light</button><button data-v="dark">Dark</button><button data-v="system">System</button></div><div>Ashley's Blog &middot; Version 2026.10.31h</div></footer>
 <script>
 /* ===================================================== */
 
@@ -79,21 +91,28 @@ const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&
 const fmt=d=>new Date(d).toLocaleDateString(undefined,{year:'numeric',month:'long',day:'numeric'});
 const ORN='<svg class="orn" viewBox="0 0 140 14"><path d="M2 7h52M86 7h52" stroke="currentColor" stroke-width="1"/><path d="M70 1l6 6-6 6-6-6z" fill="none" stroke="currentColor" stroke-width="1.2"/><circle cx="58" cy="7" r="1.5" fill="currentColor"/><circle cx="82" cy="7" r="1.5" fill="currentColor"/></svg>';
 const imgTag=(u,a)=>u.startsWith('drive:')?`<img data-d="${esc(u.slice(6))}" alt="${esc(a||'')}" loading="lazy">`:`<img src="${esc(u)}" alt="${esc(a||'')}" loading="lazy">`;
-function render(b){return String(b||'').split(/\n{2,}/).map(p=>{const m=p.trim().match(/^!\[(.*?)\]\(((?:https:\/\/|drive:)[^\s)]+)\)$/);return m?imgTag(m[2],m[1]):'<p>'+esc(p).replace(/!\[(.*?)\]\(((?:https:\/\/|drive:)[^\s)]+)\)/g,(x,a,u)=>imgTag(u,a)).replace(/\n/g,'<br>')+'</p>'}).join('')}
-const plain=b=>String(b||'').replace(/!\[.*?\]\(.*?\)/g,'').trim();
+const inl=s=>s.replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>').replace(/(^|[^*])\*([^*\n]+)\*/g,'$1<em>$2</em>');
+const IMGRE=/!\[(.*?)\]\(((?:https:\/\/|drive:)[^\s)]+)\)/g;
+function render(b){return String(b||'').split(/\n{2,}/).map(p=>{p=p.trim();const m=p.match(/^!\[(.*?)\]\(((?:https:\/\/|drive:)[^\s)]+)\)$/);if(m)return imgTag(m[2],m[1]);
+  if(/^##\s/.test(p))return '<h3>'+inl(esc(p.replace(/^##\s+/,'')))+'</h3>';
+  if(/^>\s?/.test(p))return '<blockquote>'+inl(esc(p.replace(/^>\s?/gm,''))).replace(/\n/g,'<br>')+'</blockquote>';
+  return '<p>'+inl(esc(p)).replace(IMGRE,(x,a,u)=>imgTag(u,a)).replace(/\n/g,'<br>')+'</p>'}).join('')}
+const plain=b=>String(b||'').replace(/!\[.*?\]\(.*?\)/g,'').replace(/[*#>]/g,'').replace(/\s+/g,' ').trim();
+const rt=b=>Math.max(1,Math.round(plain(b).split(' ').length/200))+' min read';
+const coverOf=p=>p.cover||(String(p.body).match(/!\[.*?\]\(((?:https:\/\/|drive:)[^\s)]+)\)/)||[])[1];
+const coverTag=u=>u?imgTag(u,'').replace('<img ','<img class="cover" '):'';
 const chips=t=>(t&&t.length)?'<div class="chips">'+t.map(x=>`<a class="chip" href="#/tag/${encodeURIComponent(x)}">${esc(x)}</a>`).join('')+'</div>':'';
 function setTheme(v){document.body.dataset.t=v;localStorage.blogTheme=v;document.querySelectorAll('#seg button').forEach(b=>b.classList.toggle('on',b.dataset.v===v));
   const dark=v==='dark'||(v==='system'&&matchMedia('(prefers-color-scheme: dark)').matches);document.querySelector('meta[name=theme-color]').content=dark?'#000000':'#ffffff'}
 setTheme(localStorage.blogTheme||'system');$('#seg').onclick=e=>{if(e.target.dataset.v)setTheme(e.target.dataset.v)};
 matchMedia('(prefers-color-scheme: dark)').addEventListener('change',()=>setTheme(localStorage.blogTheme||'system'));
-$('#mbtn').onclick=()=>$('#menu').classList.add('on');$('#menu').onclick=e=>{if(e.target.id==='menu'||e.target.closest('a'))$('#menu').classList.remove('on')};
 function norm(p){const m=String(p.body||'').match(/^<!--tags:(.*?)-->\n?/);return {...p,tags:m?m[1].split(',').map(s=>s.trim()).filter(Boolean):(Array.isArray(p.tags)?p.tags:[]),body:m?p.body.slice(m[0].length):(p.body||'')}}
 let CACHE=null;
 const byDate=a=>a.slice().sort((x,y)=>new Date(y.created_at)-new Date(x.created_at));
 async function all(){if(CACHE)return CACHE;CACHE=byDate(await loadAll());return CACHE}
 async function pub(){return (await all()).filter(p=>p.published)}
-function card(p){const t=plain(p.body),long=t.length>600,img=(p.body.match(/!\[.*?\]\(((?:https:\/\/|drive:)[^\s)]+)\)/)||[])[1];
-  return `<article class="post"><div class="date">${fmt(p.created_at)}</div><h2><a href="#/p/${p.id}">${esc(p.title)||'Untitled'}</a></h2>${chips(p.tags)}<div class="body">${long?(img?imgTag(img,''):'')+'<p>'+esc(t.slice(0,600))+'...</p>':render(p.body)}</div>${long?`<a class="more" href="#/p/${p.id}">Continue reading</a>`:''}</article>`}
+function card(p){const t=plain(p.body),ex=t.length>260?t.slice(0,260).replace(/\s\S*$/,'')+'...':t;
+  return `<article class="post">${coverOf(p)?`<a href="#/p/${p.id}">${coverTag(coverOf(p))}</a>`:''}<div class="meta">${fmt(p.created_at)} &middot; ${rt(p.body)}</div><h2><a href="#/p/${p.id}">${esc(p.title)||'Untitled'}</a></h2>${chips(p.tags)}<p class="excerpt">${esc(ex)}</p><a class="more" href="#/p/${p.id}">Continue reading</a></article><div class="sep">&middot; &middot; &middot;</div>`}
 const head=(t,s)=>`<div class="pagehead"><h1>${esc(t)}</h1>${s?`<p>${s}</p>`:''}</div>`;
 const fail='<div class="empty">Posts could not load. Please try again.</div>';
 async function home(){app.innerHTML=`<div id="pl" class="empty">Loading</div>`;
@@ -104,7 +123,7 @@ async function tags(){try{const c={};(await pub()).forEach(p=>p.tags.forEach(t=>
 async function archive(){try{const d=await pub(),g={};d.forEach(p=>{const k=new Date(p.created_at).toLocaleDateString(undefined,{year:'numeric',month:'long'});(g[k]=g[k]||[]).push(p)});
   app.innerHTML=head('Archive')+(d.length?Object.entries(g).map(([m,ps])=>`<h3 style="margin:22px 0 4px;font-size:24px">${esc(m)} <span class="cnt">${ps.length}</span></h3><div class="list">${ps.map(p=>`<a class="it" href="#/p/${p.id}"><span>${esc(p.title)||'Untitled'}</span><span class="cnt" style="flex:none">${new Date(p.created_at).getDate()}</span></a>`).join('')}</div>`).join(''):'<div class="empty">No posts yet.</div>')}catch(e){app.innerHTML=fail}}
 async function view(id){let data=null;try{data=(await all()).find(p=>p.id===id)}catch(e){}
-  app.innerHTML=data?`<article class="post" style="border:0"><div class="date">${fmt(data.created_at)}</div><h2>${esc(data.title)||'Untitled'}</h2>${chips(data.tags)}<div class="body">${render(data.body)}</div></article><div style="text-align:center">${ORN}</div><p style="text-align:center"><a class="more" href="#/">All posts</a></p>`:'<div class="empty">Post not found.</div>';scrollTo(0,0)}
+  app.innerHTML=data?`<article class="full"><div class="meta">${fmt(data.created_at)} &middot; ${rt(data.body)}</div><h1>${esc(data.title)||'Untitled'}</h1>${chips(data.tags)}${data.cover?`<div style="margin-top:22px">${coverTag(data.cover)}</div>`:''}<div class="body">${render(data.body)}</div></article><div class="sep" style="margin:40px 0 20px">&middot; &middot; &middot;</div><p style="text-align:center"><a class="more" href="#/">All posts</a></p>`:'<div class="empty">Post not found.</div>';scrollTo(0,0)}
 let HASTAGS=true,ALL=[];
 async function write(){let error=null;try{ALL=await all()}catch(x){error=x;ALL=[]}
   
@@ -115,11 +134,12 @@ async function write(){let error=null;try{ALL=await all()}catch(x){error=x;ALL=[
   $('#nw').onclick=()=>edit();$('#so').onclick=()=>{if(!confirm('Sign out of your blog on this device?'))return;try{google.accounts.oauth2.revoke(tok,()=>{})}catch(e){}dropTok();['blog.em','blog.fid','blog.cache'].forEach(k=>LS.removeItem(k));CACHE=null;location.hash='#/';route()};
   app.querySelectorAll('[data-e]').forEach(b=>b.onclick=()=>edit(ALL.find(p=>p.id===b.dataset.e)));
   $('#bk').onclick=()=>{const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([JSON.stringify({exported:new Date().toISOString(),posts:ALL},null,2)],{type:'application/json'}));a.download='blog-backup-'+new Date().toISOString().slice(0,10)+'.json';a.click()}}
-function edit(p){p=p||{title:'',body:'',published:true,tags:[]};let T=[...(p.tags||[])];
+function edit(p){p=p||{title:'',body:'',published:true,tags:[]};let COVER=p.cover||'';let T=[...(p.tags||[])];
   const known=[...new Set(ALL.flatMap(x=>x.tags||[]))].sort();
   app.innerHTML=`<label class="l">Title</label><input id="ti" value="${esc(p.title)}">
   ${HASTAGS?`<label class="l">Tags</label><div class="chips" id="tc"></div><input id="tg" list="tl" placeholder="Type a tag and press Enter"><datalist id="tl">${known.map(t=>`<option value="${esc(t)}">`).join('')}</datalist><div class="chips" id="sug"></div>`:''}
-  <label class="l">Post</label><textarea id="bo" placeholder="Write here. Leave a blank line between paragraphs.">${esc(p.body)}</textarea>
+  <label class="l">Cover photo (optional)</label><div class="coverbox" id="cvb"></div><div class="row" style="margin-top:0"><label class="btn" style="margin:0"><svg class="i" viewBox="0 0 24 24"><path d="M4 6h16v12H4zM4 15l5-4 4 3 3-2 4 3"/><circle cx="15" cy="9" r="1.5"/></svg><span id="cvl">Choose cover</span><input type="file" accept="image/*" id="cv" hidden></label><button id="cvx" hidden>Remove cover</button></div>
+  <label class="l">Post</label><div class="fmt"><button data-f="b" aria-label="Bold"><b>B</b></button><button data-f="i" aria-label="Italic"><i>I</i></button><button data-f="h" aria-label="Heading"><svg class="i" viewBox="0 0 24 24"><path d="M6 5v14M18 5v14M6 12h12"/></svg></button><button data-f="q" aria-label="Quote"><svg class="i" viewBox="0 0 24 24"><path d="M7 7h4v4c0 3-2 5-4 6M14 7h4v4c0 3-2 5-4 6"/></svg></button><label class="btn" style="margin:0;padding:7px 12px;border-radius:6px" aria-label="Image"><svg class="i" viewBox="0 0 24 24"><path d="M4 6h16v12H4zM4 15l5-4 4 3 3-2 4 3"/><circle cx="15" cy="9" r="1.5"/></svg><input type="file" accept="image/*" id="ph2" hidden></label></div><textarea id="bo" placeholder="Write here. Leave a blank line between paragraphs.">${esc(p.body)}</textarea>
   <div class="row"><label class="btn" style="margin:0"><svg class="i" viewBox="0 0 24 24"><path d="M4 6h16v12H4zM4 15l5-4 4 3 3-2 4 3"/><circle cx="15" cy="9" r="1.5"/></svg>Add photo<input type="file" accept="image/*" id="ph" hidden></label>
   <label class="sans" style="display:flex;gap:8px;align-items:center;font-size:15px"><input type="checkbox" id="pb" style="width:auto" ${p.published?'checked':''}>Published</label></div>
   <div class="row"><button class="pri" id="sv">Save</button><button id="cx">Cancel</button>${p.id?'<button id="dl" style="margin-left:auto">Delete</button>':''}</div><div class="msg" id="msg"></div>`;
@@ -128,12 +148,19 @@ function edit(p){p=p||{title:'',body:'',published:true,tags:[]};let T=[...(p.tag
     const add=v=>{v=v.replace(/,|-->|<!--/g,' ').trim().replace(/\s+/g,' ');if(v&&!T.some(t=>t.toLowerCase()===v.toLowerCase()))T.push(v);$('#tg').value='';draw()};
     $('#tg').onkeydown=e=>{if(e.key==='Enter'||e.key===','){e.preventDefault();add($('#tg').value)}};$('#tg').onchange=()=>add($('#tg').value);
     $('#tc').onclick=e=>{const b=e.target.closest('[data-i]');if(b){T.splice(+b.dataset.i,1);draw()}};$('#sug').onclick=e=>{const b=e.target.closest('[data-a]');if(b)add(b.dataset.a)};draw()}
+  const drawCv=()=>{$('#cvb').innerHTML=COVER?imgTag(COVER,''):'';$('#cvx').hidden=!COVER;$('#cvl').textContent=COVER?'Change cover':'Choose cover'};drawCv();
+  const upImg=async f=>{const id=await mpUpload({name:'img-'+Date.now()+'-'+f.name.replace(/[^\w.]+/g,'_'),parents:['appDataFolder']},f,f.type||'application/octet-stream');return 'drive:'+id};
+  $('#cv').onchange=async e=>{const f=e.target.files[0];if(!f)return;$('#msg').textContent='Uploading cover';try{COVER=await upImg(f);drawCv();$('#msg').textContent='Cover added'}catch(x){$('#msg').textContent='Cover upload failed. Please try again.'}};
+  $('#cvx').onclick=()=>{COVER='';drawCv()};
+  $('#ph2').onchange=e=>{$('#ph').onchange({target:e.target})};
+  app.querySelector('.fmt').onclick=e=>{const b=e.target.closest('[data-f]');if(!b)return;const t=$('#bo'),s=t.selectionStart,en=t.selectionEnd,sel=t.value.slice(s,en)||'text',f=b.dataset.f;
+    const out=f==='b'?'**'+sel+'**':f==='i'?'*'+sel+'*':f==='h'?'\n\n## '+sel+'\n\n':'\n\n> '+sel+'\n\n';t.value=t.value.slice(0,s)+out+t.value.slice(en);t.focus();t.selectionStart=t.selectionEnd=s+out.length};
   $('#cx').onclick=write;
   $('#ph').onchange=async e=>{const f=e.target.files[0];if(!f)return;$('#msg').textContent='Uploading photo';
     try{const id=await mpUpload({name:'img-'+Date.now()+'-'+f.name.replace(/[^\w.]+/g,'_'),parents:['appDataFolder']},f,f.type||'application/octet-stream');
     const t=$('#bo'),i=t.selectionStart;t.value=t.value.slice(0,i)+'\n\n![](drive:'+id+')\n\n'+t.value.slice(i);$('#msg').textContent='Photo added'}catch(x){$('#msg').textContent='Photo upload failed. Please try again.'}};
   $('#sv').onclick=async()=>{if($('#tg').value.trim())add($('#tg').value);$('#msg').textContent='Saving';
-    const row={title:$('#ti').value.trim(),body:$('#bo').value,tags:T,published:$('#pb').checked,updated_at:new Date().toISOString()};
+    const row={title:$('#ti').value.trim(),body:$('#bo').value,cover:COVER,tags:T,published:$('#pb').checked,updated_at:new Date().toISOString()};
     try{await change(a=>{const i=a.findIndex(x=>x.id===p.id);if(p.id&&i>=0)a[i]={...a[i],...row};else a.push({id:crypto.randomUUID(),created_at:new Date().toISOString(),...row});return a});write()}catch(x){$('#msg').textContent='Could not save. Your text is still here; please try again.'}};
   if(p.id)$('#dl').onclick=async()=>{if(!confirm('Delete this post?'))return;try{await change(a=>a.filter(x=>x.id!==p.id));write()}catch(x){$('#msg').textContent='Could not delete. Please try again.'}}}
 function signin(msg){$('#mbtn').style.visibility='hidden';app.innerHTML=head('Ashley\'s Blog')+`<p class="sans" style="color:var(--mut)">${msg||'Private. Sign in to continue.'}</p><div class="row"><button class="pri" id="gs"><svg class="i" viewBox="0 0 24 24"><path d="M7 18.5h10.5a4 4 0 0 0 .6-7.95A6 6 0 0 0 6.5 9.6 4.5 4.5 0 0 0 7 18.5z"/></svg>${LS.getItem('blog.em')?'Continue':'Sign in with Google'}</button></div><div class="msg" id="msg"></div>`;
@@ -143,7 +170,7 @@ async function route(){if(!LS.getItem('blog.em')){signin();return}
   const h=location.hash||'#/';let r='home';
   if(h.startsWith('#/p/'))view(h.slice(4));else if(h.startsWith('#/tag/'))tagPage(decodeURIComponent(h.slice(6))),r='tags';else if(h==='#/tags')tags(),r='tags';
   else if(h==='#/archive')archive(),r='archive';else if(h==='#/write')write(),r='write';else home();
-  document.querySelectorAll('#menu a').forEach(a=>a.classList.toggle('cur',a.dataset.r===r));scrollTo(0,0)}
+  document.querySelectorAll('.nav a').forEach(a=>a.classList.toggle('cur',a.dataset.r===r));scrollTo(0,0)}
 addEventListener('hashchange',route);route();
 if('serviceWorker' in navigator)navigator.serviceWorker.register('sw.js');
 </script>
