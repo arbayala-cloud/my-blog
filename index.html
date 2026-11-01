@@ -141,7 +141,7 @@ a{color:var(--lnk)}
 .adjf img{width:100%;height:100%;object-fit:cover;pointer-events:none;user-select:none;-webkit-user-drag:none}
 .nudge{display:flex;gap:6px;justify-content:center;margin-top:8px;flex-wrap:wrap}.nudge button{padding:8px 12px}
 
-/* ---- 2026.10.31u refined layer ---- */
+/* ---- 2026.10.31v refined layer ---- */
 .wrap{max-width:1000px}
 .xhead{padding:44px 22px 30px;text-align:left}.xhead .brand{font:600 34px/1.15 Lora,Georgia,serif !important;letter-spacing:-.01em}
 .xbar{padding:9px 18px;gap:6px 18px;font-size:11px}.xbar a{padding:2px 2px;letter-spacing:.04em}
@@ -195,8 +195,17 @@ body:not([data-dv=line]) .full .entry::after,body:not([data-dv=line]) .entry.sol
 .entry:nth-child(5n+3){--dvi:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22%23000%22%20stroke-width%3D%221.35%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M5%2010h11v5.5a3.8%203.8%200%200%201-3.8%203.8H8.8A3.8%203.8%200%200%201%205%2015.5zM16%2011.5h1.4a2.4%202.4%200%200%201%200%204.8H16M8.7%203.5c-1%201.2.9%202-.1%203.6M12.3%203.5c-1%201.2.9%202-.1%203.6%22/%3E%3C/svg%3E")}
 .entry:nth-child(5n+4){--dvi:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22%23000%22%20stroke-width%3D%221.35%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M4.5%2015.5V12a7.5%207.5%200%200%201%2015%200v3.5%22/%3E%3Cpath%20d%3D%22M4.5%2014h2.8v6H5.6a1.1%201.1%200%200%201-1.1-1.1zM19.5%2014h-2.8v6h1.7a1.1%201.1%200%200%200%201.1-1.1z%22/%3E%3C/svg%3E")}
 .entry:nth-child(5n+5){--dvi:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22%23000%22%20stroke-width%3D%221.35%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M3.5%204.5h17v11.5h-17z%22/%3E%3Cpath%20d%3D%22M6%207h12v6.5H6zM9.5%2016l-1%203.5h7l-1-3.5%22/%3E%3C/svg%3E")}
+.xr{display:flex;align-items:center;gap:2px;flex:none}.xbar a.mnb{padding:4px 6px !important;background:none}.xbar a.mnb.cur{background:rgba(255,255,255,.18) !important}
+.sbox{display:flex;align-items:center;gap:8px;border:1px solid var(--line);border-radius:10px;padding:4px 6px 4px 12px;background:var(--card);margin:0 0 6px}.sbox .i{flex:none;color:var(--mut)}
+.sbox input{border:0 !important;background:none !important;box-shadow:none !important;outline:0;flex:1;min-width:0;font-size:17px;padding:8px 0;margin:0;color:var(--fg)}
+.sbox button{margin:0;padding:6px;border:0;background:none;color:var(--mut);display:inline-flex}.sbox button[hidden]{display:none}
+.scount{font-size:13px;color:var(--mut);margin:0 2px 12px}.sres{list-style:none;padding:0;margin:0}.sres li{border-bottom:1px solid var(--line)}
+.sres a{display:block;padding:12px 2px;color:var(--fg);text-decoration:none}.sres a:hover .st,.sres a:focus .st{text-decoration:underline}
+.sres .st{font-weight:bold;font-size:17px;color:var(--ttl,var(--fg))}.sres .sd{font-size:12px;color:var(--mut);margin:2px 0 4px}.sres .sn{font-size:14px;color:var(--fg);line-height:1.5;overflow-wrap:anywhere}
+.sbox input::-webkit-search-cancel-button,.sbox input::-webkit-search-decoration{-webkit-appearance:none;appearance:none;display:none}
+.sres mark{background:color-mix(in srgb,var(--lnk) 40%,transparent);color:inherit;border-radius:2px;padding:0 1px}
 </style></head><body data-t="system">
-<div class="wrap"><div class="xbar" id="mbtn"><nav class="xnav"><a href="#/" data-r="home">home</a><a href="#/write" data-r="write">write</a><a href="#/tags" data-r="tags">labels</a><a href="#/archive" data-r="archive">archives</a></nav><button class="mnb" id="mnb" aria-label="Menu" aria-expanded="false" aria-controls="mnu"><svg class="i" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+<div class="wrap"><div class="xbar" id="mbtn"><nav class="xnav"><a href="#/" data-r="home">home</a><a href="#/write" data-r="write">write</a><a href="#/tags" data-r="tags">labels</a><a href="#/archive" data-r="archive">archives</a></nav><span class="xr"><a class="mnb" id="srb" href="#/search" data-r="search" aria-label="Search posts"><svg class="i" viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6"/><path d="M15 15l5 5"/></svg></a><button class="mnb" id="mnb" aria-label="Menu" aria-expanded="false" aria-controls="mnu"><svg class="i" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button></span>
 <div class="mnu" id="mnu" hidden><a href="#/custom" data-r="custom" class="mi"><svg class="i" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M12 4a8 8 0 0 0 0 16c1.5 0 2-1 2-2s-1-1.5-1-2.5 1-1.5 2-1.5h2a3 3 0 0 0 3-3"/></svg>Customize</a>
 <div class="mlab">Theme</div><div class="seg" id="seg"><button data-v="light">Light</button><button data-v="dark">Dark</button><button data-v="system">System</button></div>
 <button class="mi" id="mbk"><svg class="i" viewBox="0 0 24 24"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg>Download backup</button>
@@ -205,7 +214,7 @@ body:not([data-dv=line]) .full .entry::after,body:not([data-dv=line]) .entry.sol
 <div class="syncbar sans" id="syncbar" hidden><span id="synct">Showing your saved copy.</span><button id="syncb"><svg class="i" viewBox="0 0 24 24"><path d="M20 12a8 8 0 1 1-2.3-5.6M20 4v5h-5"/></svg>Continue syncing</button></div>
 <div class="xhead" id="xhead"><a class="brand" href="#/">Ashley's Blog</a><div class="xsub" id="xsub"></div></div>
 <div class="cols"><main id="app"></main><aside id="side"></aside></div>
-<footer class="foot"><div>Ashley's Blog &middot; est. 2026 &middot; Version 2026.10.31u</div></footer></div>
+<footer class="foot"><div>Ashley's Blog &middot; est. 2026 &middot; Version 2026.10.31v</div></footer></div>
 <script>
 /* ===================================================== */
 
@@ -343,6 +352,19 @@ const card=p=>entry(p,false);
 const head=(t,s)=>`<div class="pagehead"><h1>${esc(t)}</h1>${s?`<p>${s}</p>`:''}</div>`;
 const fail='<div class="empty">Posts could not load. Please try again.</div>';
 const PER=5;
+const fold=t=>{let f='',m=[];for(let i=0;i<t.length;i++){const c=t[i].normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase();for(const x of c){f+=x;m.push(i)}}return [f,m]};
+function hit(t,q){t=String(t||'');const [f,m]=fold(t),i=f.indexOf(q);return i<0?null:{t,a:m[i],b:m[i+q.length-1]+1}}
+function snip(h,n=70){const a=Math.max(0,h.a-n),b=Math.min(h.t.length,h.b+n);return (a?'… ':'')+esc(h.t.slice(a,h.a))+'<mark>'+esc(h.t.slice(h.a,h.b))+'</mark>'+esc(h.t.slice(h.b,b))+(b<h.t.length?' …':'')}
+let SQ='';
+async function search(){app.innerHTML=`<div class="sbox" role="search"><svg class="i" viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6"/><path d="M15 15l5 5"/></svg><input id="sq" type="text" role="searchbox" enterkeyhint="search" autocomplete="off" placeholder="Search your posts" aria-label="Search your posts"><button id="sqx" aria-label="Clear search" hidden><svg class="i" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div><div class="scount sans" id="sc"></div><ul class="sres sans" id="sr"></ul>`;
+  let P=[];try{P=await all()}catch(e){}const q=$('#sq');q.value=SQ;
+  const run=()=>{SQ=q.value;$('#sqx').hidden=!q.value;const k=fold(q.value.trim())[0];if(!k){$('#sc').textContent=P.length?'Type to search '+P.length+' post'+(P.length===1?'':'s')+'.':'No posts yet.';$('#sr').innerHTML='';return}
+    const out=[];P.forEach(p=>{const fields=[p.title,plain(p.body),(p.tags||[]).join(', '),p.mood,p.listening];const hs=fields.map(f=>hit(f,k));if(!hs.some(Boolean))return;
+      const lab=['','','Labels: ','Mood: ','Listening: '],j=hs[1]?1:hs.findIndex((h,i)=>h&&i>0),sn=j>0?lab[j]+snip(hs[j]):esc(plain(p.body).slice(0,140))+(plain(p.body).length>140?' …':'');
+      out.push(`<li><a href="#/p/${p.id}"><div class="st">${hs[0]?snip(hs[0],200):esc(p.title||'Untitled')}${p.published?'':' <span class="tag">Draft</span>'}</div><div class="sd">${LONG(p.created_at)}</div><div class="sn">${sn}</div></a></li>`)});
+    $('#sc').textContent=out.length?out.length+' post'+(out.length===1?'':'s')+' found':'';$('#sr').innerHTML=out.join('')||'<li class="empty" style="border:0">No posts found</li>'};
+  q.oninput=run;q.onkeydown=e=>{if(e.key==='Escape'){e.preventDefault();if(q.value){q.value='';run()}else history.length>1?history.back():(location.hash='#/')}};
+  $('#sqx').onclick=()=>{q.value='';run();q.focus()};run();q.focus()}
 async function home(pg){pg=Math.max(1,+pg||1);app.innerHTML=`<div id="pl" class="empty">Loading</div>`;
   try{const d=await pub(),n=Math.max(1,Math.ceil(d.length/PER));pg=Math.min(pg,n);const part=d.slice((pg-1)*PER,pg*PER);
    const nav=n>1?`<nav class="pager">${pg>1?`<a href="#/page/${pg-1}">${PREV} Newer posts</a>`:'<span></span>'}<a href="#/">Home</a>${pg<n?`<a href="#/page/${pg+1}">Older posts ${NEXT}</a>`:'<span></span>'}</nav>`:'';
@@ -480,7 +502,7 @@ async function route(){if(!LS.getItem('blog.em')){signin();return}
   $('#mbtn').style.visibility='visible';if(!(tok&&Date.now()<tokExp-60000))needSync();
   const h=location.hash||'#/';let r='home';
   if(h.startsWith('#/page/'))home(h.slice(7));else if(h.startsWith('#/p/'))view(h.slice(4));else if(h.startsWith('#/tag/'))tagPage(decodeURIComponent(h.slice(6))),r='tags';else if(h==='#/tags')tags(),r='tags';
-  else if(h==='#/archive')archive(),r='archive';else if(h==='#/write')write(),r='write';else if(h==='#/custom')custom(),r='custom';else home();
+  else if(h==='#/archive')archive(),r='archive';else if(h==='#/write')write(),r='write';else if(h==='#/search')search(),r='search';else if(h==='#/custom')custom(),r='custom';else home();
   side();document.querySelectorAll('.xbar a').forEach(a=>a.classList.toggle('cur',a.dataset.r===r));scrollTo(0,0)}
 $('#syncb').onclick=resync;addEventListener('hashchange',route);route();
 if('serviceWorker' in navigator)navigator.serviceWorker.register('sw.js');
