@@ -141,7 +141,7 @@ a{color:var(--lnk)}
 .adjf img{width:100%;height:100%;object-fit:cover;pointer-events:none;user-select:none;-webkit-user-drag:none}
 .nudge{display:flex;gap:6px;justify-content:center;margin-top:8px;flex-wrap:wrap}.nudge button{padding:8px 12px}
 
-/* ---- 2026.11.01a refined layer ---- */
+/* ---- 2026.11.01b refined layer ---- */
 .wrap{max-width:1000px}
 .xhead{padding:44px 22px 30px;text-align:left}.xhead .brand{font:600 34px/1.15 Lora,Georgia,serif !important;letter-spacing:-.01em}
 .xbar{padding:9px 18px;gap:6px 18px;font-size:11px}.xbar a{padding:2px 2px;letter-spacing:.04em}
@@ -229,6 +229,8 @@ body:not([data-dv=line]) .full .entry::after,body:not([data-dv=line]) .entry.sol
 .tlist a{display:block;padding:18px 2px;text-decoration:none;color:var(--ttl,var(--fg))}.tlist a:hover .tlt,.tlist a:focus .tlt{text-decoration:underline;text-underline-offset:4px}
 .tld{display:block;font:600 11px/1.4 system-ui,sans-serif;letter-spacing:.12em;text-transform:uppercase;color:var(--mut);margin-bottom:5px}
 .tlt{display:block;font:600 22px/1.3 Lora,Georgia,serif;overflow-wrap:anywhere}.vtop{display:flex;justify-content:flex-end;margin:-6px 0 4px}
+.tlist a.tla{padding:18px 2px 4px}.rmore{display:inline-flex !important;align-items:center;gap:4px;padding:4px 2px 16px !important;font:600 13px system-ui,sans-serif !important;color:var(--lnk) !important;text-decoration:none}.rmore:hover{text-decoration:underline}
+.vtop{justify-content:flex-start !important;margin:0 0 14px !important}.vbot{margin:26px 0 0}.bkh{display:inline-flex;align-items:center;gap:6px;font:600 14px system-ui,sans-serif;color:var(--lnk);text-decoration:none;padding:6px 0}.bkh:hover{text-decoration:underline}
 </style></head><body data-t="system">
 <div class="wrap"><div class="xbar" id="mbtn"><nav class="xnav"><a href="#/" data-r="home">home</a><a href="#/write" data-r="write">write</a><a href="#/tags" data-r="tags">labels</a></nav><span class="xr"><a class="mnb" id="srb" href="#/search" data-r="search" aria-label="Search posts"><svg class="i" viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6"/><path d="M15 15l5 5"/></svg></a><button class="mnb" id="mnb" aria-label="Menu" aria-expanded="false" aria-controls="mnu"><svg class="i" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button></span>
 <div class="mnu" id="mnu" hidden><a href="#/custom" data-r="custom" class="mi"><svg class="i" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M12 4a8 8 0 0 0 0 16c1.5 0 2-1 2-2s-1-1.5-1-2.5 1-1.5 2-1.5h2a3 3 0 0 0 3-3"/></svg>Customize</a><a href="#/profile" data-r="profile" class="mi"><svg class="i" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c1-4 4-6 8-6s7 2 8 6"/></svg>Profile</a><a href="#/archive" data-r="archive" class="mi"><svg class="i" viewBox="0 0 24 24"><path d="M3.5 5h17v4h-17zM5 9v10h14V9M10 13h4"/></svg>Blog Archive</a><a href="#/year" data-r="year" class="mi"><svg class="i" viewBox="0 0 24 24"><path d="M4 6h16v14H4zM4 10h16M8 3v5M16 3v5"/><path d="M8 14h2M12 14h2M16 14h0M8 17h2M12 17h2"/></svg>Year at a glance</a>
@@ -239,7 +241,7 @@ body:not([data-dv=line]) .full .entry::after,body:not([data-dv=line]) .entry.sol
 <div class="syncbar sans" id="syncbar" hidden><span id="synct">Showing your saved copy.</span><button id="syncb"><svg class="i" viewBox="0 0 24 24"><path d="M20 12a8 8 0 1 1-2.3-5.6M20 4v5h-5"/></svg>Continue syncing</button></div>
 <div class="xhead" id="xhead"><a class="brand" href="#/">Ashley's Blog</a><div class="xsub" id="xsub"></div></div>
 <div class="cols"><main id="app"></main><aside id="side"></aside></div>
-<footer class="foot"><div>Ashley's Blog &middot; est. 2026 &middot; Version 2026.11.01a</div></footer></div>
+<footer class="foot"><div>Ashley's Blog &middot; est. 2026 &middot; Version 2026.11.01b</div></footer></div>
 <script>
 /* ===================================================== */
 
@@ -403,7 +405,7 @@ async function search(){app.innerHTML=`<div class="sbox" role="search"><svg clas
 async function home(pg){pg=Math.max(1,+pg||1);app.innerHTML=`<div id="pl" class="empty">Loading</div>`;
   try{const d=await pub(),HP=15,n=Math.max(1,Math.ceil(d.length/HP));pg=Math.min(pg,n);const part=d.slice((pg-1)*HP,pg*HP);
    const nav=n>1?`<nav class="pager">${pg>1?`<a href="#/page/${pg-1}">${PREV} Newer posts</a>`:'<span></span>'}<a href="#/">Home</a>${pg<n?`<a href="#/page/${pg+1}">Older posts ${NEXT}</a>`:'<span></span>'}</nav>`:'';
-   $('#pl').outerHTML=d.length?'<ul class="tlist">'+part.map(p=>`<li><a href="#/p/${p.id}"><span class="tld">${LONG(p.created_at)}</span><span class="tlt">${esc(p.title)||'Untitled'}</span></a></li>`).join('')+'</ul>'+nav:'<div class="empty">No posts yet.</div>'}catch(e){$('#pl').outerHTML=fail}}
+   $('#pl').outerHTML=d.length?'<ul class="tlist">'+part.map(p=>`<li><a class="tla" href="#/post/${p.id}"><span class="tld">${LONG(p.created_at)}</span><span class="tlt">${esc(p.title)||'Untitled'}</span></a><a class="rmore" href="#/post/${p.id}">Read more ${NEXT}</a></li>`).join('')+'</ul>'+nav:'<div class="empty">No posts yet.</div>'}catch(e){$('#pl').outerHTML=fail}}
 const PREV='<svg class="i" style="width:12px;height:12px" viewBox="0 0 24 24"><path d="M15 6l-6 6 6 6"/></svg>',NEXT='<svg class="i" style="width:12px;height:12px" viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></svg>';
 const DKEY=d=>new Date(d).toLocaleDateString('en-CA');let GY=new Date().getFullYear();
 function glance(d,y){const by={};d.forEach(p=>{const k=DKEY(p.created_at);(by[k]=by[k]||[]).push(p)});const today=DKEY(new Date());
@@ -421,7 +423,7 @@ async function tagPage(t){try{const d=(await pub()).filter(p=>p.tags.includes(t)
 async function tags(){try{const c={};(await pub()).forEach(p=>p.tags.forEach(t=>c[t]=(c[t]||0)+1));const k=Object.keys(c).sort((a,b)=>a.localeCompare(b));
   app.innerHTML=head('Categories')+(k.length?'<div class="list">'+k.map(t=>`<a class="it" href="#/tag/${encodeURIComponent(t)}"><span>${esc(t)}</span><span class="cnt" style="flex:none">${c[t]}</span></a>`).join('')+'</div>':'<div class="empty">No categories yet.</div>')}catch(e){app.innerHTML=fail}}
 async function view(id){let data=null;try{data=(await all()).find(p=>p.id===id)}catch(e){}
-  app.innerHTML=(data?`<div class="vtop">${XBTN}</div>`+entry(data,true)+'<p><a class="more" href="#/" id="bk2">back to all entries</a></p>':'<div class="empty">Entry not found.</div>');wireX();const b2=$('#bk2');if(b2)b2.onclick=e=>{if(BACKOK){e.preventDefault();history.back()}};scrollTo(0,0)}
+  const BK=`<a class="bkh" href="#/" data-bk>${PREV} Back to home</a>`;app.innerHTML=(data?`<div class="postpage"><div class="vtop">${BK}</div>`+entry(data,true)+`<div class="vbot">${BK}</div></div>`:'<div class="empty">Entry not found.</div>');app.querySelectorAll('[data-bk]').forEach(a=>a.onclick=e=>{if(BACKOK){e.preventDefault();history.back()}});scrollTo(0,0)}
 let HASTAGS=true,ALL=[];
 async function write(){let error=null;try{ALL=await all()}catch(x){error=x;ALL=[]}
   
@@ -582,11 +584,11 @@ async function custom(){try{await all()}catch(e){}let L={...LOOK},F={...DEFF,...
   $('#csv').onclick=async()=>{const fields={};app.querySelectorAll('[data-pf]').forEach(i=>fields[i.dataset.pf]=i.value.trim());$('#msg').textContent='Saving';
     try{await change(a=>{PROFILE={...PROFILE,look:L,fields,photoPos:POS,...(PHOTO?{photo:PHOTO}:{})};return a});setLook(L);side();$('#msg').textContent='Saved'}catch(x){$('#msg').textContent='Could not save. Please try again.'}};
   $('#crs').onclick=()=>{if(!confirm('Reset skin, accent, font and header to classic?'))return;L={};live();custom();$('#msg').textContent='Reset. Tap Save to keep it.'}}
-const SCR={};let BACKOK=false;addEventListener('hashchange',e=>{try{const o=new URL(e.oldURL).hash||'#/';if(!o.startsWith('#/p/'))SCR[o]=scrollY;BACKOK=!o.startsWith('#/p/');FROMPOST=o.startsWith('#/p/')}catch(x){}});let FROMPOST=false;
+const SCR={};let BACKOK=false;addEventListener('hashchange',e=>{try{const o=new URL(e.oldURL).hash||'#/';const ip=/^#\/(p|post)\//.test(o);if(!ip)SCR[o]=scrollY;BACKOK=!ip;FROMPOST=ip}catch(x){}});let FROMPOST=false;
 async function route(){if(!LS.getItem('blog.em')){signin();return}
   $('#mbtn').style.visibility='visible';if(!(tok&&Date.now()<tokExp-60000))needSync();
   const h=location.hash||'#/';let r='home';
-  if(h.startsWith('#/page/'))home(h.slice(7));else if(h.startsWith('#/p/'))view(h.slice(4));else if(h==='#/profile')profilePage(),r='profile';else if(h==='#/year')yearPage(),r='year';else if(h.startsWith('#/day/'))dayPage(h.slice(6));else if(h.startsWith('#/tag/'))tagPage(decodeURIComponent(h.slice(6))),r='tags';else if(h==='#/tags')tags(),r='tags';
+  if(h.startsWith('#/page/'))home(h.slice(7));else if(h.startsWith('#/p/'))view(h.slice(4));else if(h.startsWith('#/post/'))view(h.slice(7));else if(h==='#/profile')profilePage(),r='profile';else if(h==='#/year')yearPage(),r='year';else if(h.startsWith('#/day/'))dayPage(h.slice(6));else if(h.startsWith('#/tag/'))tagPage(decodeURIComponent(h.slice(6))),r='tags';else if(h==='#/tags')tags(),r='tags';
   else if(h==='#/archive')archive(),r='archive';else if(h==='#/write')write(),r='write';else if(h==='#/search')search(),r='search';else if(h==='#/custom')custom(),r='custom';else home();
   side();document.querySelectorAll('.xbar a').forEach(a=>a.classList.toggle('cur',a.dataset.r===r));const y=FROMPOST?SCR[h]:null;FROMPOST=false;scrollTo(0,0);if(y){let k=0;const t=()=>{if(document.documentElement.scrollHeight-innerHeight>=y-2||k++>40){scrollTo(0,y)}else setTimeout(t,50)};setTimeout(t,30)}}
 $('#syncb').onclick=resync;app.addEventListener('click',async e=>{const b=e.target.closest('[data-gy]');if(!b)return;GY+=+b.dataset.gy;let d=[];try{d=await pub()}catch(x){}const g=$('#gl');if(g)g.innerHTML=glance(d,GY)});addEventListener('hashchange',route);route();
