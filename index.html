@@ -141,7 +141,7 @@ a{color:var(--lnk)}
 .adjf img{width:100%;height:100%;object-fit:cover;pointer-events:none;user-select:none;-webkit-user-drag:none}
 .nudge{display:flex;gap:6px;justify-content:center;margin-top:8px;flex-wrap:wrap}.nudge button{padding:8px 12px}
 
-/* ---- 2026.10.31s refined layer ---- */
+/* ---- 2026.10.31t refined layer ---- */
 .wrap{max-width:1000px}
 .xhead{padding:44px 22px 30px;text-align:left}.xhead .brand{font:600 34px/1.15 Lora,Georgia,serif !important;letter-spacing:-.01em}
 .xbar{padding:9px 18px;gap:6px 18px;font-size:11px}.xbar a{padding:2px 2px;letter-spacing:.04em}
@@ -184,6 +184,7 @@ a{color:var(--lnk)}
 .xhead.hasban{aspect-ratio:16/6;min-height:200px;max-height:340px;justify-content:flex-start !important;align-items:flex-end;text-align:right !important;padding-top:26px !important}
 .xhead.hasban .brand{color:#fff !important;text-shadow:0 2px 10px rgba(0,0,0,.7)}.xhead.hasban .xsub{color:#f1e8ec !important;text-shadow:0 1px 6px rgba(0,0,0,.7)}
 @media(max-width:760px){.xhead.hasban{aspect-ratio:16/9;min-height:0;padding-top:18px !important}}
+.syncbar{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:7px 14px;font-size:13px;color:var(--mut);background:var(--card);border-bottom:1px solid var(--line)}.syncbar[hidden]{display:none}.syncbar button{margin:0;padding:6px 12px;font-size:13px;white-space:nowrap}
 </style></head><body data-t="system">
 <div class="wrap"><div class="xbar" id="mbtn"><nav class="xnav"><a href="#/" data-r="home">home</a><a href="#/write" data-r="write">write</a><a href="#/tags" data-r="tags">labels</a><a href="#/archive" data-r="archive">archives</a></nav><button class="mnb" id="mnb" aria-label="Menu" aria-expanded="false" aria-controls="mnu"><svg class="i" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
 <div class="mnu" id="mnu" hidden><a href="#/custom" data-r="custom" class="mi"><svg class="i" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M12 4a8 8 0 0 0 0 16c1.5 0 2-1 2-2s-1-1.5-1-2.5 1-1.5 2-1.5h2a3 3 0 0 0 3-3"/></svg>Customize</a>
@@ -191,9 +192,10 @@ a{color:var(--lnk)}
 <button class="mi" id="mbk"><svg class="i" viewBox="0 0 24 24"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg>Download backup</button>
 <button class="mi" id="mso"><svg class="i" viewBox="0 0 24 24"><path d="M10 5H5v14h5M14 8l4 4-4 4M18 12H9"/></svg>Sign out</button>
 <div class="msync" id="msync"></div></div></div>
+<div class="syncbar sans" id="syncbar" hidden><span id="synct">Showing your saved copy.</span><button id="syncb"><svg class="i" viewBox="0 0 24 24"><path d="M20 12a8 8 0 1 1-2.3-5.6M20 4v5h-5"/></svg>Continue syncing</button></div>
 <div class="xhead" id="xhead"><a class="brand" href="#/">Ashley's Blog</a><div class="xsub" id="xsub"></div></div>
 <div class="cols"><main id="app"></main><aside id="side"></aside></div>
-<footer class="foot"><div>Ashley's Blog &middot; est. 2026 &middot; Version 2026.10.31s</div></footer></div>
+<footer class="foot"><div>Ashley's Blog &middot; est. 2026 &middot; Version 2026.10.31t</div></footer></div>
 <script>
 /* ===================================================== */
 
@@ -201,25 +203,34 @@ const CID='844979369291-3008v3sv7o2tv9ktuj8dccvd0khjdneh.apps.googleusercontent.
 const LS=localStorage,DR='https://www.googleapis.com/drive/v3/files',UP='https://www.googleapis.com/upload/drive/v3/files';
 let tok=null,tokExp=0;try{const v=JSON.parse(LS.getItem('blog.tok')||'null');if(v&&v.e>Date.now()+60000){tok=v.t;tokExp=v.e}}catch(e){}
 let gisP=null;function gis(){return gisP||(gisP=new Promise((ok,no)=>{if(window.google&&google.accounts&&google.accounts.oauth2)return ok();const s=document.createElement('script');s.src='https://accounts.google.com/gsi/client';s.async=1;s.onload=()=>ok();s.onerror=()=>{gisP=null;no(new Error('offline'))};document.head.appendChild(s)}))}
-async function token(interactive){if(tok&&Date.now()<tokExp-60000)return tok;await gis();
+async function token(interactive){if(tok&&Date.now()<tokExp-60000)return tok;if(!interactive){needSync();throw new Error('auth')}await gis();
  return new Promise((ok,no)=>{const t=setTimeout(()=>no(new Error('timeout')),interactive?120000:15000);
   const tc=google.accounts.oauth2.initTokenClient({client_id:CID,scope:SCOPE,login_hint:LS.getItem('blog.em')||undefined,callback:async r=>{clearTimeout(t);if(r&&r.access_token){tok=r.access_token;tokExp=Date.now()+(r.expires_in||3600)*1000;LS.setItem('blog.tok',JSON.stringify({t:tok,e:tokExp}));
      if(!LS.getItem('blog.em')){try{const u=await(await fetch('https://www.googleapis.com/oauth2/v3/userinfo',{headers:{Authorization:'Bearer '+tok}})).json();if(u.email)LS.setItem('blog.em',u.email)}catch(e){}}ok(tok)}else no(new Error(r&&r.error||'denied'))},error_callback:e=>{clearTimeout(t);no(new Error(e&&e.type||'failed'))}});
   tc.requestAccessToken({prompt:interactive&&!LS.getItem('blog.em')?'select_account':''})})}
-function dropTok(){tok=null;tokExp=0;LS.removeItem('blog.tok')}
+function dropTok(){tok=null;tokExp=0;LS.removeItem('blog.tok');needSync()}
+function needSync(){const b=document.getElementById('syncbar');if(b&&LS.getItem('blog.em')){b.hidden=false;const p=LS.getItem('blog.pending');document.getElementById('synct').textContent=p?'Your changes are saved on this phone and will sync to Drive.':'Showing your saved copy.'}}
+async function resync(){const m=document.getElementById('synct');m.textContent='Connecting to Google';try{await token(true)}catch(e){m.textContent=e.message==='offline'?'You appear to be offline. Your blog is still here.':'Sync did not finish. Tap Continue syncing to try again.';return}
+  try{if(LS.getItem('blog.pending'))await flush();document.getElementById('syncbar').hidden=true;CACHE=null;route()}catch(e){m.textContent='Could not sync yet. Your changes are still saved on this phone.'}}
+async function flush(){const local=JSON.parse(LS.getItem('blog.cache')||'[]'),lp=JSON.parse(LS.getItem('blog.pprof')||'null');const remote=await loadAll();
+  const map=new Map(remote.map(p=>[p.id,p]));local.forEach(p=>{const r=map.get(p.id);if(!r||(p.updated_at||p.created_at||'')>(r.updated_at||r.created_at||''))map.set(p.id,p)});
+  if(lp)PROFILE=lp;await saveAll([...map.values()]);LS.removeItem('blog.pending');LS.removeItem('blog.pprof')}
 async function api(u,o={}){const t=await token(false);const r=await fetch(u,{...o,headers:{...(o.headers||{}),Authorization:'Bearer '+t}});if(r.status===401){dropTok();throw new Error('auth')}if(!r.ok)throw new Error('http '+r.status);return r}
 async function fileId(){let id=LS.getItem('blog.fid');if(id)return id;const r=await(await api(DR+'?spaces=appDataFolder&fields=files(id)&orderBy=modifiedTime desc&q='+encodeURIComponent("name='"+FN+"'"))).json();id=r.files&&r.files[0]&&r.files[0].id;if(id)LS.setItem('blog.fid',id);return id||null}
 async function mpUpload(meta,blob,type){if(!type||type==='application/octet-stream'){const n=(meta.name||'')+' '+(blob.name||'');type=/\.png/i.test(n)?'image/png':/\.webp/i.test(n)?'image/webp':/\.gif/i.test(n)?'image/gif':/\.hei[cf]/i.test(n)?'image/heic':(blob.name?'image/jpeg':type||'application/octet-stream')}if(type.startsWith('image/'))meta={...meta,mimeType:type};const b='blog'+Date.now(),pre='--'+b+'\r\nContent-Type: application/json; charset=UTF-8\r\n\r\n'+JSON.stringify(meta)+'\r\n--'+b+'\r\nContent-Type: '+type+'\r\n\r\n';
   return (await(await api(UP+'?uploadType=multipart&fields=id',{method:'POST',headers:{'Content-Type':'multipart/related; boundary='+b},body:new Blob([pre,blob,'\r\n--'+b+'--'])})).json()).id}
 const SEED=[{id:'eddb8fd3-d77a-4bee-8ebf-5df8ea1418eb',title:'Hi guys!',body:'Yada yada whoooo',tags:[],published:true,created_at:'2026-10-31T20:36:20.323Z',updated_at:'2026-10-31T20:36:18.589Z'}];
-let PROFILE={};
+let PROFILE={};try{PROFILE=JSON.parse(LS.getItem('blog.prof')||'{}')||{}}catch(e){}
 async function loadAll(){let id=await fileId();if(id){const r=await fetch(DR+'/'+id+'?alt=media',{headers:{Authorization:'Bearer '+await token(false)}});
-    if(r.status===404){LS.removeItem('blog.fid');id=null}else if(r.status===401){dropTok();throw new Error('auth')}else if(!r.ok)throw new Error('http '+r.status);else{const d=await r.json();PROFILE=d.profile||{};if(PROFILE.look&&JSON.stringify(PROFILE.look)!==LS.getItem('blog.look'))setLook(PROFILE.look);const p=(d.posts||[]).map(norm);LS.setItem('blog.cache',JSON.stringify(p));return p}}
+    if(r.status===404){LS.removeItem('blog.fid');id=null}else if(r.status===401){dropTok();throw new Error('auth')}else if(!r.ok)throw new Error('http '+r.status);else{const d=await r.json();PROFILE=d.profile||{};LS.setItem('blog.prof',JSON.stringify(PROFILE));if(PROFILE.look&&JSON.stringify(PROFILE.look)!==LS.getItem('blog.look'))setLook(PROFILE.look);const p=(d.posts||[]).map(norm);LS.setItem('blog.cache',JSON.stringify(p));return p}}
   await saveAll(SEED);return SEED}
 async function saveAll(posts){const body=JSON.stringify({app:'my-blog',v:1,saved:Date.now(),profile:PROFILE,posts});const id=await fileId();
   if(id)await api(UP+'/'+id+'?uploadType=media',{method:'PATCH',headers:{'Content-Type':'application/json'},body});
-  else{const nid=await mpUpload({name:FN,parents:['appDataFolder']},body,'application/json');LS.setItem('blog.fid',nid)}LS.setItem('blog.cache',JSON.stringify(posts))}
-async function change(fn){const cur=await loadAll();const next=fn(cur.slice());await saveAll(next);CACHE=null;STOR=null;return next}
+  else{const nid=await mpUpload({name:FN,parents:['appDataFolder']},body,'application/json');LS.setItem('blog.fid',nid)}LS.setItem('blog.cache',JSON.stringify(posts));LS.setItem('blog.prof',JSON.stringify(PROFILE))}
+async function change(fn){let cur;try{cur=await loadAll()}catch(e){if(!/auth|offline|timeout|Failed to fetch|NetworkError|Load failed/i.test(e.message))throw e;cur=null}
+  if(cur){const next=fn(cur.slice());await saveAll(next);CACHE=null;STOR=null;return next}
+  const loc=JSON.parse(LS.getItem('blog.cache')||'[]').map(norm);const next=fn(loc.slice());if(loc.some(p=>!next.find(x=>x.id===p.id)))throw new Error('needsync');
+  LS.setItem('blog.cache',JSON.stringify(next));LS.setItem('blog.prof',JSON.stringify(PROFILE));LS.setItem('blog.pprof',JSON.stringify(PROFILE));LS.setItem('blog.pending','1');CACHE=null;needSync();return next}
 const IMG={},ICACHE='blog-img-v1';
 const SIL="data:image/svg+xml,"+encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><rect width="24" height="24" fill="#eee"/><circle cx="12" cy="9" r="3.6" fill="none" stroke="#999" stroke-width="1.3"/><path d="M5.5 20c1-3.6 3.6-5.4 6.5-5.4s5.5 1.8 6.5 5.4" fill="none" stroke="#999" stroke-width="1.3"/></svg>');
 const BLANK='data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==';
@@ -294,17 +305,19 @@ applyLook();
 function setTheme(v){document.body.dataset.t=v;localStorage.blogTheme=v;document.querySelectorAll('#seg button').forEach(b=>b.classList.toggle('on',b.dataset.v===v));
   const dark=v==='dark'||(v==='system'&&matchMedia('(prefers-color-scheme: dark)').matches);document.querySelector('meta[name=theme-color]').content=dark?'#000000':'#ffffff'}
 (()=>{const b=$('#mnb'),m=$('#mnu');const shut=()=>{m.hidden=true;b.setAttribute('aria-expanded','false')};
-  b.onclick=e=>{e.stopPropagation();const show=m.hidden;m.hidden=!show;b.setAttribute('aria-expanded',String(show));if(show)$('#msync').innerHTML=navigator.onLine?`<b>Synced with Google Drive</b><br>${esc(LS.getItem('blog.em')||'')}`:'<b>Offline</b><br>Changes will sync when you reconnect'};
+  b.onclick=e=>{e.stopPropagation();const show=m.hidden;m.hidden=!show;b.setAttribute('aria-expanded',String(show));if(show)$('#msync').innerHTML=!navigator.onLine?'<b>Offline</b><br>Changes will sync when you reconnect':LS.getItem('blog.pending')?`<b>Changes waiting to sync</b><br>${esc(LS.getItem('blog.em')||'')}`:(tok&&Date.now()<tokExp)?`<b>Synced with Google Drive</b><br>${esc(LS.getItem('blog.em')||'')}`:`<b>Signed in</b>, sync paused<br>${esc(LS.getItem('blog.em')||'')}`};
   document.addEventListener('click',e=>{if(!m.hidden&&!m.contains(e.target)&&e.target!==b)shut()});document.addEventListener('keydown',e=>{if(e.key==='Escape')shut()});addEventListener('hashchange',shut);
   m.addEventListener('click',e=>{if(e.target.closest('a.mi'))shut()});
   $('#mbk').onclick=async()=>{shut();try{const P=await all();const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([JSON.stringify({exported:new Date().toISOString(),posts:P},null,2)],{type:'application/json'}));a.download='blog-backup-'+new Date().toLocaleDateString('en-CA')+'.json';a.click()}catch(x){alert('Could not download right now. Please try again.')}};
-  $('#mso').onclick=()=>{shut();if(!confirm('Sign out of your blog on this device?'))return;try{google.accounts.oauth2.revoke(tok,()=>{})}catch(e){}dropTok();['blog.em','blog.fid','blog.cache'].forEach(k=>LS.removeItem(k));CACHE=null;location.hash='#/';route()}})();
+  $('#mso').onclick=()=>{shut();if(!confirm(LS.getItem('blog.pending')?'Some changes have not synced to Drive yet and will be lost. Sign out anyway?':'Sign out of your blog on this device?'))return;try{google.accounts.oauth2.revoke(tok,()=>{})}catch(e){}dropTok();['blog.em','blog.fid','blog.cache','blog.prof','blog.pprof','blog.pending'].forEach(k=>LS.removeItem(k));try{caches.delete(ICACHE)}catch(e){}$('#syncbar').hidden=true;CACHE=null;location.hash='#/';route()}})();
 setTheme(localStorage.blogTheme||'system');$('#seg').onclick=e=>{if(e.target.dataset.v)setTheme(e.target.dataset.v)};
 matchMedia('(prefers-color-scheme: dark)').addEventListener('change',()=>setTheme(localStorage.blogTheme||'system'));
 function norm(p){const m=String(p.body||'').match(/^<!--tags:(.*?)-->\n?/);return {...p,tags:m?m[1].split(',').map(s=>s.trim()).filter(Boolean):(Array.isArray(p.tags)?p.tags:[]),body:m?p.body.slice(m[0].length):(p.body||'')}}
 let CACHE=null;
 const byDate=a=>a.slice().sort((x,y)=>new Date(y.created_at)-new Date(x.created_at));
-async function all(){if(CACHE)return CACHE;CACHE=byDate(await loadAll());return CACHE}
+async function all(){if(CACHE)return CACHE;const c=LS.getItem('blog.cache');
+  if(LS.getItem('blog.pending')&&c){CACHE=byDate(JSON.parse(c).map(norm));needSync();return CACHE}
+  try{CACHE=byDate(await loadAll())}catch(e){if(!c)throw e;CACHE=byDate(JSON.parse(c).map(norm));needSync()}return CACHE}
 async function pub(){return (await all()).filter(p=>p.published)}
 const MOODI='<svg class="i" style="width:12px;height:12px" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M9 14c1.5 1.5 4.5 1.5 6 0M9.5 10h0M14.5 10h0"/></svg>',MUSI='<svg class="i" style="width:12px;height:12px" viewBox="0 0 24 24"><path d="M9 18V6l10-2v12"/><circle cx="7" cy="18" r="2"/><circle cx="17" cy="16" r="2"/></svg>';
 function entry(p,full){const long=!full&&plain(p.body).length>2000;
@@ -340,7 +353,7 @@ async function write(){let error=null;try{ALL=await all()}catch(x){error=x;ALL=[
   <div class="row"><label class="btn" style="margin:0">Set profile photo<input type="file" accept="image/*" id="pp" hidden></label></div>
 `;
   $('#nw').onclick=()=>edit();if($('#cd'))$('#cd').onclick=()=>edit();
-  $('#pp').onchange=async e=>{const f=e.target.files[0];if(!f)return;try{const id=await mpUpload({name:'profile-'+Date.now(),parents:['appDataFolder']},f,f.type||'application/octet-stream');await change(a=>{PROFILE={...PROFILE,photo:'drive:'+id};return a});side()}catch(x){alert('Could not save the photo. Please try again.')}};if($('#so'))$('#so').onclick=()=>{if(!confirm('Sign out of your blog on this device?'))return;try{google.accounts.oauth2.revoke(tok,()=>{})}catch(e){}dropTok();['blog.em','blog.fid','blog.cache'].forEach(k=>LS.removeItem(k));CACHE=null;location.hash='#/';route()};
+  $('#pp').onchange=async e=>{const f=e.target.files[0];if(!f)return;try{const id=await mpUpload({name:'profile-'+Date.now(),parents:['appDataFolder']},f,f.type||'application/octet-stream');await change(a=>{PROFILE={...PROFILE,photo:'drive:'+id};return a});side()}catch(x){alert('Could not save the photo. Please try again.')}};if($('#so'))$('#so').onclick=()=>{if(!confirm(LS.getItem('blog.pending')?'Some changes have not synced to Drive yet and will be lost. Sign out anyway?':'Sign out of your blog on this device?'))return;try{google.accounts.oauth2.revoke(tok,()=>{})}catch(e){}dropTok();['blog.em','blog.fid','blog.cache','blog.prof','blog.pprof','blog.pending'].forEach(k=>LS.removeItem(k));try{caches.delete(ICACHE)}catch(e){}$('#syncbar').hidden=true;CACHE=null;location.hash='#/';route()};
   app.querySelectorAll('[data-e]').forEach(b=>b.onclick=()=>edit(ALL.find(p=>p.id===b.dataset.e)));
   if($('#bk'))$('#bk').onclick=()=>{const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([JSON.stringify({exported:new Date().toISOString(),posts:ALL},null,2)],{type:'application/json'}));a.download='blog-backup-'+new Date().toLocaleDateString('en-CA')+'.json';a.click()}}
 const DK=id=>'blog.draft.'+(id||'new');
@@ -382,7 +395,7 @@ function edit(p,fresh){p=p||{title:'',body:'',published:true,tags:[]};const orig
   $('#sv').onclick=async()=>{if($('#tg').value.trim())add($('#tg').value);$('#msg').textContent='Saving';
     const row={title:$('#ti').value.trim(),body:$('#bo').value,cover:COVER,mood:$('#md').value.trim(),listening:$('#ls').value.trim(),tags:T,published:$('#pb').checked,updated_at:new Date().toISOString()};
     try{await change(a=>{const i=a.findIndex(x=>x.id===p.id);if(p.id&&i>=0)a[i]={...a[i],...row};else a.push({id:crypto.randomUUID(),created_at:new Date().toISOString(),...row});return a});done=true;clearInterval(iv);LS.removeItem(DK(orig.id));write()}catch(x){$('#msg').textContent='Could not save. Your text is still here; please try again.'}};
-  if(p.id)$('#dl').onclick=async()=>{if(!confirm('Delete this post?'))return;try{await change(a=>a.filter(x=>x.id!==p.id));done=true;clearInterval(iv);LS.removeItem(DK(orig.id));write()}catch(x){$('#msg').textContent='Could not delete. Please try again.'}}}
+  if(p.id)$('#dl').onclick=async()=>{if(!confirm('Delete this post?'))return;try{await change(a=>a.filter(x=>x.id!==p.id));done=true;clearInterval(iv);LS.removeItem(DK(orig.id));write()}catch(x){$('#msg').textContent=x.message==='needsync'?'Tap Continue syncing at the top first, then delete.':'Could not delete. Please try again.'}}}
 function signin(msg){$('#side').innerHTML='';$('#mbtn').style.visibility='hidden';app.innerHTML=head('Ashley\'s Blog')+`<p class="sans" style="color:var(--mut)">${msg||'Private. Sign in to continue.'}</p><div class="row"><button class="pri" id="gs"><svg class="i" viewBox="0 0 24 24"><path d="M7 18.5h10.5a4 4 0 0 0 .6-7.95A6 6 0 0 0 6.5 9.6 4.5 4.5 0 0 0 7 18.5z"/></svg>${LS.getItem('blog.em')?'Continue':'Sign in with Google'}</button></div><div class="msg" id="msg"></div>`;
   $('#gs').onclick=async()=>{$('#msg').textContent='Opening Google';try{await token(true);CACHE=null;route()}catch(e){$('#msg').textContent=e.message==='offline'?'You appear to be offline.':'Sign-in did not finish. Please try again.'}}}
 let CALM=null;
@@ -452,12 +465,12 @@ async function custom(){try{await all()}catch(e){}let L={...LOOK},F={...DEFF,...
     try{await change(a=>{PROFILE={...PROFILE,look:L,fields,photoPos:POS,...(PHOTO?{photo:PHOTO}:{})};return a});setLook(L);side();$('#msg').textContent='Saved'}catch(x){$('#msg').textContent='Could not save. Please try again.'}};
   $('#crs').onclick=()=>{if(!confirm('Reset skin, accent, font and header to classic?'))return;L={};live();custom();$('#msg').textContent='Reset. Tap Save to keep it.'}}
 async function route(){if(!LS.getItem('blog.em')){signin();return}
-  try{await token(false)}catch(e){signin(e.message==='offline'?'You appear to be offline.':'Tap Continue to open your blog.');return}$('#mbtn').style.visibility='visible';
+  $('#mbtn').style.visibility='visible';if(!(tok&&Date.now()<tokExp-60000))needSync();
   const h=location.hash||'#/';let r='home';
   if(h.startsWith('#/page/'))home(h.slice(7));else if(h.startsWith('#/p/'))view(h.slice(4));else if(h.startsWith('#/tag/'))tagPage(decodeURIComponent(h.slice(6))),r='tags';else if(h==='#/tags')tags(),r='tags';
   else if(h==='#/archive')archive(),r='archive';else if(h==='#/write')write(),r='write';else if(h==='#/custom')custom(),r='custom';else home();
   side();document.querySelectorAll('.xbar a').forEach(a=>a.classList.toggle('cur',a.dataset.r===r));scrollTo(0,0)}
-addEventListener('hashchange',route);route();
+$('#syncb').onclick=resync;addEventListener('hashchange',route);route();
 if('serviceWorker' in navigator)navigator.serviceWorker.register('sw.js');
 </script>
 </body></html>
