@@ -141,7 +141,7 @@ a{color:var(--lnk)}
 .adjf img{width:100%;height:100%;object-fit:cover;pointer-events:none;user-select:none;-webkit-user-drag:none}
 .nudge{display:flex;gap:6px;justify-content:center;margin-top:8px;flex-wrap:wrap}.nudge button{padding:8px 12px}
 
-/* ---- 2026.11.01d refined layer ---- */
+/* ---- 2026.11.01e refined layer ---- */
 .wrap{max-width:1000px}
 .xhead{padding:44px 22px 30px;text-align:left}.xhead .brand{font:600 34px/1.15 Lora,Georgia,serif !important;letter-spacing:-.01em}
 .xbar{padding:9px 18px;gap:6px 18px;font-size:11px}.xbar a{padding:2px 2px;letter-spacing:.04em}
@@ -236,9 +236,22 @@ body:not([data-dv=line]) .full .entry::after,body:not([data-dv=line]) .entry.sol
 @font-face{font-family:"Courier Prime";src:url(fonts/cp-400-italic.woff2) format("woff2");font-weight:400;font-style:italic;font-display:swap}
 @font-face{font-family:"Courier Prime";src:url(fonts/cp-700-normal.woff2) format("woff2");font-weight:700;font-style:normal;font-display:swap}
 @font-face{font-family:"Courier Prime";src:url(fonts/cp-700-italic.woff2) format("woff2");font-weight:700;font-style:italic;font-display:swap}
-body.tw .entry .body,body.tw .full .body,body.tw .pvw{font-size:15px !important;line-height:1.75 !important;letter-spacing:0}
+body.tw .entry .body,body.tw .full .body,body.tw .bp-body,body.tw .pvw{font-size:15px !important;line-height:1.75 !important;letter-spacing:0}
 body.tw .body blockquote{font-size:15px !important}body.tw #bo{font-size:15px !important;line-height:1.7 !important}
-@media(min-width:761px){body.tw .entry .body,body.tw .full .body,body.tw .pvw,body.tw .body blockquote{font-size:16px !important}}
+@media(min-width:761px){body.tw .entry .body,body.tw .full .body,body.tw .bp-body,body.tw .pvw,body.tw .body blockquote{font-size:16px !important}}
+.bpost{max-width:680px;margin:0 auto;padding:4px 0 10px}
+.bp-date{font:600 11px/1.4 system-ui,sans-serif;letter-spacing:.14em;text-transform:uppercase;color:var(--mut);padding-bottom:10px;margin-bottom:18px;border-bottom:1px solid color-mix(in srgb,var(--line) 60%,transparent)}
+.bp-title{font:600 32px/1.2 Lora,Georgia,serif !important;color:var(--ttl,var(--fg)) !important;margin:0 0 8px !important;overflow-wrap:anywhere}
+.bp-meta{font:13px/1.5 system-ui,sans-serif;color:var(--mut);margin:0 0 26px}.bp-meta a,.bp-foot a{color:var(--lnk)}
+.bpost .cover,.bp-body img{display:block;max-width:100%;width:auto !important;max-height:80vh;height:auto;margin:22px auto 26px !important;border-radius:4px;box-shadow:none !important;border:0 !important}
+.bp-body p,.bp-body ul,.bp-body ol{margin:0 0 1.35em}.bp-body h3{font:600 20px/1.35 Lora,Georgia,serif;margin:1.6em 0 .6em;color:var(--ttl,var(--fg))}
+.bp-body blockquote{margin:1.6em 0 !important;padding:.5em 1.1em !important;background:color-mix(in srgb,var(--line) 18%,transparent);border-radius:0 6px 6px 0}
+.bp-body .vv{margin:1.4em 0;padding:.2em 0}.bp-cur{font:13px/1.6 system-ui,sans-serif;color:var(--mut);margin:26px 0 0}.bp-cur span{font-weight:600;color:var(--fg);margin-right:4px}
+.bp-foot{margin:34px 0 0;padding:14px 0;border-top:1px solid color-mix(in srgb,var(--line) 60%,transparent);border-bottom:1px solid color-mix(in srgb,var(--line) 60%,transparent);font:13px/1.9 system-ui,sans-serif;color:var(--mut)}
+.bp-foot .heart{font:13px system-ui,sans-serif;color:var(--lnk)}
+.bp-nav{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:10px;margin:16px 0 0;font:600 13px system-ui,sans-serif}.bp-nav a{color:var(--lnk);text-decoration:none;display:inline-flex;align-items:center;gap:4px}.bp-nav a:hover{text-decoration:underline}
+.bp-nav>:last-child{justify-self:end}.bp-nav>:nth-child(2){justify-self:center}
+@media(max-width:760px){.bp-title{font-size:27px !important}}
 </style></head><body data-t="system">
 <div class="wrap"><div class="xbar" id="mbtn"><nav class="xnav"><a href="#/" data-r="home">home</a><a href="#/write" data-r="write">write</a><a href="#/tags" data-r="tags">labels</a></nav><span class="xr"><a class="mnb" id="srb" href="#/search" data-r="search" aria-label="Search posts"><svg class="i" viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6"/><path d="M15 15l5 5"/></svg></a><button class="mnb" id="mnb" aria-label="Menu" aria-expanded="false" aria-controls="mnu"><svg class="i" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button></span>
 <div class="mnu" id="mnu" hidden><a href="#/custom" data-r="custom" class="mi"><svg class="i" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M12 4a8 8 0 0 0 0 16c1.5 0 2-1 2-2s-1-1.5-1-2.5 1-1.5 2-1.5h2a3 3 0 0 0 3-3"/></svg>Customize</a><a href="#/profile" data-r="profile" class="mi"><svg class="i" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c1-4 4-6 8-6s7 2 8 6"/></svg>Profile</a><a href="#/archive" data-r="archive" class="mi"><svg class="i" viewBox="0 0 24 24"><path d="M3.5 5h17v4h-17zM5 9v10h14V9M10 13h4"/></svg>Blog Archive</a><a href="#/year" data-r="year" class="mi"><svg class="i" viewBox="0 0 24 24"><path d="M4 6h16v14H4zM4 10h16M8 3v5M16 3v5"/><path d="M8 14h2M12 14h2M16 14h0M8 17h2M12 17h2"/></svg>Year at a glance</a>
@@ -249,7 +262,7 @@ body.tw .body blockquote{font-size:15px !important}body.tw #bo{font-size:15px !i
 <div class="syncbar sans" id="syncbar" hidden><span id="synct">Showing your saved copy.</span><button id="syncb"><svg class="i" viewBox="0 0 24 24"><path d="M20 12a8 8 0 1 1-2.3-5.6M20 4v5h-5"/></svg>Continue syncing</button></div>
 <div class="xhead" id="xhead"><a class="brand" href="#/">Ashley's Blog</a><div class="xsub" id="xsub"></div></div>
 <div class="cols"><main id="app"></main><aside id="side"></aside></div>
-<footer class="foot"><div>Ashley's Blog &middot; est. 2026 &middot; Version 2026.11.01d</div></footer></div>
+<footer class="foot"><div>Ashley's Blog &middot; est. 2026 &middot; Version 2026.11.01e</div></footer></div>
 <script>
 /* ===================================================== */
 
@@ -430,8 +443,22 @@ async function dayPage(k){try{const d=(await pub()).filter(p=>DKEY(p.created_at)
 async function tagPage(t){try{const d=(await pub()).filter(p=>p.tags.includes(t));app.innerHTML=head(t,d.length+(d.length===1?' post':' posts')+' &middot; <a class="more" href="#/tags">All categories</a>')+d.map(card).join('')}catch(e){app.innerHTML=fail}}
 async function tags(){try{const c={};(await pub()).forEach(p=>p.tags.forEach(t=>c[t]=(c[t]||0)+1));const k=Object.keys(c).sort((a,b)=>a.localeCompare(b));
   app.innerHTML=head('Categories')+(k.length?'<div class="list">'+k.map(t=>`<a class="it" href="#/tag/${encodeURIComponent(t)}"><span>${esc(t)}</span><span class="cnt" style="flex:none">${c[t]}</span></a>`).join('')+'</div>':'<div class="empty">No categories yet.</div>')}catch(e){app.innerHTML=fail}}
-async function view(id){let data=null;try{data=(await all()).find(p=>p.id===id)}catch(e){}
-  const BK=`<a class="bkh" href="#/" data-bk>${PREV} Back to home</a>`;app.innerHTML=(data?`<div class="postpage"><div class="vtop">${BK}</div>`+entry(data,true)+`<div class="vbot">${BK}</div></div>`:'<div class="empty">Entry not found.</div>');app.querySelectorAll('[data-bk]').forEach(a=>a.onclick=e=>{if(BACKOK){e.preventDefault();history.back()}});scrollTo(0,0)}
+async function view(id){let data=null,list=[];try{const A=await all();data=A.find(p=>p.id===id);list=A.filter(p=>p.published)}catch(e){}
+  if(!data){app.innerHTML='<div class="empty">Entry not found.</div><p><a class="bkh" href="#/">'+PREV+' Back to home</a></p>';return}
+  const p=data,k=list.findIndex(x=>x.id===p.id),newer=k>0?list[k-1]:null,older=k>=0&&k<list.length-1?list[k+1]:null;
+  const labs=(p.tags||[]).map(t=>`<a href="#/tag/${encodeURIComponent(t)}">${esc(t)}</a>`).join(', ');
+  const who=esc((typeof PF==='function'&&PF().name)||PROFILE.name||'Ashley');
+  app.innerHTML=`<article class="bpost">
+  <div class="bp-date">${LONG(p.created_at)}</div>
+  <h1 class="bp-title">${esc(p.title)||'Untitled'}${p.published?'':' <span class="tag">Draft</span>'}</h1>
+  <div class="bp-meta">${rt(p.body)}${labs?' &middot; '+labs:''}</div>
+  ${p.cover?coverTag(p.cover):''}
+  <div class="body bp-body">${render(p.body)}</div>
+  ${p.mood||p.listening?`<div class="bp-cur">${p.mood?`<div><span>Mood</span> ${esc(p.mood)}</div>`:''}${p.listening?`<div><span>Listening to</span> ${esc(p.listening)}</div>`:''}</div>`:''}
+  <footer class="bp-foot"><div>Posted by ${who} at <a href="#/post/${p.id}">${TIME(p.created_at)}</a> <span class="s">&middot;</span> <button class="heart${p.hearts?' on':''}" data-h="${p.id}" aria-label="Heart"><svg class="i" style="width:11px;height:11px" viewBox="0 0 24 24"><path d="M12 20s-7-4.5-7-10a4 4 0 0 1 7-2.5A4 4 0 0 1 19 10c0 5.5-7 10-7 10z"/></svg>${p.hearts?p.hearts+' eprops':'add eprops'}</button></div>${labs?`<div>Labels: ${labs}</div>`:''}</footer>
+  <nav class="bp-nav">${newer?`<a href="#/post/${newer.id}">${PREV} Newer Post</a>`:'<span></span>'}<a href="#/" data-bk>Back to home</a>${older?`<a href="#/post/${older.id}">Older Post ${NEXT}</a>`:'<span></span>'}</nav>
+  </article>`;
+  app.querySelectorAll('[data-bk]').forEach(a=>a.onclick=e=>{if(BACKOK){e.preventDefault();history.back()}});scrollTo(0,0)}
 let HASTAGS=true,ALL=[];
 async function write(){let error=null;try{ALL=await all()}catch(x){error=x;ALL=[]}
   
