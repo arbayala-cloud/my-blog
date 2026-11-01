@@ -141,7 +141,7 @@ a{color:var(--lnk)}
 .adjf img{width:100%;height:100%;object-fit:cover;pointer-events:none;user-select:none;-webkit-user-drag:none}
 .nudge{display:flex;gap:6px;justify-content:center;margin-top:8px;flex-wrap:wrap}.nudge button{padding:8px 12px}
 
-/* ---- 2026.11.01e refined layer ---- */
+/* ---- 2026.11.01f refined layer ---- */
 .wrap{max-width:1000px}
 .xhead{padding:44px 22px 30px;text-align:left}.xhead .brand{font:600 34px/1.15 Lora,Georgia,serif !important;letter-spacing:-.01em}
 .xbar{padding:9px 18px;gap:6px 18px;font-size:11px}.xbar a{padding:2px 2px;letter-spacing:.04em}
@@ -262,7 +262,7 @@ body.tw .body blockquote{font-size:15px !important}body.tw #bo{font-size:15px !i
 <div class="syncbar sans" id="syncbar" hidden><span id="synct">Showing your saved copy.</span><button id="syncb"><svg class="i" viewBox="0 0 24 24"><path d="M20 12a8 8 0 1 1-2.3-5.6M20 4v5h-5"/></svg>Continue syncing</button></div>
 <div class="xhead" id="xhead"><a class="brand" href="#/">Ashley's Blog</a><div class="xsub" id="xsub"></div></div>
 <div class="cols"><main id="app"></main><aside id="side"></aside></div>
-<footer class="foot"><div>Ashley's Blog &middot; est. 2026 &middot; Version 2026.11.01e</div></footer></div>
+<footer class="foot"><div>Ashley's Blog &middot; est. 2026 &middot; Version 2026.11.01f</div></footer></div>
 <script>
 /* ===================================================== */
 
@@ -329,7 +329,34 @@ function block(p){const m=p.match(/^!\[(.*?)\]\(((?:https:\/\/|drive:)[^\s)]+)\)
 function verses(p,I){const L=p.split('\n');const vs=L.filter(l=>/^\d{1,3}\s?[A-Za-z“"‘'(*_]/.test(l)).length;
   if(vs>=2&&vs>=L.length*0.6)return '<span class="vv">'+L.map(l=>{const m=l.match(/^(\d{1,3})\s?(.*)$/);return m&&/^[A-Za-z“"‘'(*_]/.test(m[2])?`<span class="vl"><sup class="vn">${m[1]}</sup>${I(m[2])}</span>`:`<span class="vl">${I(l)}</span>`}).join('')+'</span>';
   return I(p).replace(/\n/g,'<br>')}
-function render(b){return clean(b).split(/\n{2,}/).map(p=>block(p.trim())).join('')}
+const SUPD={'⁰':'0','¹':'1','²':'2','³':'3','⁴':'4','⁵':'5','⁶':'6','⁷':'7','⁸':'8','⁹':'9'};
+function normV(t){return t.replace(/^[ \t]*(?:[1-3] ?)?[A-Z][a-z]{1,12}\.? \d{1,3}:(\d{1,3})(?=[ \t]+\S)/gm,'$1').replace(/[⁰¹²³⁴⁵⁶⁷⁸⁹]+/g,m=>' '+[...m].map(c=>SUPD[c]).join('')+' ').replace(/\[([a-z]{1,2})\](?!\()/g,'').replace(/[\[(](\d{1,3})[\])](?!\()/g,' $1 ').replace(/[ \t]{2,}/g,' ').replace(/ +\n/g,'\n').replace(/\n +/g,'\n')}
+function vChains(t){const C=[],re=/(\d{1,3})(?=[ \t]*[*_“"‘'(]*[A-Za-z])/g;let m;
+  while((m=re.exec(t))){const i=m.index;if(i>0&&/[\d:.\-–\w]/.test(t[i-1]))continue;let j=i-1;while(j>=0&&(t[j]===' '||t[j]==='\t'))j--;
+    const ls=t.lastIndexOf('\n',i-1)+1,line=t.slice(ls,i);if(/^\s*(#|!\[)/.test(line))continue;
+    let start=j<0||t[j]==='\n'||/^\s*>?\s*$/.test(line);if(!start&&!/[.,;:!?'"”’)\]*_]/.test(t[j]))continue;C.push({i,v:+m[1],ls:start,len:m[1].length})}
+  const out=[];let from=0;
+  for(;;){const K=C.filter(c=>c.i>=from);if(!K.length)break;const best=K.map(()=>1),prev=K.map(()=>-1);let bi=-1;
+    for(let a=0;a<K.length;a++){for(let b=0;b<a;b++)if(K[b].v===K[a].v-1&&best[b]+1>=best[a]){best[a]=best[b]+1;prev[a]=b}if(bi<0||best[a]>best[bi])bi=a}
+    const ch=[];for(let a=bi;a>=0;a=prev[a])ch.unshift(K[a]);
+    const ok=ch.length>=3||(ch.length===2&&ch.every(c=>c.ls));if(!ok)break;
+    if(ch[0].v===2){const k=K.indexOf(ch[0]);const before=K.slice(0,k).filter(c=>c.ls&&c.v!==1).pop();if(before&&!t.slice(before.i,ch[0].i).includes('\n\n'))ch.unshift({...before,v:1,chap:before.v})}
+    out.push(ch);const last=ch[ch.length-1];const e=t.indexOf('\n\n',last.i);from=e<0?t.length:e}
+  return out}
+function render(b){const t=normV(clean(b));const chains=vChains(t);const plainBlocks=x=>x.split(/\n{2,}/).map(p=>p.trim()).filter(Boolean).map(p=>block(p)).join('');
+  if(!chains.length)return clean(b).split(/\n{2,}/).map(p=>block(p.trim())).join('');
+  const I=x=>inl(esc(x)).replace(IMGRE,(z,a,u)=>imgTag(u,a));let out='',cur=0;
+  for(const ch of chains){out+=plainBlocks(t.slice(cur,ch[0].i).replace(/^\s*>\s*$/gm,''));let V=[];
+    const flush=()=>{if(V.length)out+='<p class="vp"><span class="vv">'+V.join('')+'</span></p>';V=[]};
+    for(let k=0;k<ch.length;k++){const c=ch[k],end=k+1<ch.length?ch[k+1].i:t.length;let seg=t.slice(c.i,end);seg=seg.replace(/^\d{1,3}[ \t]*/,'');
+      const br=seg.indexOf('\n\n');let rest='';if(br>=0){rest=seg.slice(br);seg=seg.slice(0,br)}
+      if(k+1<ch.length&&rest){const r2=rest.replace(/[\s>]+$/,'');rest=r2.trim()?r2:''}
+      seg=seg.replace(/^\s*>\s?/gm,'').replace(/\s?\([A-Z]{1,2}\)(?=[\s,.;:!?]|$)/g,'').replace(/[ \t]*\n[ \t]*/g,' ').replace(/\s+([,.;:!?])/g,'$1').trim();
+      if(seg)V.push(`<span class="vl"><sup class="vn">${c.v}</sup>${I(seg)}</span>`);
+      if(k+1===ch.length){cur=c.i+(c.len)+(br>=0?br:t.length);if(br<0)cur=t.length;else cur=t.indexOf('\n\n',c.i)}
+      else if(rest){flush();out+=plainBlocks(rest)}}
+    flush()}
+  out+=plainBlocks(t.slice(cur));return out}
 const plain=b=>clean(b).replace(/!\[.*?\]\(.*?\)/g,'').replace(/\[([^\]]+)\]\([^)]+\)/g,'$1').replace(/\{(center|right|left)\}/g,'').replace(/[*#>_]/g,'').replace(/\s+/g,' ').trim();
 const rt=b=>{const w=plain(b).split(/\s+/).filter(x=>/[A-Za-z0-9]/.test(x)).length;return Math.max(1,Math.round(w/200))+' min read'};
 const coverOf=p=>p.cover||(String(p.body).match(/!\[.*?\]\(((?:https:\/\/|drive:)[^\s)]+)\)/)||[])[1];
