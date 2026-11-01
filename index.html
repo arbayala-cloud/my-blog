@@ -141,7 +141,7 @@ a{color:var(--lnk)}
 .adjf img{width:100%;height:100%;object-fit:cover;pointer-events:none;user-select:none;-webkit-user-drag:none}
 .nudge{display:flex;gap:6px;justify-content:center;margin-top:8px;flex-wrap:wrap}.nudge button{padding:8px 12px}
 
-/* ---- 2026.10.31w refined layer ---- */
+/* ---- 2026.10.31x refined layer ---- */
 .wrap{max-width:1000px}
 .xhead{padding:44px 22px 30px;text-align:left}.xhead .brand{font:600 34px/1.15 Lora,Georgia,serif !important;letter-spacing:-.01em}
 .xbar{padding:9px 18px;gap:6px 18px;font-size:11px}.xbar a{padding:2px 2px;letter-spacing:.04em}
@@ -210,9 +210,10 @@ body:not([data-dv=line]) .full .entry::after,body:not([data-dv=line]) .entry.sol
 .gg .g1{background:color-mix(in srgb,var(--lnk) 45%,var(--bg))}.gg .g2{background:color-mix(in srgb,var(--lnk) 72%,var(--bg))}.gg .g3{background:var(--lnk)}
 .gg .td{outline:1.5px solid var(--fg);outline-offset:0}.gg a:hover,.gg a:focus{outline:1.5px solid var(--fg)}
 .gg span:not(.g0){background:none}.gt{font-size:12px;color:var(--mut);margin-top:10px;text-align:center}
+.yv{max-width:560px}.yv .gms{gap:16px 14px}.yv .gml{font-size:12px}.yv .gg{gap:3px}.yv .gy{font-size:16px;margin-bottom:14px}.yv .gt{font-size:14px;margin-top:16px}.yx .i{width:22px !important;height:22px !important}
 </style></head><body data-t="system">
 <div class="wrap"><div class="xbar" id="mbtn"><nav class="xnav"><a href="#/" data-r="home">home</a><a href="#/write" data-r="write">write</a><a href="#/tags" data-r="tags">labels</a><a href="#/archive" data-r="archive">archives</a></nav><span class="xr"><a class="mnb" id="srb" href="#/search" data-r="search" aria-label="Search posts"><svg class="i" viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6"/><path d="M15 15l5 5"/></svg></a><button class="mnb" id="mnb" aria-label="Menu" aria-expanded="false" aria-controls="mnu"><svg class="i" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button></span>
-<div class="mnu" id="mnu" hidden><a href="#/custom" data-r="custom" class="mi"><svg class="i" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M12 4a8 8 0 0 0 0 16c1.5 0 2-1 2-2s-1-1.5-1-2.5 1-1.5 2-1.5h2a3 3 0 0 0 3-3"/></svg>Customize</a>
+<div class="mnu" id="mnu" hidden><a href="#/custom" data-r="custom" class="mi"><svg class="i" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M12 4a8 8 0 0 0 0 16c1.5 0 2-1 2-2s-1-1.5-1-2.5 1-1.5 2-1.5h2a3 3 0 0 0 3-3"/></svg>Customize</a><a href="#/year" data-r="year" class="mi"><svg class="i" viewBox="0 0 24 24"><path d="M4 6h16v14H4zM4 10h16M8 3v5M16 3v5"/><path d="M8 14h2M12 14h2M16 14h0M8 17h2M12 17h2"/></svg>Year at a glance</a>
 <div class="mlab">Theme</div><div class="seg" id="seg"><button data-v="light">Light</button><button data-v="dark">Dark</button><button data-v="system">System</button></div>
 <button class="mi" id="mbk"><svg class="i" viewBox="0 0 24 24"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg>Download backup</button>
 <button class="mi" id="mso"><svg class="i" viewBox="0 0 24 24"><path d="M10 5H5v14h5M14 8l4 4-4 4M18 12H9"/></svg>Sign out</button>
@@ -220,7 +221,7 @@ body:not([data-dv=line]) .full .entry::after,body:not([data-dv=line]) .entry.sol
 <div class="syncbar sans" id="syncbar" hidden><span id="synct">Showing your saved copy.</span><button id="syncb"><svg class="i" viewBox="0 0 24 24"><path d="M20 12a8 8 0 1 1-2.3-5.6M20 4v5h-5"/></svg>Continue syncing</button></div>
 <div class="xhead" id="xhead"><a class="brand" href="#/">Ashley's Blog</a><div class="xsub" id="xsub"></div></div>
 <div class="cols"><main id="app"></main><aside id="side"></aside></div>
-<footer class="foot"><div>Ashley's Blog &middot; est. 2026 &middot; Version 2026.10.31w</div></footer></div>
+<footer class="foot"><div>Ashley's Blog &middot; est. 2026 &middot; Version 2026.10.31x</div></footer></div>
 <script>
 /* ===================================================== */
 
@@ -384,6 +385,9 @@ function glance(d,y){const by={};d.forEach(p=>{const k=DKEY(p.created_at);(by[k]
       c+=ps.length?`<a href="${ps.length===1?'#/p/'+ps[0].id:'#/day/'+k}" class="g${lv}${t}" title="${lab}: ${ps.length} post${ps.length>1?'s':''}" aria-label="${lab}, ${ps.length} post${ps.length>1?'s':''}"></a>`:`<span class="g0${t}"${t?' title="Today"':''}></span>`}
     return `<div class="gm"><div class="gml">${new Date(y,m,1).toLocaleDateString('en-US',{month:'short'})}</div><div class="gg">${c}</div></div>`}).join('');
   return `<div class="gy"><button class="gyb" data-gy="-1" aria-label="Previous year" ${y<=minY?'disabled':''}><svg class="i" viewBox="0 0 24 24"><path d="M15 6l-6 6 6 6"/></svg></button><b>${y}</b><button class="gyb" data-gy="1" aria-label="Next year" ${y>=new Date().getFullYear()?'disabled':''}><svg class="i" viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></svg></button></div><div class="gms">${M}</div><div class="gt">${days} day${days===1?'':'s'} written in ${y}</div>`}
+async function yearPage(){let d=[];try{d=await pub()}catch(e){}
+  app.innerHTML=`<div class="yv"><div class="row" style="margin:0 0 14px;justify-content:space-between;align-items:center"><h1 style="margin:0;font-size:28px">Year at a glance</h1><button class="gyb yx" id="yx" aria-label="Close"><svg class="i" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div><div id="gl">${glance(d,GY)}</div></div>`;
+  $('#yx').onclick=()=>history.length>1?history.back():(location.hash='#/')}
 async function dayPage(k){try{const d=(await pub()).filter(p=>DKEY(p.created_at)===k);const lab=new Date(k+'T12:00').toLocaleDateString('en-US',{weekday:'long',month:'long',day:'numeric',year:'numeric'});app.innerHTML=head(lab,d.length+(d.length===1?' post':' posts'))+d.map(card).join('')}catch(e){app.innerHTML=fail}}
 async function tagPage(t){try{const d=(await pub()).filter(p=>p.tags.includes(t));app.innerHTML=head(t,d.length+(d.length===1?' post':' posts')+' &middot; <a class="more" href="#/tags">All categories</a>')+d.map(card).join('')}catch(e){app.innerHTML=fail}}
 async function tags(){try{const c={};(await pub()).forEach(p=>p.tags.forEach(t=>c[t]=(c[t]||0)+1));const k=Object.keys(c).sort((a,b)=>a.localeCompare(b));
@@ -462,7 +466,6 @@ async function side(){applyLook();const S=$('#side');if(!LS.getItem('blog.em')){
   const ys=Object.keys(Y).sort((a,b)=>b-a);
   const archH=ys.length?ys.map((y,yi)=>{const ms=Y[y],cnt=Object.values(ms).reduce((t,a)=>t+a.length,0);return `<details class="ya" ${yi===0?'open':''}><summary>${y} <span class="cnt">(${cnt})</span></summary>${Object.entries(ms).map(([m,ps],mi)=>`<details class="ma" ${yi===0&&mi===0?'open':''}><summary>${m} <span class="cnt">(${ps.length})</span></summary><ul>${ps.map(p=>`<li><a href="#/p/${p.id}">${esc(p.title||LONG(p.created_at))}</a></li>`).join('')}</ul></details>`).join('')}</details>`}).join(''):'<span class="mutd">No posts yet</span>';
   const labs=Object.keys(c).sort();
-  const pf=S.querySelector('.mod.pf');if(pf){pf.insertAdjacentHTML('afterend',`<div class="mod"><h4>Year at a glance</h4><div class="in" id="gl">${glance(d,GY)}</div></div>`)}
   S.innerHTML=S.innerHTML.replace(/<div class="mod"><h4>Archives<\/h4>[\s\S]*$/,'')+`<div class="mod"><h4>Blog Archive</h4><div class="in arch">${archH}</div></div>
   <div class="mod"><h4>Labels</h4><div class="in">${labs.length?'<ul class="labs">'+labs.map(t=>`<li><a href="#/tag/${encodeURIComponent(t)}">${esc(t)}</a> <span class="cnt">(${c[t]})</span></li>`).join('')+'</ul>':'<span class="mutd">No labels yet</span>'}</div></div>`;
 }
@@ -517,10 +520,10 @@ async function custom(){try{await all()}catch(e){}let L={...LOOK},F={...DEFF,...
 async function route(){if(!LS.getItem('blog.em')){signin();return}
   $('#mbtn').style.visibility='visible';if(!(tok&&Date.now()<tokExp-60000))needSync();
   const h=location.hash||'#/';let r='home';
-  if(h.startsWith('#/page/'))home(h.slice(7));else if(h.startsWith('#/p/'))view(h.slice(4));else if(h.startsWith('#/day/'))dayPage(h.slice(6));else if(h.startsWith('#/tag/'))tagPage(decodeURIComponent(h.slice(6))),r='tags';else if(h==='#/tags')tags(),r='tags';
+  if(h.startsWith('#/page/'))home(h.slice(7));else if(h.startsWith('#/p/'))view(h.slice(4));else if(h==='#/year')yearPage(),r='year';else if(h.startsWith('#/day/'))dayPage(h.slice(6));else if(h.startsWith('#/tag/'))tagPage(decodeURIComponent(h.slice(6))),r='tags';else if(h==='#/tags')tags(),r='tags';
   else if(h==='#/archive')archive(),r='archive';else if(h==='#/write')write(),r='write';else if(h==='#/search')search(),r='search';else if(h==='#/custom')custom(),r='custom';else home();
   side();document.querySelectorAll('.xbar a').forEach(a=>a.classList.toggle('cur',a.dataset.r===r));scrollTo(0,0)}
-$('#syncb').onclick=resync;$('#side').addEventListener('click',async e=>{const b=e.target.closest('[data-gy]');if(!b)return;GY+=+b.dataset.gy;let d=[];try{d=await pub()}catch(x){}const g=$('#gl');if(g)g.innerHTML=glance(d,GY)});addEventListener('hashchange',route);route();
+$('#syncb').onclick=resync;app.addEventListener('click',async e=>{const b=e.target.closest('[data-gy]');if(!b)return;GY+=+b.dataset.gy;let d=[];try{d=await pub()}catch(x){}const g=$('#gl');if(g)g.innerHTML=glance(d,GY)});addEventListener('hashchange',route);route();
 if('serviceWorker' in navigator)navigator.serviceWorker.register('sw.js');
 </script>
 </body></html>
