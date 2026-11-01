@@ -141,7 +141,7 @@ a{color:var(--lnk)}
 .adjf img{width:100%;height:100%;object-fit:cover;pointer-events:none;user-select:none;-webkit-user-drag:none}
 .nudge{display:flex;gap:6px;justify-content:center;margin-top:8px;flex-wrap:wrap}.nudge button{padding:8px 12px}
 
-/* ---- 2026.10.31q refined layer ---- */
+/* ---- 2026.10.31r refined layer ---- */
 .wrap{max-width:1000px}
 .xhead{padding:44px 22px 30px;text-align:left}.xhead .brand{font:600 34px/1.15 Lora,Georgia,serif !important;letter-spacing:-.01em}
 .xbar{padding:9px 18px;gap:6px 18px;font-size:11px}.xbar a{padding:2px 2px;letter-spacing:.04em}
@@ -171,11 +171,25 @@ a{color:var(--lnk)}
 .seg button.on{background:var(--lnk);color:var(--card);border-color:var(--lnk)}
 .dnote{font-size:14px;color:var(--mut);border:1px solid var(--line);border-radius:8px;padding:8px 12px;margin:0 0 12px;display:flex;gap:10px;align-items:center;flex-wrap:wrap}.dnote button{padding:5px 10px;font-size:13px}
 .saved{font-size:12px;color:var(--mut);opacity:0;transition:opacity .4s}.saved.on{opacity:1}
+.xbar{position:relative;flex-wrap:nowrap !important;justify-content:space-between}
+.xnav{display:flex;align-items:center;gap:4px 18px;min-width:0;overflow:hidden}.xnav a{white-space:nowrap}
+.mnb{background:none;border:0;color:var(--bart,#fff);padding:4px 6px;margin:0;display:inline-flex;align-items:center;cursor:pointer;border-radius:4px;min-height:30px}.mnb:hover,.mnb[aria-expanded=true]{background:rgba(255,255,255,.18)}.mnb .i{width:20px;height:20px}
+.mnu{position:absolute;right:8px;top:calc(100% + 4px);z-index:50;background:var(--card);color:var(--fg);border:1px solid var(--line);border-radius:10px;box-shadow:0 8px 24px rgba(0,0,0,.18);padding:6px;width:230px;font:14px var(--sans,system-ui,sans-serif);letter-spacing:0;text-align:left}
+.mnu .mi{display:flex;gap:10px;align-items:center;width:100%;padding:9px 10px;border:0;background:none;color:var(--fg) !important;font:inherit;text-decoration:none !important;border-radius:6px;margin:0;cursor:pointer;font-weight:normal}.mnu .mi:hover,.mnu .mi.cur{background:var(--chip,rgba(0,0,0,.06));padding:9px 10px}
+.mlab{font-size:11px;color:var(--mut);text-transform:uppercase;letter-spacing:.06em;padding:8px 10px 4px;border-top:1px solid var(--line);margin-top:4px}
+.mnu .seg{margin:0 6px 6px;display:flex}.mnu .seg button{flex:1;padding:6px 0;font-size:13px}
+.msync{font-size:12px;color:var(--mut);padding:8px 10px 4px;border-top:1px solid var(--line);margin-top:4px;line-height:1.4;overflow-wrap:anywhere}
+@media(max-width:380px){.xnav{gap:4px 12px}}
 </style></head><body data-t="system">
-<div class="wrap"><div class="xbar" id="mbtn"><span class="xlogo"><svg class="i" style="width:13px;height:13px" viewBox="0 0 24 24"><path d="M12 3c3 3 4.5 6 4.5 9L12 21 7.5 12C7.5 9 9 6 12 3z"/></svg> my blog</span><a href="#/" data-r="home">home</a><a href="#/tags" data-r="tags">categories</a><a href="#/archive" data-r="archive">archives</a><a href="#/write" data-r="write">write</a><a href="#/custom" data-r="custom">customize</a></div>
+<div class="wrap"><div class="xbar" id="mbtn"><nav class="xnav"><a href="#/" data-r="home">home</a><a href="#/write" data-r="write">write</a><a href="#/tags" data-r="tags">labels</a><a href="#/archive" data-r="archive">archives</a></nav><button class="mnb" id="mnb" aria-label="Menu" aria-expanded="false" aria-controls="mnu"><svg class="i" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+<div class="mnu" id="mnu" hidden><a href="#/custom" data-r="custom" class="mi"><svg class="i" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M12 4a8 8 0 0 0 0 16c1.5 0 2-1 2-2s-1-1.5-1-2.5 1-1.5 2-1.5h2a3 3 0 0 0 3-3"/></svg>Customize</a>
+<div class="mlab">Theme</div><div class="seg" id="seg"><button data-v="light">Light</button><button data-v="dark">Dark</button><button data-v="system">System</button></div>
+<button class="mi" id="mbk"><svg class="i" viewBox="0 0 24 24"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg>Download backup</button>
+<button class="mi" id="mso"><svg class="i" viewBox="0 0 24 24"><path d="M10 5H5v14h5M14 8l4 4-4 4M18 12H9"/></svg>Sign out</button>
+<div class="msync" id="msync"></div></div></div>
 <div class="xhead" id="xhead"><a class="brand" href="#/">Ashley's Blog</a><div class="xsub" id="xsub"></div></div>
 <div class="cols"><main id="app"></main><aside id="side"></aside></div>
-<footer class="foot"><div class="seg" id="seg"><button data-v="light">Light</button><button data-v="dark">Dark</button><button data-v="system">System</button></div><div>Ashley's Blog &middot; est. 2026 &middot; Version 2026.10.31q</div></footer></div>
+<footer class="foot"><div>Ashley's Blog &middot; est. 2026 &middot; Version 2026.10.31r</div></footer></div>
 <script>
 /* ===================================================== */
 
@@ -274,6 +288,12 @@ function setLook(L,save){LOOK=L;LS.setItem('blog.look',JSON.stringify(L));applyL
 applyLook();
 function setTheme(v){document.body.dataset.t=v;localStorage.blogTheme=v;document.querySelectorAll('#seg button').forEach(b=>b.classList.toggle('on',b.dataset.v===v));
   const dark=v==='dark'||(v==='system'&&matchMedia('(prefers-color-scheme: dark)').matches);document.querySelector('meta[name=theme-color]').content=dark?'#000000':'#ffffff'}
+(()=>{const b=$('#mnb'),m=$('#mnu');const shut=()=>{m.hidden=true;b.setAttribute('aria-expanded','false')};
+  b.onclick=e=>{e.stopPropagation();const show=m.hidden;m.hidden=!show;b.setAttribute('aria-expanded',String(show));if(show)$('#msync').innerHTML=navigator.onLine?`<b>Synced with Google Drive</b><br>${esc(LS.getItem('blog.em')||'')}`:'<b>Offline</b><br>Changes will sync when you reconnect'};
+  document.addEventListener('click',e=>{if(!m.hidden&&!m.contains(e.target)&&e.target!==b)shut()});document.addEventListener('keydown',e=>{if(e.key==='Escape')shut()});addEventListener('hashchange',shut);
+  m.addEventListener('click',e=>{if(e.target.closest('a.mi'))shut()});
+  $('#mbk').onclick=async()=>{shut();try{const P=await all();const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([JSON.stringify({exported:new Date().toISOString(),posts:P},null,2)],{type:'application/json'}));a.download='blog-backup-'+new Date().toLocaleDateString('en-CA')+'.json';a.click()}catch(x){alert('Could not download right now. Please try again.')}};
+  $('#mso').onclick=()=>{shut();if(!confirm('Sign out of your blog on this device?'))return;try{google.accounts.oauth2.revoke(tok,()=>{})}catch(e){}dropTok();['blog.em','blog.fid','blog.cache'].forEach(k=>LS.removeItem(k));CACHE=null;location.hash='#/';route()}})();
 setTheme(localStorage.blogTheme||'system');$('#seg').onclick=e=>{if(e.target.dataset.v)setTheme(e.target.dataset.v)};
 matchMedia('(prefers-color-scheme: dark)').addEventListener('change',()=>setTheme(localStorage.blogTheme||'system'));
 function norm(p){const m=String(p.body||'').match(/^<!--tags:(.*?)-->\n?/);return {...p,tags:m?m[1].split(',').map(s=>s.trim()).filter(Boolean):(Array.isArray(p.tags)?p.tags:[]),body:m?p.body.slice(m[0].length):(p.body||'')}}
@@ -312,12 +332,12 @@ async function write(){let error=null;try{ALL=await all()}catch(x){error=x;ALL=[
   
   app.innerHTML=`<div class="row" style="margin:0 0 10px;justify-content:space-between"><h1 style="margin:0;font-size:34px">Your posts</h1><button class="pri" id="nw"><svg class="i" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>New post</button></div>
   ${getDraft()?'<div class="dnote sans">You have an unfinished new post. <button id="cd">Continue writing</button></div>':''}<div class="list">${error?'<div class="msg">Could not load your posts. Check your connection.</div>':(ALL.map(p=>`<div class="it"><span>${esc(p.title)||'Untitled'}${p.published?'':'<span class="tag">Draft</span>'}<br><small class="date">${fmt(p.created_at)}</small></span><button data-e="${p.id}">Edit</button></div>`).join('')||'<div class="empty">No posts yet.</div>')}</div>
-  <div class="row"><button id="bk"><svg class="i" viewBox="0 0 24 24"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg>Download all posts</button><label class="btn" style="margin:0">Set profile photo<input type="file" accept="image/*" id="pp" hidden></label><button id="so">Sign out</button></div>
+  <div class="row"><label class="btn" style="margin:0">Set profile photo<input type="file" accept="image/*" id="pp" hidden></label></div>
 `;
   $('#nw').onclick=()=>edit();if($('#cd'))$('#cd').onclick=()=>edit();
-  $('#pp').onchange=async e=>{const f=e.target.files[0];if(!f)return;try{const id=await mpUpload({name:'profile-'+Date.now(),parents:['appDataFolder']},f,f.type||'application/octet-stream');await change(a=>{PROFILE={...PROFILE,photo:'drive:'+id};return a});side()}catch(x){alert('Could not save the photo. Please try again.')}};$('#so').onclick=()=>{if(!confirm('Sign out of your blog on this device?'))return;try{google.accounts.oauth2.revoke(tok,()=>{})}catch(e){}dropTok();['blog.em','blog.fid','blog.cache'].forEach(k=>LS.removeItem(k));CACHE=null;location.hash='#/';route()};
+  $('#pp').onchange=async e=>{const f=e.target.files[0];if(!f)return;try{const id=await mpUpload({name:'profile-'+Date.now(),parents:['appDataFolder']},f,f.type||'application/octet-stream');await change(a=>{PROFILE={...PROFILE,photo:'drive:'+id};return a});side()}catch(x){alert('Could not save the photo. Please try again.')}};if($('#so'))$('#so').onclick=()=>{if(!confirm('Sign out of your blog on this device?'))return;try{google.accounts.oauth2.revoke(tok,()=>{})}catch(e){}dropTok();['blog.em','blog.fid','blog.cache'].forEach(k=>LS.removeItem(k));CACHE=null;location.hash='#/';route()};
   app.querySelectorAll('[data-e]').forEach(b=>b.onclick=()=>edit(ALL.find(p=>p.id===b.dataset.e)));
-  $('#bk').onclick=()=>{const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([JSON.stringify({exported:new Date().toISOString(),posts:ALL},null,2)],{type:'application/json'}));a.download='blog-backup-'+new Date().toISOString().slice(0,10)+'.json';a.click()}}
+  if($('#bk'))$('#bk').onclick=()=>{const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([JSON.stringify({exported:new Date().toISOString(),posts:ALL},null,2)],{type:'application/json'}));a.download='blog-backup-'+new Date().toLocaleDateString('en-CA')+'.json';a.click()}}
 const DK=id=>'blog.draft.'+(id||'new');
 function getDraft(id){try{return JSON.parse(LS.getItem(DK(id))||'null')}catch(e){return null}}
 function edit(p,fresh){p=p||{title:'',body:'',published:true,tags:[]};const orig=p;const dr=fresh?null:getDraft(p.id);if(dr)p={...p,...dr.d};let COVER=p.cover||'';let T=[...(p.tags||[])];
