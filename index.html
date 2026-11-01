@@ -141,7 +141,7 @@ a{color:var(--lnk)}
 .adjf img{width:100%;height:100%;object-fit:cover;pointer-events:none;user-select:none;-webkit-user-drag:none}
 .nudge{display:flex;gap:6px;justify-content:center;margin-top:8px;flex-wrap:wrap}.nudge button{padding:8px 12px}
 
-/* ---- 2026.11.01c refined layer ---- */
+/* ---- 2026.11.01d refined layer ---- */
 .wrap{max-width:1000px}
 .xhead{padding:44px 22px 30px;text-align:left}.xhead .brand{font:600 34px/1.15 Lora,Georgia,serif !important;letter-spacing:-.01em}
 .xbar{padding:9px 18px;gap:6px 18px;font-size:11px}.xbar a{padding:2px 2px;letter-spacing:.04em}
@@ -232,6 +232,13 @@ body:not([data-dv=line]) .full .entry::after,body:not([data-dv=line]) .entry.sol
 .tlist a.tla{padding:18px 2px 4px}.rmore{display:inline-flex !important;align-items:center;gap:4px;padding:4px 2px 16px !important;font:600 13px system-ui,sans-serif !important;color:var(--lnk) !important;text-decoration:none}.rmore:hover{text-decoration:underline}
 .vtop{justify-content:flex-start !important;margin:0 0 14px !important}.vbot{margin:26px 0 0}.bkh{display:inline-flex;align-items:center;gap:6px;font:600 14px system-ui,sans-serif;color:var(--lnk);text-decoration:none;padding:6px 0}.bkh:hover{text-decoration:underline}
 .rtm{font-weight:400;opacity:.85;white-space:nowrap}
+@font-face{font-family:"Courier Prime";src:url(fonts/cp-400-normal.woff2) format("woff2");font-weight:400;font-style:normal;font-display:swap}
+@font-face{font-family:"Courier Prime";src:url(fonts/cp-400-italic.woff2) format("woff2");font-weight:400;font-style:italic;font-display:swap}
+@font-face{font-family:"Courier Prime";src:url(fonts/cp-700-normal.woff2) format("woff2");font-weight:700;font-style:normal;font-display:swap}
+@font-face{font-family:"Courier Prime";src:url(fonts/cp-700-italic.woff2) format("woff2");font-weight:700;font-style:italic;font-display:swap}
+body.tw .entry .body,body.tw .full .body,body.tw .pvw{font-size:15px !important;line-height:1.75 !important;letter-spacing:0}
+body.tw .body blockquote{font-size:15px !important}body.tw #bo{font-size:15px !important;line-height:1.7 !important}
+@media(min-width:761px){body.tw .entry .body,body.tw .full .body,body.tw .pvw,body.tw .body blockquote{font-size:16px !important}}
 </style></head><body data-t="system">
 <div class="wrap"><div class="xbar" id="mbtn"><nav class="xnav"><a href="#/" data-r="home">home</a><a href="#/write" data-r="write">write</a><a href="#/tags" data-r="tags">labels</a></nav><span class="xr"><a class="mnb" id="srb" href="#/search" data-r="search" aria-label="Search posts"><svg class="i" viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6"/><path d="M15 15l5 5"/></svg></a><button class="mnb" id="mnb" aria-label="Menu" aria-expanded="false" aria-controls="mnu"><svg class="i" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button></span>
 <div class="mnu" id="mnu" hidden><a href="#/custom" data-r="custom" class="mi"><svg class="i" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M12 4a8 8 0 0 0 0 16c1.5 0 2-1 2-2s-1-1.5-1-2.5 1-1.5 2-1.5h2a3 3 0 0 0 3-3"/></svg>Customize</a><a href="#/profile" data-r="profile" class="mi"><svg class="i" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c1-4 4-6 8-6s7 2 8 6"/></svg>Profile</a><a href="#/archive" data-r="archive" class="mi"><svg class="i" viewBox="0 0 24 24"><path d="M3.5 5h17v4h-17zM5 9v10h14V9M10 13h4"/></svg>Blog Archive</a><a href="#/year" data-r="year" class="mi"><svg class="i" viewBox="0 0 24 24"><path d="M4 6h16v14H4zM4 10h16M8 3v5M16 3v5"/><path d="M8 14h2M12 14h2M16 14h0M8 17h2M12 17h2"/></svg>Year at a glance</a>
@@ -242,7 +249,7 @@ body:not([data-dv=line]) .full .entry::after,body:not([data-dv=line]) .entry.sol
 <div class="syncbar sans" id="syncbar" hidden><span id="synct">Showing your saved copy.</span><button id="syncb"><svg class="i" viewBox="0 0 24 24"><path d="M20 12a8 8 0 1 1-2.3-5.6M20 4v5h-5"/></svg>Continue syncing</button></div>
 <div class="xhead" id="xhead"><a class="brand" href="#/">Ashley's Blog</a><div class="xsub" id="xsub"></div></div>
 <div class="cols"><main id="app"></main><aside id="side"></aside></div>
-<footer class="foot"><div>Ashley's Blog &middot; est. 2026 &middot; Version 2026.11.01c</div></footer></div>
+<footer class="foot"><div>Ashley's Blog &middot; est. 2026 &middot; Version 2026.11.01d</div></footer></div>
 <script>
 /* ===================================================== */
 
@@ -353,7 +360,7 @@ function applyLook(L){L=L||LOOK;document.body.dataset.dv=L.divider==='line'?'lin
   let el=document.getElementById('skincss');if(!el){el=document.createElement('style');el.id='skincss';document.head.appendChild(el)}
   const PL=modePal(s,L,'L'),PD=modePal(s,L,'D');ADJ=[...new Set([...(PL?PL.notes:[]),...(PD?PD.notes:[])])];const vl=PL?vars(PL.o):vars(s.L,L.accent),vd=PD?vars(PD.o):vars(s.D,L.accent);
   el.textContent=`body[data-t=light],body[data-t=system]{${vl}}body[data-t=dark]{${vd}}@media(prefers-color-scheme:dark){body[data-t=system]{${vd}}}
-  body,.mod .in,.entry .body,.entry h2,.entry .day,.mod h4,.xhead .brand,input,textarea,button,.btn,label.l,.ef,.mood,.cur2,.xbar{font-family:${f}}`;
+  body,.mod .in,.entry .body,.entry h2,.entry .day,.mod h4,.xhead .brand,input,textarea,button,.btn,label.l,.ef,.mood,.cur2,.xbar{font-family:${f}}${L.tw===false?'':'body.tw .body,body.tw .body p,body.tw .body li,body.tw .body blockquote,body.tw #bo,body.tw .pvw{font-family:"Courier Prime","Courier New",ui-monospace,monospace !important}'}`;document.body.classList.toggle('tw',L.tw!==false);
   const xs=document.getElementById('xsub');if(xs){xs.textContent=L.subtitle||'';xs.hidden=!L.subtitle}
   const xh=document.getElementById('xhead');if(xh){const own=L.banner&&L.banner.startsWith('drive:'),none=L.banner==='none';xh.classList.toggle('hasban',!none);xh.classList.toggle('defban',!none&&!own);xh.style.backgroundImage='';
     if(own&&typeof driveImg==='function'&&LS.getItem('blog.em'))driveImg(L.banner.slice(6)).then(u=>xh.style.backgroundImage=`linear-gradient(rgba(0,0,0,.25),rgba(0,0,0,.35)),url(${u})`).catch(()=>{xh.classList.add('defban')})}}
@@ -547,7 +554,7 @@ async function custom(){try{await all()}catch(e){}let L={...LOOK},F={...DEFF,...
     <div class="cgrid"><label class="cc"><input type="color" data-cc="bg"><span>Page background</span></label><label class="cc"><input type="color" data-cc="card"><span>Post background</span></label><label class="cc"><input type="color" data-cc="fg"><span>Text</span></label><label class="cc"><input type="color" data-cc="title"><span>Titles</span></label><label class="cc"><input type="color" data-cc="acc"><span>Accent (links, eProps, labels)</span></label><label class="cc"><input type="color" data-cc="bar"><span>Top bar</span></label></div>
     <div class="msg" id="cnote" style="min-height:0"></div><p class="mutd" id="cdhint" style="margin:6px 0 0"></p>
     <div class="row" style="margin-top:8px"><button id="ccx">Reset to skin</button></div></div>
-  <div class="cbox"><h4>Font</h4><div class="fonts">${Object.entries(FONTS).map(([k,f])=>`<label class="fo"><input type="radio" name="fo" value="${k}" ${(L.font||'verdana')===k?'checked':''}><span style="font-family:${f.f}">${f.n}</span></label>`).join('')}</div></div>
+  <div class="cbox"><h4>Font</h4><div class="fonts">${Object.entries(FONTS).map(([k,f])=>`<label class="fo"><input type="radio" name="fo" value="${k}" ${(L.font||'verdana')===k?'checked':''}><span style="font-family:${f.f}">${f.n}</span></label>`).join('')}</div><label class="fo" style="margin-top:10px"><input type="checkbox" id="twc" ${L.tw!==false?'checked':''}><span style="font-family:'Courier Prime',monospace">Typewriter post text</span></label></div>
   <div class="cbox"><h4>Divider between posts</h4><div class="fonts"><label class="fo"><input type="radio" name="dv" value="drawn" ${L.divider!=='line'?'checked':''}><span>Drawn icons</span></label><label class="fo"><input type="radio" name="dv" value="line" ${L.divider==='line'?'checked':''}><span>Simple line</span></label></div></div>
   <div class="cbox"><h4>Header</h4><label class="l">Subtitle (optional)</label><input id="st" value="${esc(L.subtitle||'')}" placeholder="Leave blank for none">
     <label class="l">Banner photo (optional)</label><div class="row" style="margin:0"><label class="btn">Choose banner<input type="file" accept="image/*" id="bn" hidden></label><button id="bnd">Use default banner</button><button id="bnx">No banner</button></div></div>
@@ -566,6 +573,7 @@ async function custom(){try{await all()}catch(e){}let L={...LOOK},F={...DEFF,...
     $('#ccx').onclick=()=>{delete L.colors;live()};drawCC()},0);
   app.querySelectorAll('.skin').forEach(b=>b.onclick=()=>{L.skin=b.dataset.sk;delete L.accent;$('#ac').value=SKINS[L.skin].L.bar;live()});
   $('#ac').oninput=e=>{L.accent=e.target.value;live()};$('#acx').onclick=()=>{delete L.accent;$('#ac').value=SKINS[L.skin||'classic'].L.bar;live()};
+  $('#twc').onchange=e=>{if(e.target.checked)delete L.tw;else L.tw=false;live()};
   app.querySelectorAll('[name=dv]').forEach(r=>r.onchange=()=>{if(r.value==='line')L.divider='line';else delete L.divider;live()});
   app.querySelectorAll('[name=fo]').forEach(r=>r.onchange=()=>{L.font=r.value;live()});
   $('#st').oninput=e=>{L.subtitle=e.target.value.trim();live()};
