@@ -1,4 +1,4 @@
-const V='blog-v26';const CORE=['./','index.html','manifest.json','icons/icon.svg','icons/icon-192.png','icons/maskable-512.png','img/banner.webp','img/banner.jpg'];
+const V='blog-v27';const CORE=['./','index.html','manifest.json','icons/icon.svg','icons/icon-192.png','icons/maskable-512.png','img/banner.webp','img/banner.jpg'];
 self.addEventListener('install',e=>{e.waitUntil(caches.open(V).then(c=>c.addAll(CORE)));self.skipWaiting()});
 self.addEventListener('activate',e=>{e.waitUntil(caches.keys().then(k=>Promise.all(k.filter(x=>x!==V).map(x=>caches.delete(x)))).then(()=>self.clients.claim()))});
 self.addEventListener('fetch',e=>{const u=new URL(e.request.url);if(e.request.method!=='GET'||u.origin!==location.origin)return;e.respondWith(fetch(e.request).then(r=>{const c=r.clone();caches.open(V).then(x=>x.put(e.request,c));return r}).catch(()=>caches.match(e.request).then(r=>r||caches.match('index.html'))))});
