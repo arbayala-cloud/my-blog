@@ -141,7 +141,7 @@ a{color:var(--lnk)}
 .adjf img{width:100%;height:100%;object-fit:cover;pointer-events:none;user-select:none;-webkit-user-drag:none}
 .nudge{display:flex;gap:6px;justify-content:center;margin-top:8px;flex-wrap:wrap}.nudge button{padding:8px 12px}
 
-/* ---- 2026.11.01g refined layer ---- */
+/* ---- 2026.11.04a refined layer ---- */
 .wrap{max-width:1000px}
 .xhead{padding:44px 22px 30px;text-align:left}.xhead .brand{font:600 34px/1.15 Lora,Georgia,serif !important;letter-spacing:-.01em}
 .xbar{padding:9px 18px;gap:6px 18px;font-size:11px}.xbar a{padding:2px 2px;letter-spacing:.04em}
@@ -264,7 +264,7 @@ body.tw .body blockquote{font-size:15px !important}body.tw #bo{font-size:15px !i
 <div class="syncbar sans" id="syncbar" hidden><span id="synct">Showing your saved copy.</span><button id="syncb"><svg class="i" viewBox="0 0 24 24"><path d="M20 12a8 8 0 1 1-2.3-5.6M20 4v5h-5"/></svg>Continue syncing</button></div>
 <div class="xhead" id="xhead"><a class="brand" href="#/">Ashley's Blog</a><div class="xsub" id="xsub"></div></div>
 <div class="cols"><main id="app"></main><aside id="side"></aside></div>
-<footer class="foot"><div>Ashley's Blog &middot; est. 2026 &middot; Version 2026.11.01g</div></footer></div>
+<footer class="foot"><div>Ashley's Blog &middot; est. 2026 &middot; Version 2026.11.04a</div></footer></div>
 <script>
 /* ===================================================== */
 
@@ -459,8 +459,8 @@ async function search(){app.innerHTML=`<div class="sbox" role="search"><svg clas
   q.oninput=run;q.onkeydown=e=>{if(e.key==='Escape'){e.preventDefault();if(q.value){q.value='';run()}else history.length>1?history.back():(location.hash='#/')}};
   $('#sqx').onclick=()=>{q.value='';run();q.focus()};run();q.focus()}
 async function home(pg){pg=Math.max(1,+pg||1);app.innerHTML=`<div id="pl" class="empty">Loading</div>`;
-  try{const d=await pub(),HP=15,n=Math.max(1,Math.ceil(d.length/HP));pg=Math.min(pg,n);const part=d.slice((pg-1)*HP,pg*HP);
-   const nav=n>1?`<nav class="pager">${pg>1?`<a href="#/page/${pg-1}">${PREV} Newer posts</a>`:'<span></span>'}<a href="#/">Home</a>${pg<n?`<a href="#/page/${pg+1}">Older posts ${NEXT}</a>`:'<span></span>'}</nav>`:'';
+  try{const d=await pub(),HP=7,n=Math.max(1,Math.ceil(d.length/HP));pg=Math.min(pg,n);const part=d.slice((pg-1)*HP,pg*HP);
+   const nav=d.length>HP?`<nav class="pager" style="justify-content:center"><a href="#/archive">Older posts ${NEXT}</a></nav>`:'';
    $('#pl').outerHTML=d.length?'<ul class="tlist">'+part.map(p=>`<li><a class="tla" href="#/post/${p.id}"><span class="tld">${LONG(p.created_at)}<span class="rtm"> &middot; ${rt(p.body)}</span></span><span class="tlt">${esc(p.title)||'Untitled'}</span></a><a class="rmore" href="#/post/${p.id}">Read more ${NEXT}</a></li>`).join('')+'</ul>'+nav:'<div class="empty">No posts yet.</div>'}catch(e){$('#pl').outerHTML=fail}}
 const PREV='<svg class="i" style="width:12px;height:12px" viewBox="0 0 24 24"><path d="M15 6l-6 6 6 6"/></svg>',NEXT='<svg class="i" style="width:12px;height:12px" viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></svg>';
 const DKEY=d=>new Date(d).toLocaleDateString('en-CA');let GY=new Date().getFullYear();
