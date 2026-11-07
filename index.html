@@ -313,6 +313,8 @@ main{grid-column:1 !important;grid-row:1 !important;max-width:none !important;ma
 .bp-foot{margin-top:30px !important;padding:14px 16px !important;border:1px solid var(--line) !important;border-radius:8px;background:var(--bg)}
 .foot{text-align:center !important;border:0 !important;margin:18px 0 0 !important;padding:10px !important;font:11px system-ui,sans-serif !important;letter-spacing:.14em;text-transform:uppercase;color:var(--mut)}
 ::selection{background:color-mix(in srgb,var(--lnk) 30%,transparent)}
+body.ishome #side,body.ishome .xhead,body.ishome .foot{display:none !important}
+body.ishome .cols{grid-template-columns:1fr !important;max-width:760px !important;margin:34px auto 0 !important;border-top:1px solid color-mix(in srgb,var(--line) 70%,transparent) !important;border-radius:14px !important}
 </style></head><body data-t="system">
 <div class="wrap"><div class="xbar" id="mbtn"><nav class="xnav"><a href="#/" data-r="home">home</a><a href="#/write" data-r="write">write</a><a href="#/tags" data-r="tags">labels</a></nav><span class="xr"><a class="mnb" id="srb" href="#/search" data-r="search" aria-label="Search posts"><svg class="i" viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6"/><path d="M15 15l5 5"/></svg></a><button class="mnb" id="mnb" aria-label="Menu" aria-expanded="false" aria-controls="mnu"><svg class="i" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button></span>
 <div class="mnu" id="mnu" hidden><a href="#/custom" data-r="custom" class="mi"><svg class="i" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M12 4a8 8 0 0 0 0 16c1.5 0 2-1 2-2s-1-1.5-1-2.5 1-1.5 2-1.5h2a3 3 0 0 0 3-3"/></svg>Customize</a><a href="#/profile" data-r="profile" class="mi"><svg class="i" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c1-4 4-6 8-6s7 2 8 6"/></svg>Profile</a><a href="#/archive" data-r="archive" class="mi"><svg class="i" viewBox="0 0 24 24"><path d="M3.5 5h17v4h-17zM5 9v10h14V9M10 13h4"/></svg>Blog Archive</a><a href="#/year" data-r="year" class="mi"><svg class="i" viewBox="0 0 24 24"><path d="M4 6h16v14H4zM4 10h16M8 3v5M16 3v5"/><path d="M8 14h2M12 14h2M16 14h0M8 17h2M12 17h2"/></svg>Year at a glance</a>
@@ -323,7 +325,7 @@ main{grid-column:1 !important;grid-row:1 !important;max-width:none !important;ma
 <div class="syncbar sans" id="syncbar" hidden><span id="synct">Showing your saved copy.</span><button id="syncb"><svg class="i" viewBox="0 0 24 24"><path d="M20 12a8 8 0 1 1-2.3-5.6M20 4v5h-5"/></svg>Continue syncing</button></div>
 <div class="xhead" id="xhead"><a class="brand" href="#/">Ashley's Blog</a><div class="xsub" id="xsub"></div></div>
 <div class="cols"><main id="app"></main><aside id="side"></aside></div>
-<footer class="foot"><div>Ashley's Blog &middot; est. 2026 &middot; Version 2026.11.07d</div></footer></div>
+<footer class="foot"><div>Ashley's Blog &middot; est. 2026 &middot; Version 2026.11.07e</div></footer></div>
 <script>
 /* ===================================================== */
 
@@ -518,8 +520,8 @@ async function search(){app.innerHTML=`<div class="sbox" role="search"><svg clas
   q.oninput=run;q.onkeydown=e=>{if(e.key==='Escape'){e.preventDefault();if(q.value){q.value='';run()}else history.length>1?history.back():(location.hash='#/')}};
   $('#sqx').onclick=()=>{q.value='';run();q.focus()};run();q.focus()}
 async function home(pg){pg=Math.max(1,+pg||1);app.innerHTML=`<div id="pl" class="empty">Loading</div>`;
-  try{const d=await pub(),HP=7,n=Math.max(1,Math.ceil(d.length/HP));pg=Math.min(pg,n);const part=d.slice((pg-1)*HP,pg*HP);
-   const nav=d.length>HP?`<nav class="pager" style="justify-content:center"><a href="#/archive">Older posts ${NEXT}</a></nav>`:'';
+  try{const d=await pub(),HP=5,n=Math.max(1,Math.ceil(d.length/HP));pg=Math.min(pg,n);const part=d.slice((pg-1)*HP,pg*HP);
+   const nav='';
    $('#pl').outerHTML=d.length?'<ul class="tlist">'+part.map(p=>`<li data-d="${new Date(p.created_at).getDate()}" data-m="${new Date(p.created_at).toLocaleString('en-US',{month:'short'})}"><a class="tla" href="#/post/${p.id}"><span class="tld">${LONG(p.created_at)}<span class="rtm"> &middot; ${rt(p.body)}</span></span><span class="tlt">${esc(p.title)||'Untitled'}</span></a><a class="rmore" href="#/post/${p.id}">Read more ${NEXT}</a></li>`).join('')+'</ul>'+nav:'<div class="empty">No posts yet.</div>'}catch(e){$('#pl').outerHTML=fail}}
 const PREV='<svg class="i" style="width:12px;height:12px" viewBox="0 0 24 24"><path d="M15 6l-6 6 6 6"/></svg>',NEXT='<svg class="i" style="width:12px;height:12px" viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></svg>';
 const DKEY=d=>new Date(d).toLocaleDateString('en-CA');let GY=new Date().getFullYear();
@@ -653,7 +655,7 @@ async function storage(){const el=$('#stor');if(!el)return;try{if(!STOR){let tot
   const {tot,cnt,q}=STOR;let x=`<div><b>Blog:</b> ${SZ(tot)}</div><div class="mutd">${cnt} file${cnt===1?'':'s'} (posts and photos)</div>`;
   if(q&&q.limit){const u=+q.usage,l=+q.limit,pc=Math.min(100,u/l*100);x+=`<div style="margin-top:8px"><b>Google:</b> ${SZ(u)} of ${SZ(l)}</div><div class="meter"><span style="width:${pc.toFixed(1)}%"></span></div>`}
   else if(q&&q.usage)x+=`<div style="margin-top:8px"><b>Google:</b> ${SZ(+q.usage)} used</div>`;el.innerHTML=x}catch(e){el.textContent='Not available right now'}}
-async function side(){applyLook();const S=$('#side');if(!S)return;let d=[];try{d=await pub()}catch(e){S.innerHTML='';return}
+async function side(){applyLook();document.body.classList.toggle('ishome',!location.hash||location.hash==='#/'||location.hash==='#');const S=$('#side');if(!S)return;let d=[];try{d=await pub()}catch(e){S.innerHTML='';return}
   const c={};d.forEach(p=>(p.tags||[]).forEach(t=>c[t]=(c[t]||0)+1));const tg=Object.keys(c).sort((a,b)=>a.localeCompare(b));
   const Y={};d.forEach(p=>{const t=new Date(p.created_at),k=t.getFullYear()+'';(Y[k]=Y[k]||{})[t.getMonth()]=((Y[k]||{})[t.getMonth()]||0)+1});
   const MN=['January','February','March','April','May','June','July','August','September','October','November','December'];
