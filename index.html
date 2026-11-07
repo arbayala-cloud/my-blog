@@ -1,6 +1,6 @@
 <!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Ashley's Blog</title><meta name="theme-color" content="#ffffff"><link rel="manifest" href="manifest.json?v=2"><link rel="icon" href="icons/icon.svg?v=2" type="image/svg+xml"><link rel="icon" href="icons/favicon-32.png?v=2" sizes="32x32"><link rel="apple-touch-icon" href="icons/apple-touch-icon.png?v=2">
-<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Lora:ital@0;1&family=Varela+Round&family=Fira+Sans:wght@400;600&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Lora:ital@0;1&family=Varela+Round&family=Fira+Sans:wght@400;600&family=Playfair+Display:ital,wght@0,500;0,600;1,500&family=Jost:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
 :root{--bg:#ffffff;--card:#ffffff;--fg:#111111;--mut:#6b6b6b;--acc:#111111;--acc2:#333333;--gold:#555555;--line:#e2e2e2;--chip:#f0f0f0}
 [data-t=dark]{--bg:#000000;--card:#0d0d0d;--fg:#f2f2f2;--mut:#9a9a9a;--acc:#ffffff;--acc2:#dddddd;--gold:#bbbbbb;--line:#2a2a2a;--chip:#1c1c1c}
@@ -346,6 +346,30 @@ body.ishome .cols{background:none !important;border:0 !important;box-shadow:none
 .mood,.bp-cur{border:0 !important;border-left:2px solid var(--fg) !important;border-radius:0 !important;background:none !important;padding:4px 0 4px 14px !important;font-style:italic}
 .bp-body blockquote{background:none !important;border-left:2px solid var(--fg) !important;border-radius:0}
 .bp-foot{background:none !important;border:0 !important;border-top:1px solid var(--line) !important;border-radius:0;padding:16px 0 !important}
+/* ---- 2026.11.07g soft elegant palette ---- */
+html body[data-t]{--bg:#f7f1ec;--card:#fffdfb;--fg:#3b2f33;--mut:#9a8a8e;--line:#eadfd9;--chip:#f3e9e4;--lnk:#b8737d;--ttl:#3b2f33;--bar:#5e4a52;--bart:#fbf4f1;--hd:#d9b8b4;--acc:#b8737d;--sage:#8fa58e}
+html body[data-t=dark]{--bg:#1d191b;--card:#262124;--fg:#efe6e3;--mut:#a89a9c;--line:#3a3236;--chip:#302a2d;--lnk:#e0a4ab;--ttl:#f6ece9;--bar:#2e262a;--bart:#f6ece9;--hd:#4a3b40;--acc:#e0a4ab;--sage:#a9bfa8}
+@media(prefers-color-scheme:dark){html body[data-t=system]{--bg:#1d191b;--card:#262124;--fg:#efe6e3;--mut:#a89a9c;--line:#3a3236;--chip:#302a2d;--lnk:#e0a4ab;--ttl:#f6ece9;--bar:#2e262a;--bart:#f6ece9;--hd:#4a3b40;--acc:#e0a4ab;--sage:#a9bfa8}}
+body{background:linear-gradient(180deg,color-mix(in srgb,var(--hd) 28%,var(--bg)) 0,var(--bg) 420px) var(--bg) !important;background-attachment:scroll !important}
+.xbar,.xnav a,.mnb,.tld,.tlist .rmore,.wg h4,.wi,.bp-date,.bp-meta,.bp-foot,.foot,.wg-tags a{font-family:Jost,system-ui,sans-serif !important}
+.xbar{background:color-mix(in srgb,var(--bar) 94%,transparent) !important;backdrop-filter:blur(8px)}
+.xhead .brand,.tlt,.bp-title,.me-n,.bp-body h3{font-family:"Playfair Display",Georgia,serif !important;font-weight:500 !important}
+.xhead .brand{font-style:italic}
+.xhead:not(.hasban){background:linear-gradient(135deg,var(--hd),color-mix(in srgb,var(--sage) 55%,var(--hd))) !important}
+.tlist li{background:var(--card) !important;border-color:var(--line) !important;border-radius:14px !important;box-shadow:0 2px 14px -8px color-mix(in srgb,var(--lnk) 40%,transparent) !important}
+.tlist li:hover{border-color:color-mix(in srgb,var(--lnk) 45%,var(--line)) !important;box-shadow:0 14px 30px -16px color-mix(in srgb,var(--lnk) 55%,transparent) !important}
+.tld{color:var(--sage) !important;font-weight:500 !important}.tld .rtm{color:var(--lnk) !important}
+.tlt{color:var(--ttl) !important;font-size:29px !important}
+.tlist li:hover .tlt{color:var(--lnk) !important}
+.tlist .rmore{color:var(--lnk) !important;font-weight:500 !important}
+.cols{background:var(--card) !important;border-color:var(--line) !important}
+.wg h4{color:var(--sage)}.wg{border-color:var(--line)}
+.me-ph{box-shadow:0 0 0 3px var(--card),0 0 0 4px var(--lnk) !important}
+.wg-tags a:hover,.wg-arch a:hover{color:var(--lnk) !important;border-color:var(--lnk) !important}
+.bp-date{color:var(--sage) !important}
+.mood,.bp-cur,.bp-body blockquote{border-left-color:var(--lnk) !important}
+.body a,.bp-meta a:hover{color:var(--lnk)}
+::selection{background:color-mix(in srgb,var(--lnk) 28%,transparent)}
 </style></head><body data-t="system">
 <div class="wrap"><div class="xbar" id="mbtn"><nav class="xnav"><a href="#/" data-r="home">home</a><a href="#/write" data-r="write">write</a><a href="#/tags" data-r="tags">labels</a></nav><span class="xr"><a class="mnb" id="srb" href="#/search" data-r="search" aria-label="Search posts"><svg class="i" viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6"/><path d="M15 15l5 5"/></svg></a><button class="mnb" id="mnb" aria-label="Menu" aria-expanded="false" aria-controls="mnu"><svg class="i" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button></span>
 <div class="mnu" id="mnu" hidden><a href="#/custom" data-r="custom" class="mi"><svg class="i" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M12 4a8 8 0 0 0 0 16c1.5 0 2-1 2-2s-1-1.5-1-2.5 1-1.5 2-1.5h2a3 3 0 0 0 3-3"/></svg>Customize</a><a href="#/profile" data-r="profile" class="mi"><svg class="i" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c1-4 4-6 8-6s7 2 8 6"/></svg>Profile</a><a href="#/archive" data-r="archive" class="mi"><svg class="i" viewBox="0 0 24 24"><path d="M3.5 5h17v4h-17zM5 9v10h14V9M10 13h4"/></svg>Blog Archive</a><a href="#/year" data-r="year" class="mi"><svg class="i" viewBox="0 0 24 24"><path d="M4 6h16v14H4zM4 10h16M8 3v5M16 3v5"/><path d="M8 14h2M12 14h2M16 14h0M8 17h2M12 17h2"/></svg>Year at a glance</a>
@@ -356,7 +380,7 @@ body.ishome .cols{background:none !important;border:0 !important;box-shadow:none
 <div class="syncbar sans" id="syncbar" hidden><span id="synct">Showing your saved copy.</span><button id="syncb"><svg class="i" viewBox="0 0 24 24"><path d="M20 12a8 8 0 1 1-2.3-5.6M20 4v5h-5"/></svg>Continue syncing</button></div>
 <div class="xhead" id="xhead"><a class="brand" href="#/">Ashley's Blog</a><div class="xsub" id="xsub"></div></div>
 <div class="cols"><main id="app"></main><aside id="side"></aside></div>
-<footer class="foot"><div>Ashley's Blog &middot; est. 2026 &middot; Version 2026.11.07f</div></footer></div>
+<footer class="foot"><div>Ashley's Blog &middot; est. 2026 &middot; Version 2026.11.07g</div></footer></div>
 <script>
 /* ===================================================== */
 
