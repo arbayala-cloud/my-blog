@@ -315,6 +315,37 @@ main{grid-column:1 !important;grid-row:1 !important;max-width:none !important;ma
 ::selection{background:color-mix(in srgb,var(--lnk) 30%,transparent)}
 body.ishome #side,body.ishome .xhead,body.ishome .foot{display:none !important}
 body.ishome .cols{grid-template-columns:1fr !important;max-width:760px !important;margin:34px auto 0 !important;border-top:1px solid color-mix(in srgb,var(--line) 70%,transparent) !important;border-radius:14px !important}
+/* ---- 2026.11.07f mature refinement ---- */
+body{background-image:none !important}
+.xbar{height:56px;border-bottom:1px solid rgba(255,255,255,.08) !important;box-shadow:0 1px 0 rgba(0,0,0,.08) !important;letter-spacing:.18em !important;font-size:11px !important}
+.xnav a:hover,.xnav a.cur{background:none !important;opacity:1}.xnav a{opacity:.65}
+.xhead .brand{background:none !important;backdrop-filter:none !important;border:0 !important;box-shadow:none !important;color:#fff !important;font:600 46px/1.05 Lora,Georgia,serif !important;letter-spacing:-.02em !important;text-shadow:0 2px 18px rgba(0,0,0,.45) !important}
+.xhead:not(.hasban){background-image:none !important;background-color:var(--bar,#222) !important}
+.xhead{border-radius:4px 4px 0 0 !important}
+.cols{border-radius:0 0 4px 4px !important;box-shadow:0 1px 3px rgba(0,0,0,.06) !important}
+body.ishome .cols{background:none !important;border:0 !important;box-shadow:none !important;padding:10px 0 40px !important;max-width:720px !important;margin:44px auto 0 !important}
+.tlist{gap:18px !important}
+.tlist li{border:1px solid color-mix(in srgb,var(--line) 75%,transparent) !important;border-radius:6px !important;box-shadow:0 1px 2px rgba(0,0,0,.04) !important;padding:26px 30px 24px !important}
+.tlist li:hover{border-color:color-mix(in srgb,var(--fg) 25%,var(--line)) !important;box-shadow:0 8px 24px -16px rgba(0,0,0,.35) !important}
+.tld{display:block !important;background:none !important;border:0 !important;padding:0 !important;margin:0 0 10px !important;font:600 10.5px/1.4 system-ui,sans-serif !important;letter-spacing:.2em !important;color:var(--mut) !important}
+.tld .rtm{color:var(--mut) !important;letter-spacing:.2em}
+.tlt{padding:0 !important;font:600 28px/1.22 Lora,Georgia,serif !important;letter-spacing:-.015em}
+.tlist .rmore{margin:16px 0 0 !important;padding:0 0 3px !important;background:none !important;border-radius:0;border-bottom:1px solid currentColor;color:var(--fg) !important;font:600 10.5px system-ui,sans-serif !important;letter-spacing:.2em !important}
+.tlist .rmore:hover{color:var(--lnk) !important;filter:none}
+@media(max-width:600px){.tlist li{padding:20px 20px 18px !important}.tlt{font-size:23px !important}}
+.wg{border-radius:4px;background:none;border:0;border-top:1px solid var(--line)}
+.wg h4{background:none;color:var(--mut);padding:14px 0 8px;font-size:10.5px;letter-spacing:.2em}
+.wi{padding:0 0 14px}
+.me-ph{box-shadow:none;border:0;width:110px;height:110px}
+.wg-tags a{border-radius:3px;background:none}
+.bp-date{background:none !important;padding:0 !important;color:var(--mut) !important;letter-spacing:.2em !important;font-size:10.5px !important}
+.bp-title{font-weight:600 !important;font-size:40px !important;letter-spacing:-.02em !important}
+@media(max-width:760px){.bp-title{font-size:30px !important}}
+.bp-meta{border-bottom:1px solid var(--line) !important}
+.bp-meta a,.bp-foot div:last-child a,.lbls a{border-radius:3px;background:none}
+.mood,.bp-cur{border:0 !important;border-left:2px solid var(--fg) !important;border-radius:0 !important;background:none !important;padding:4px 0 4px 14px !important;font-style:italic}
+.bp-body blockquote{background:none !important;border-left:2px solid var(--fg) !important;border-radius:0}
+.bp-foot{background:none !important;border:0 !important;border-top:1px solid var(--line) !important;border-radius:0;padding:16px 0 !important}
 </style></head><body data-t="system">
 <div class="wrap"><div class="xbar" id="mbtn"><nav class="xnav"><a href="#/" data-r="home">home</a><a href="#/write" data-r="write">write</a><a href="#/tags" data-r="tags">labels</a></nav><span class="xr"><a class="mnb" id="srb" href="#/search" data-r="search" aria-label="Search posts"><svg class="i" viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6"/><path d="M15 15l5 5"/></svg></a><button class="mnb" id="mnb" aria-label="Menu" aria-expanded="false" aria-controls="mnu"><svg class="i" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button></span>
 <div class="mnu" id="mnu" hidden><a href="#/custom" data-r="custom" class="mi"><svg class="i" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M12 4a8 8 0 0 0 0 16c1.5 0 2-1 2-2s-1-1.5-1-2.5 1-1.5 2-1.5h2a3 3 0 0 0 3-3"/></svg>Customize</a><a href="#/profile" data-r="profile" class="mi"><svg class="i" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c1-4 4-6 8-6s7 2 8 6"/></svg>Profile</a><a href="#/archive" data-r="archive" class="mi"><svg class="i" viewBox="0 0 24 24"><path d="M3.5 5h17v4h-17zM5 9v10h14V9M10 13h4"/></svg>Blog Archive</a><a href="#/year" data-r="year" class="mi"><svg class="i" viewBox="0 0 24 24"><path d="M4 6h16v14H4zM4 10h16M8 3v5M16 3v5"/><path d="M8 14h2M12 14h2M16 14h0M8 17h2M12 17h2"/></svg>Year at a glance</a>
@@ -325,7 +356,7 @@ body.ishome .cols{grid-template-columns:1fr !important;max-width:760px !importan
 <div class="syncbar sans" id="syncbar" hidden><span id="synct">Showing your saved copy.</span><button id="syncb"><svg class="i" viewBox="0 0 24 24"><path d="M20 12a8 8 0 1 1-2.3-5.6M20 4v5h-5"/></svg>Continue syncing</button></div>
 <div class="xhead" id="xhead"><a class="brand" href="#/">Ashley's Blog</a><div class="xsub" id="xsub"></div></div>
 <div class="cols"><main id="app"></main><aside id="side"></aside></div>
-<footer class="foot"><div>Ashley's Blog &middot; est. 2026 &middot; Version 2026.11.07e</div></footer></div>
+<footer class="foot"><div>Ashley's Blog &middot; est. 2026 &middot; Version 2026.11.07f</div></footer></div>
 <script>
 /* ===================================================== */
 
