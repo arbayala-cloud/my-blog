@@ -211,7 +211,7 @@ body:not([data-dv=line]) .full .entry::after,body:not([data-dv=line]) .entry.sol
 .gg .td{outline:1.5px solid var(--fg);outline-offset:0}.gg a:hover,.gg a:focus{outline:1.5px solid var(--fg)}
 .gg span:not(.g0){background:none}.gt{font-size:12px;color:var(--mut);margin-top:10px;text-align:center}
 .yv{max-width:560px}.yv .gms{gap:16px 14px}.yv .gml{font-size:12px}.yv .gg{gap:3px}.yv .gy{font-size:16px;margin-bottom:14px}.yv .gt{font-size:14px;margin-top:16px}.yx .i{width:22px !important;height:22px !important}
-#side{display:none !important}.cols{display:block !important;max-width:700px;margin:34px auto 0 !important}main{max-width:none}
+
 .pfpage{border:0 !important;padding:0 !important}.pfpage>h4{display:none}.pfpage .ph{max-width:220px}.pfpage .pl{font-size:15px;line-height:1.8}
 .archpage{font-size:16px}.archpage summary{padding:6px 0;cursor:pointer}.archpage ul{padding:0;margin:4px 0 8px 31px}.archpage li{padding:5px 0;font-size:16px}
 .body{overflow-wrap:anywhere;word-break:normal}.body strong{font-weight:700}.body u{text-underline-offset:3px}
@@ -261,73 +261,60 @@ body.tw .body blockquote{font-size:15px !important}body.tw #bo{font-size:15px !i
 .tlist .rmore{padding:8px 0 0 !important;font-size:12.5px !important}
 .pager a[href="#/archive"]{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--line);border-radius:999px;padding:8px 16px;text-decoration:none;color:var(--lnk);font:600 13px system-ui,sans-serif}
 .pager a[href="#/archive"]:hover{border-color:var(--lnk)}
-/* ---- 2026.11.07c full redesign ---- */
-body{background:var(--bg)}
-.wrap{max-width:1180px;margin:0 auto}
-.rail{position:relative}
-.xbar{position:relative !important;padding:14px 22px !important;font:700 11px/1 system-ui,sans-serif !important;letter-spacing:.16em;text-transform:uppercase;background:var(--bar,#18181b) !important;border:0;box-shadow:none}
-.xnav{gap:4px 24px !important}.xnav a{opacity:.72;transition:opacity .2s;position:relative}.xnav a:hover,.xnav a.cur{opacity:1}
-.xnav a::before{content:"";position:absolute;left:-10px;top:50%;width:4px;height:4px;margin-top:-2px;border-radius:50%;background:currentColor;opacity:0;transition:opacity .2s}.xnav a.cur::before{opacity:1}
-.xhead{padding:44px 26px 30px !important;border:0;text-align:left !important;background:none}
-.xhead .brand{display:block;font:700 54px/.95 Lora,Georgia,serif !important;letter-spacing:-.035em;color:var(--ttl,var(--fg))}
-.xhead .xsub{font:italic 16px/1.55 Lora,Georgia,serif;color:var(--mut);margin-top:16px;max-width:22em}
-.xhead:not(.hasban)::after{content:"";display:block;width:56px;height:4px;margin-top:22px;background:var(--lnk)}
-.xhead.hasban{border-radius:0;box-shadow:inset 0 -100px 100px -50px rgba(0,0,0,.6)}
-.xhead.hasban .brand{color:#fff !important}
-.tstrip{display:flex;gap:8px;overflow-x:auto;padding:4px 26px 22px;border:0;scrollbar-width:none;font:600 12.5px system-ui,sans-serif}.tstrip::-webkit-scrollbar{display:none}.tstrip[hidden]{display:none}
-.tstrip a{flex:none;display:inline-flex;align-items:center;justify-content:space-between;gap:10px;padding:8px 14px;border:1px solid var(--line);border-radius:999px;color:var(--fg);text-decoration:none;transition:all .2s}
-.tstrip a:hover{border-color:var(--lnk);color:var(--lnk)}.tstrip a.on{background:var(--lnk);color:var(--card);border-color:var(--lnk)}.tstrip a .n{opacity:.6;font-weight:500;font-variant-numeric:tabular-nums}
-.cols{max-width:none !important;margin:0 !important;padding:8px 26px 0 !important}
-main{max-width:740px !important;margin:0 !important;padding-bottom:60px}
-@media(min-width:980px){
- .wrap{display:grid;grid-template-columns:330px minmax(0,1fr);column-gap:64px;align-items:start;padding:0 32px}
- .rail{position:sticky;top:0;height:100vh;overflow-y:auto;display:flex;flex-direction:column;border-right:1px solid var(--line);padding-right:28px;scrollbar-width:none}
- .rail::-webkit-scrollbar{display:none}
- .xbar{margin:28px 0 0;border-radius:14px;padding:13px 16px !important}
- .xhead{padding:56px 0 30px !important}
- .xhead.hasban{margin-top:18px;border-radius:16px;padding:24px 20px !important;aspect-ratio:4/5;max-height:none;min-height:0}
- .xhead .brand{font-size:60px !important}
- .tstrip{flex-direction:column;overflow:visible;padding:0 0 30px}
- .tstrip::before{content:"Browse by tag";font:700 10.5px system-ui,sans-serif;letter-spacing:.18em;text-transform:uppercase;color:var(--mut);margin:0 0 8px 2px}
- .tstrip a{border-radius:10px;border-color:transparent;padding:9px 12px}.tstrip a:hover{background:var(--chip);border-color:transparent}
- .cols{grid-column:2;padding:56px 0 0 !important}
- .foot{grid-column:2}
- .mnu{right:0}
-}
-@media(max-width:979px){.xhead .brand{font-size:44px !important}}
-@media(max-width:480px){.xhead{padding:34px 20px 22px !important}.xhead .brand{font-size:38px !important}.tstrip{padding:0 20px 18px}.cols{padding:8px 18px 0 !important}}
-.tlist{gap:0 !important;margin:0 !important}
-.tlist li{display:grid !important;grid-template-columns:64px minmax(0,1fr);column-gap:22px;border:0 !important;border-top:1px solid var(--line) !important;border-radius:0 !important;background:none !important;padding:26px 0 24px !important;box-shadow:none !important;transform:none !important;position:relative}
-.tlist li:first-child{border-top:0 !important;padding-top:4px !important}
-.tlist li::before{content:attr(data-d);grid-column:1;grid-row:1 / span 2;font:700 44px/1 Lora,Georgia,serif;color:var(--ttl,var(--fg));letter-spacing:-.03em;text-align:right;position:static;width:auto;background:none;opacity:1;transition:color .25s}
-.tlist li::after{content:attr(data-m);position:absolute;left:0;width:64px;text-align:right;top:76px;font:700 10.5px system-ui,sans-serif;letter-spacing:.2em;text-transform:uppercase;color:var(--lnk)}
-.tlist li:first-child::after{top:54px}
-.tlist li:hover::before{color:var(--lnk)}
-.tlist a.tla,.tlist .rmore{grid-column:2}
-.tld{font:600 11px/1.4 system-ui,sans-serif !important;letter-spacing:.14em !important;color:var(--mut) !important;margin-bottom:8px !important}
-.tld .rtm{opacity:1;color:var(--lnk)}
-.tlt{font:700 27px/1.2 Lora,Georgia,serif !important;letter-spacing:-.015em;transition:color .2s}
-.tlist li:hover .tlt{color:var(--lnk)}
-.tlist .rmore{padding-top:14px !important;font:700 11px system-ui,sans-serif !important;letter-spacing:.16em;text-transform:uppercase;transition:gap .2s;justify-self:start}.rmore:hover{gap:10px !important;text-decoration:none !important}
-@media(max-width:480px){.tlist li{grid-template-columns:46px minmax(0,1fr);column-gap:16px}.tlist li::before{font-size:34px}.tlist li::after{width:46px;top:66px}.tlist li:first-child::after{top:44px}.tlt{font-size:22px !important}}
-.bpost{max-width:720px;margin:0 !important;padding:0 0 20px !important}
-.bp-date{letter-spacing:.18em !important;color:var(--lnk) !important;border:0 !important;margin-bottom:12px !important;padding:0 !important}
-.bp-title{font:700 46px/1.08 Lora,Georgia,serif !important;letter-spacing:-.03em;margin-bottom:14px !important}
-@media(max-width:760px){.bp-title{font-size:34px !important}}
-.bp-meta{padding-bottom:22px;border-bottom:1px solid var(--line);margin-bottom:30px !important}
-.bp-meta a,.bp-foot div:last-child a,.lbls a{display:inline-block;padding:3px 11px;margin:2px;border:1px solid var(--line);border-radius:999px;font:600 12px system-ui,sans-serif;text-decoration:none;color:var(--fg) !important;transition:border-color .2s}
-.bp-meta a:hover,.bp-foot div:last-child a:hover,.lbls a:hover{border-color:var(--lnk)}
-.bp-body>p:first-of-type::first-letter{float:left;font:700 3.6em/.85 Lora,Georgia,serif;margin:.06em .1em 0 0;color:var(--lnk)}
-.bp-body blockquote{border-left:3px solid var(--lnk) !important;background:var(--chip) !important}
-.mood,.bp-cur{display:inline-flex !important;align-items:center;gap:8px;padding:9px 16px !important;border-radius:12px;background:var(--chip);border:0;border-left:3px solid var(--lnk);font:13px system-ui,sans-serif}
-.bp-foot{border-color:var(--line) !important}
-.pager{padding-top:18px !important;border-top:1px solid var(--line)}
-.pager a[href="#/archive"]{font:700 11px system-ui,sans-serif !important;letter-spacing:.16em;text-transform:uppercase;padding:12px 22px !important;border-color:var(--fg) !important;color:var(--fg) !important}.pager a[href="#/archive"]:hover{background:var(--fg);color:var(--bg) !important}
-.foot{text-align:left;font:11px system-ui,sans-serif;letter-spacing:.14em;text-transform:uppercase;color:var(--mut);border-top:1px solid var(--line);margin-top:20px;padding:26px 26px 40px}
+/* ---- 2026.11.07d foundation redesign: Blogger x WordPress x Xanga ---- */
+body{background-color:var(--bg) !important;background-image:radial-gradient(color-mix(in srgb,var(--lnk) 13%,transparent) 1px,transparent 1.2px) !important;background-size:18px 18px !important}
+.wrap{max-width:1120px !important;margin:0 auto !important;padding:0 18px 30px !important}
+.xbar{position:sticky !important;top:0;z-index:40;margin:0 -18px !important;padding:0 24px !important;height:52px;display:flex;align-items:center;background:var(--bar,#232326) !important;border:0 !important;border-bottom:3px solid var(--lnk) !important;box-shadow:0 2px 10px rgba(0,0,0,.18) !important;font:700 12px/1 system-ui,sans-serif !important;letter-spacing:.14em !important;text-transform:uppercase}
+.xnav{gap:0 !important;height:100%}.xnav a{display:flex !important;align-items:center;height:100%;padding:0 16px !important;opacity:.85;border-radius:0 !important;transition:background .2s,opacity .2s}
+.xnav a:hover,.xnav a.cur{opacity:1;background:rgba(255,255,255,.12)}.xnav a::before,.xnav a::after{display:none !important}
+.xhead{position:relative;margin:22px 0 0 !important;padding:0 !important;min-height:250px;border-radius:14px 14px 0 0 !important;overflow:hidden;display:flex !important;align-items:flex-end !important;justify-content:center !important;text-align:center !important;background-color:var(--hd,#2a2a2e);border:0 !important;box-shadow:none !important}
+.xhead.hasban{aspect-ratio:auto !important;max-height:none !important;min-height:300px}
+.xhead::before,.xhead::after{display:none !important}
+.xhead .brand{position:relative;margin:0 0 28px;padding:16px 34px 14px;background:color-mix(in srgb,var(--card) 90%,transparent);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);border:2px solid var(--lnk);border-radius:6px;box-shadow:6px 6px 0 color-mix(in srgb,var(--lnk) 70%,transparent);font:700 40px/1 Lora,Georgia,serif !important;letter-spacing:-.01em !important;color:var(--ttl,var(--fg)) !important;text-shadow:none !important;text-decoration:none}
+.xhead .brand::after{display:none !important}
+.xhead .xsub{position:absolute;left:0;right:0;bottom:6px;font:italic 13px Lora,Georgia,serif;color:#fff !important;text-shadow:0 1px 4px rgba(0,0,0,.8)}
+.xhead:not(.hasban){background-image:linear-gradient(135deg,var(--lnk),color-mix(in srgb,var(--lnk) 40%,var(--bar,#222)))}
+@media(max-width:760px){.xhead,.xhead.hasban{min-height:190px}.xhead .brand{font-size:28px !important;padding:12px 20px 10px;margin-bottom:22px}}
+.syncbar{margin:0 -18px}
+.cols{display:grid !important;grid-template-columns:minmax(0,1fr) 290px !important;gap:30px !important;max-width:none !important;margin:0 !important;padding:30px 30px 34px !important;background:var(--card);border:1px solid color-mix(in srgb,var(--line) 70%,transparent);border-top:0;border-radius:0 0 14px 14px;box-shadow:0 14px 40px -24px rgba(0,0,0,.35)}
+main{grid-column:1 !important;grid-row:1 !important;max-width:none !important;margin:0 !important;padding:0 !important;min-width:0}
+#side{display:block !important;grid-column:2 !important;grid-row:1 !important}
+@media(max-width:860px){.cols{grid-template-columns:1fr !important;padding:22px 16px 26px !important}#side{grid-column:1 !important;grid-row:2 !important}}
+.wg{margin:0 0 20px;border:1px solid color-mix(in srgb,var(--line) 80%,transparent);border-radius:10px;overflow:hidden;background:var(--bg)}
+.wg h4{margin:0;padding:9px 14px;background:var(--lnk);color:var(--card);font:700 11px/1.2 system-ui,sans-serif;letter-spacing:.14em;text-transform:uppercase}
+.wi{padding:14px;font:13.5px/1.55 system-ui,sans-serif;color:var(--fg)}
+.wg-me .wi{display:flex;flex-direction:column;align-items:center;text-align:center;gap:4px}
+.me-ph{display:block;width:120px;height:120px;border-radius:50%;overflow:hidden;border:3px solid var(--card);box-shadow:0 0 0 2px var(--lnk);margin:4px 0 10px;background:var(--chip)}.me-ph img{width:100%;height:100%;object-fit:cover;margin:0 !important;border:0 !important;border-radius:0 !important}
+.me-n{font:700 18px Lora,Georgia,serif;color:var(--ttl,var(--fg))}.me-c{font-size:12px;color:var(--mut)}.me-l{margin-top:8px;font-weight:700;font-size:12px;color:var(--lnk);text-decoration:none}
+.wg-mood{font:italic 15px Lora,Georgia,serif;text-align:center}
+.wg-s{display:flex;align-items:center;gap:10px;padding:9px 12px;border:1px solid var(--line);border-radius:8px;background:var(--card);color:var(--mut);text-decoration:none}.wg-s:hover{border-color:var(--lnk)}
+.wg-tags{display:flex;flex-wrap:wrap;gap:6px}.wg-tags a{display:inline-flex;gap:6px;align-items:center;padding:4px 11px;border-radius:999px;background:var(--card);border:1px solid var(--line);color:var(--fg);text-decoration:none;font-size:12.5px}.wg-tags a span{color:var(--mut);font-size:11px}.wg-tags a:hover{border-color:var(--lnk);color:var(--lnk)}
+.wg-arch details{margin:0 0 4px}.wg-arch summary{cursor:pointer;font-weight:700;padding:3px 0}.wg-arch a{display:flex;justify-content:space-between;padding:3px 0 3px 16px;color:var(--fg);text-decoration:none}.wg-arch a span{color:var(--mut)}.wg-arch a:hover{color:var(--lnk)}
+.tlist{display:flex !important;flex-direction:column;gap:22px !important;margin:0 !important;padding:0 !important}
+.tlist li{display:block !important;position:relative;padding:0 !important;margin:0 !important;border:1px solid color-mix(in srgb,var(--line) 80%,transparent) !important;border-radius:10px !important;background:var(--card) !important;overflow:hidden;box-shadow:0 2px 0 color-mix(in srgb,var(--line) 60%,transparent) !important;transform:none !important;transition:box-shadow .2s,border-color .2s !important;animation:none !important}
+.tlist li::before,.tlist li::after{display:none !important;content:none !important}
+.tlist li:hover{border-color:var(--lnk) !important;box-shadow:0 8px 22px -12px color-mix(in srgb,var(--lnk) 60%,transparent) !important}
+.tlist a.tla{display:block;padding:0 !important;text-decoration:none}
+.tld{display:flex !important;justify-content:space-between;align-items:center;margin:0 !important;padding:8px 16px !important;background:color-mix(in srgb,var(--lnk) 12%,var(--card));border-bottom:1px solid color-mix(in srgb,var(--line) 70%,transparent);font:700 11px/1.4 system-ui,sans-serif !important;letter-spacing:.12em !important;text-transform:uppercase;color:var(--fg) !important}
+.tld .rtm{color:var(--lnk) !important;opacity:1 !important;letter-spacing:.08em}
+.tlt{display:block;padding:16px 18px 4px !important;font:700 24px/1.25 Lora,Georgia,serif !important;color:var(--ttl,var(--fg)) !important}
+.tlist .rmore{display:inline-flex !important;margin:6px 18px 16px !important;padding:7px 14px !important;border-radius:6px;background:var(--lnk);color:var(--card) !important;font:700 11px system-ui,sans-serif !important;letter-spacing:.1em;text-transform:uppercase;text-decoration:none !important}.tlist .rmore:hover{filter:brightness(1.1)}
+.pager{border:0 !important;padding:24px 0 0 !important}
+.pager a[href="#/archive"]{border:2px solid var(--lnk) !important;color:var(--lnk) !important;border-radius:6px !important;background:none !important;padding:10px 20px !important;font:700 11px system-ui,sans-serif !important;letter-spacing:.12em;text-transform:uppercase}.pager a[href="#/archive"]:hover{background:var(--lnk) !important;color:var(--card) !important}
+.bpost{max-width:none !important;margin:0 !important;padding:0 !important;background:none !important;border:0 !important;box-shadow:none !important;animation:none !important}
+.bp-date{display:block;margin:0 0 16px !important;padding:8px 14px !important;border:0 !important;border-radius:6px;background:color-mix(in srgb,var(--lnk) 12%,var(--card));color:var(--fg) !important;font:700 11px system-ui,sans-serif !important;letter-spacing:.12em !important}
+.bp-title{font:700 36px/1.15 Lora,Georgia,serif !important;letter-spacing:-.01em !important;background:none !important;-webkit-text-fill-color:currentColor !important;color:var(--ttl,var(--fg)) !important}
+@media(max-width:760px){.bp-title{font-size:28px !important}}
+.bp-meta{padding:0 0 18px !important;margin:0 0 24px !important;border-bottom:2px dotted color-mix(in srgb,var(--line) 90%,transparent)}
+.bp-meta a,.bp-foot div:last-child a,.lbls a{display:inline-block;padding:2px 10px;margin:2px;border-radius:999px;border:1px solid var(--line);background:var(--bg);color:var(--fg) !important;font:600 12px system-ui,sans-serif;text-decoration:none}
+.bp-body>p:first-of-type::first-letter{all:unset}
+.bp-body blockquote{border-left:4px solid var(--lnk) !important;background:color-mix(in srgb,var(--lnk) 7%,var(--card)) !important;border-radius:0 8px 8px 0}
+.mood,.bp-cur{display:inline-flex !important;gap:8px;padding:8px 14px !important;border-radius:8px !important;border:1px dashed var(--lnk) !important;background:color-mix(in srgb,var(--lnk) 6%,var(--card)) !important;font:13px system-ui,sans-serif}
+.bp-foot{margin-top:30px !important;padding:14px 16px !important;border:1px solid var(--line) !important;border-radius:8px;background:var(--bg)}
+.foot{text-align:center !important;border:0 !important;margin:18px 0 0 !important;padding:10px !important;font:11px system-ui,sans-serif !important;letter-spacing:.14em;text-transform:uppercase;color:var(--mut)}
 ::selection{background:color-mix(in srgb,var(--lnk) 30%,transparent)}
-@media(prefers-reduced-motion:reduce){*{transition:none !important}}
 </style></head><body data-t="system">
-<div class="wrap"><aside class="rail"><div class="xbar" id="mbtn"><nav class="xnav"><a href="#/" data-r="home">home</a><a href="#/write" data-r="write">write</a><a href="#/tags" data-r="tags">labels</a></nav><span class="xr"><a class="mnb" id="srb" href="#/search" data-r="search" aria-label="Search posts"><svg class="i" viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6"/><path d="M15 15l5 5"/></svg></a><button class="mnb" id="mnb" aria-label="Menu" aria-expanded="false" aria-controls="mnu"><svg class="i" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button></span>
+<div class="wrap"><div class="xbar" id="mbtn"><nav class="xnav"><a href="#/" data-r="home">home</a><a href="#/write" data-r="write">write</a><a href="#/tags" data-r="tags">labels</a></nav><span class="xr"><a class="mnb" id="srb" href="#/search" data-r="search" aria-label="Search posts"><svg class="i" viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6"/><path d="M15 15l5 5"/></svg></a><button class="mnb" id="mnb" aria-label="Menu" aria-expanded="false" aria-controls="mnu"><svg class="i" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button></span>
 <div class="mnu" id="mnu" hidden><a href="#/custom" data-r="custom" class="mi"><svg class="i" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M12 4a8 8 0 0 0 0 16c1.5 0 2-1 2-2s-1-1.5-1-2.5 1-1.5 2-1.5h2a3 3 0 0 0 3-3"/></svg>Customize</a><a href="#/profile" data-r="profile" class="mi"><svg class="i" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c1-4 4-6 8-6s7 2 8 6"/></svg>Profile</a><a href="#/archive" data-r="archive" class="mi"><svg class="i" viewBox="0 0 24 24"><path d="M3.5 5h17v4h-17zM5 9v10h14V9M10 13h4"/></svg>Blog Archive</a><a href="#/year" data-r="year" class="mi"><svg class="i" viewBox="0 0 24 24"><path d="M4 6h16v14H4zM4 10h16M8 3v5M16 3v5"/><path d="M8 14h2M12 14h2M16 14h0M8 17h2M12 17h2"/></svg>Year at a glance</a>
 <div class="mlab">Theme</div><div class="seg" id="seg"><button data-v="light">Light</button><button data-v="dark">Dark</button><button data-v="system">System</button></div>
 <button class="mi" id="mbk"><svg class="i" viewBox="0 0 24 24"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg>Download backup</button>
@@ -335,10 +322,8 @@ main{max-width:740px !important;margin:0 !important;padding-bottom:60px}
 <div class="msync" id="msync"></div></div></div>
 <div class="syncbar sans" id="syncbar" hidden><span id="synct">Showing your saved copy.</span><button id="syncb"><svg class="i" viewBox="0 0 24 24"><path d="M20 12a8 8 0 1 1-2.3-5.6M20 4v5h-5"/></svg>Continue syncing</button></div>
 <div class="xhead" id="xhead"><a class="brand" href="#/">Ashley's Blog</a><div class="xsub" id="xsub"></div></div>
-<nav class="tstrip" id="tstrip" hidden></nav>
-</aside>
 <div class="cols"><main id="app"></main><aside id="side"></aside></div>
-<footer class="foot"><div>Ashley's Blog &middot; est. 2026 &middot; Version 2026.11.07c</div></footer></div>
+<footer class="foot"><div>Ashley's Blog &middot; est. 2026 &middot; Version 2026.11.07d</div></footer></div>
 <script>
 /* ===================================================== */
 
@@ -668,7 +653,18 @@ async function storage(){const el=$('#stor');if(!el)return;try{if(!STOR){let tot
   const {tot,cnt,q}=STOR;let x=`<div><b>Blog:</b> ${SZ(tot)}</div><div class="mutd">${cnt} file${cnt===1?'':'s'} (posts and photos)</div>`;
   if(q&&q.limit){const u=+q.usage,l=+q.limit,pc=Math.min(100,u/l*100);x+=`<div style="margin-top:8px"><b>Google:</b> ${SZ(u)} of ${SZ(l)}</div><div class="meter"><span style="width:${pc.toFixed(1)}%"></span></div>`}
   else if(q&&q.usage)x+=`<div style="margin-top:8px"><b>Google:</b> ${SZ(+q.usage)} used</div>`;el.innerHTML=x}catch(e){el.textContent='Not available right now'}}
-async function side(){applyLook();const S=$('#side');if(S)S.innerHTML=''}
+async function side(){applyLook();const S=$('#side');if(!S)return;let d=[];try{d=await pub()}catch(e){S.innerHTML='';return}
+  const c={};d.forEach(p=>(p.tags||[]).forEach(t=>c[t]=(c[t]||0)+1));const tg=Object.keys(c).sort((a,b)=>a.localeCompare(b));
+  const Y={};d.forEach(p=>{const t=new Date(p.created_at),k=t.getFullYear()+'';(Y[k]=Y[k]||{})[t.getMonth()]=((Y[k]||{})[t.getMonth()]||0)+1});
+  const MN=['January','February','March','April','May','June','July','August','September','October','November','December'];
+  const lm=d.slice().sort((a,b)=>new Date(b.created_at)-new Date(a.created_at)).find(p=>p.mood);
+  const ph=PROFILE.photo?imgTag(PROFILE.photo,'Ashley',1).replace('<img ','<img style="'+pfStyle(PROFILE.photoPos)+'" '):'';
+  S.innerHTML=`<section class="wg wg-me"><h4>About me</h4><div class="wi"><a href="#/profile" class="me-ph">${ph}</a><b class="me-n">${esc(PROFILE.name||'Ashley')}</b><span class="me-c">${d.length} ${d.length===1?'entry':'entries'}</span><a class="me-l" href="#/profile">View my profile</a></div></section>`+
+  (lm?`<section class="wg"><h4>Current mood</h4><div class="wi wg-mood">${esc(lm.mood)}</div></section>`:'')+
+  `<section class="wg"><h4>Search</h4><div class="wi"><a class="wg-s" href="#/search"><svg class="i" viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6"/><path d="M15 15l5 5"/></svg>Search my posts</a></div></section>`+
+  (tg.length?`<section class="wg"><h4>Labels</h4><div class="wi wg-tags">${tg.map(t=>`<a href="#/tag/${encodeURIComponent(t)}">${esc(t)}<span>${c[t]}</span></a>`).join('')}</div></section>`:'')+
+  `<section class="wg"><h4>Blog archive</h4><div class="wi wg-arch">${Object.keys(Y).sort((a,b)=>b-a).map(y=>`<details${y==new Date().getFullYear()?' open':''}><summary>${y}</summary>${Object.keys(Y[y]).sort((a,b)=>b-a).map(m=>`<a href="#/archive">${MN[m]}<span>${Y[y][m]}</span></a>`).join('')}</details>`).join('')}</div></section>`;
+  loadImgs()}
 const XBTN='<button class="gyb yx" id="yx" aria-label="Close"><svg class="i" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg></button>';
 function pageHead(t){return `<div class="row" style="margin:0 0 14px;justify-content:space-between;align-items:center"><h1 style="margin:0;font-size:28px">${t}</h1>${XBTN}</div>`}
 function wireX(){const x=$('#yx');if(x)x.onclick=()=>BACKOK||history.length>1?history.back():(location.hash='#/')}
@@ -739,10 +735,4 @@ async function route(){if(!LS.getItem('blog.em')){signin();return}
 $('#syncb').onclick=resync;app.addEventListener('click',async e=>{const b=e.target.closest('[data-gy]');if(!b)return;GY+=+b.dataset.gy;let d=[];try{d=await pub()}catch(x){}const g=$('#gl');if(g)g.innerHTML=glance(d,GY)});addEventListener('hashchange',route);route();
 if('serviceWorker' in navigator)navigator.serviceWorker.register('sw.js');
 </script>
-<script>
-(function(){async function ts(){const el=document.getElementById('tstrip');if(!el)return;const h=location.hash||'#/';const show=h==='#/'||h.startsWith('#/page/')||h.startsWith('#/tag/')||h==='#/tags';if(!show){el.hidden=true;return}
-try{const c={};(await pub()).forEach(p=>(p.tags||[]).forEach(t=>c[t]=(c[t]||0)+1));const k=Object.keys(c).sort((a,b)=>a.localeCompare(b));if(!k.length){el.hidden=true;return}
-const cur=h.startsWith('#/tag/')?decodeURIComponent(h.slice(6)):null;const e=s=>String(s).replace(/[&<>"]/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[m]));
-el.innerHTML='<a href="#/"'+(cur?'':' class="on"')+'>All posts</a>'+k.map(t=>'<a href="#/tag/'+encodeURIComponent(t)+'"'+(t===cur?' class="on"':'')+'>'+e(t)+'<span class="n">'+c[t]+'</span></a>').join('');el.hidden=false}catch(x){el.hidden=true}}
-addEventListener('hashchange',ts);addEventListener('load',()=>setTimeout(ts,600))})();
-</script></body></html>
+</body></html>
