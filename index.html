@@ -261,44 +261,73 @@ body.tw .body blockquote{font-size:15px !important}body.tw #bo{font-size:15px !i
 .tlist .rmore{padding:8px 0 0 !important;font-size:12.5px !important}
 .pager a[href="#/archive"]{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--line);border-radius:999px;padding:8px 16px;text-decoration:none;color:var(--lnk);font:600 13px system-ui,sans-serif}
 .pager a[href="#/archive"]:hover{border-color:var(--lnk)}
-/* ---- 2026.11.07b mature redesign ---- */
+/* ---- 2026.11.07c full redesign ---- */
 body{background:var(--bg)}
-.wrap{max-width:1040px}
-.xbar{position:sticky !important;top:0;z-index:40;padding:12px 22px !important;font:600 12px/1 system-ui,sans-serif !important;letter-spacing:.12em;text-transform:uppercase;backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);background:color-mix(in srgb,var(--bar,#1c1c1e) 92%,transparent) !important;border-bottom:1px solid rgba(255,255,255,.08);box-shadow:0 2px 14px rgba(0,0,0,.14)}
-.xnav{gap:4px 26px !important}.xnav a{position:relative;opacity:.78;transition:opacity .2s}.xnav a:hover,.xnav a.cur{opacity:1}
-.xnav a::after{content:"";position:absolute;left:0;right:0;bottom:-6px;height:2px;background:currentColor;transform:scaleX(0);transition:transform .25s}.xnav a.cur::after,.xnav a:hover::after{transform:scaleX(1)}
-.xhead{padding:58px 26px 34px !important;border-bottom:1px solid var(--line)}
-.xhead .brand{font:700 44px/1.05 Lora,Georgia,serif !important;letter-spacing:-.02em}
-.xhead .xsub{font:italic 16px/1.5 Lora,Georgia,serif;color:var(--mut);margin-top:10px}
-.xhead:not(.hasban) .brand::after{content:"";display:block;width:44px;height:3px;margin-top:16px;background:var(--lnk)}
-.xhead.hasban{border-bottom:0;box-shadow:inset 0 -80px 90px -40px rgba(0,0,0,.55)}
-@media(max-width:760px){.xhead{padding:38px 20px 24px !important}.xhead .brand{font-size:34px !important}}
-.tstrip{display:flex;gap:8px;overflow-x:auto;padding:14px 22px;border-bottom:1px solid var(--line);scrollbar-width:none;font:600 12px system-ui,sans-serif}.tstrip::-webkit-scrollbar{display:none}.tstrip[hidden]{display:none}
-.tstrip a{flex:none;padding:7px 14px;border:1px solid var(--line);border-radius:999px;color:var(--fg);text-decoration:none;letter-spacing:.03em;transition:border-color .2s,background .2s}
-.tstrip a:hover{border-color:var(--lnk)}.tstrip a.on{background:var(--fg);color:var(--bg);border-color:var(--fg)}.tstrip a .n{opacity:.55;margin-left:5px;font-weight:400}
-.cols{max-width:720px !important;margin:40px auto 0 !important}
-.tlist{gap:14px !important}
-.tlist li{position:relative;border:1px solid var(--line) !important;border-radius:14px !important;background:var(--card) !important;padding:20px 22px 16px !important;box-shadow:0 1px 2px rgba(0,0,0,.04);transition:border-color .2s,box-shadow .2s,transform .2s !important}
-.tlist li::before{content:"";position:absolute;left:-1px;top:20px;bottom:20px;width:3px;border-radius:0 3px 3px 0;background:var(--lnk);opacity:0;transition:opacity .2s}
-.tlist li:hover{border-color:color-mix(in srgb,var(--lnk) 50%,var(--line)) !important;box-shadow:0 10px 26px -14px rgba(0,0,0,.3);transform:translateY(-2px)}.tlist li:hover::before{opacity:1}
-.tld{font:600 11px/1.4 system-ui,sans-serif !important;letter-spacing:.14em !important;color:var(--mut) !important}
+.wrap{max-width:1180px;margin:0 auto}
+.rail{position:relative}
+.xbar{position:relative !important;padding:14px 22px !important;font:700 11px/1 system-ui,sans-serif !important;letter-spacing:.16em;text-transform:uppercase;background:var(--bar,#18181b) !important;border:0;box-shadow:none}
+.xnav{gap:4px 24px !important}.xnav a{opacity:.72;transition:opacity .2s;position:relative}.xnav a:hover,.xnav a.cur{opacity:1}
+.xnav a::before{content:"";position:absolute;left:-10px;top:50%;width:4px;height:4px;margin-top:-2px;border-radius:50%;background:currentColor;opacity:0;transition:opacity .2s}.xnav a.cur::before{opacity:1}
+.xhead{padding:44px 26px 30px !important;border:0;text-align:left !important;background:none}
+.xhead .brand{display:block;font:700 54px/.95 Lora,Georgia,serif !important;letter-spacing:-.035em;color:var(--ttl,var(--fg))}
+.xhead .xsub{font:italic 16px/1.55 Lora,Georgia,serif;color:var(--mut);margin-top:16px;max-width:22em}
+.xhead:not(.hasban)::after{content:"";display:block;width:56px;height:4px;margin-top:22px;background:var(--lnk)}
+.xhead.hasban{border-radius:0;box-shadow:inset 0 -100px 100px -50px rgba(0,0,0,.6)}
+.xhead.hasban .brand{color:#fff !important}
+.tstrip{display:flex;gap:8px;overflow-x:auto;padding:4px 26px 22px;border:0;scrollbar-width:none;font:600 12.5px system-ui,sans-serif}.tstrip::-webkit-scrollbar{display:none}.tstrip[hidden]{display:none}
+.tstrip a{flex:none;display:inline-flex;align-items:center;justify-content:space-between;gap:10px;padding:8px 14px;border:1px solid var(--line);border-radius:999px;color:var(--fg);text-decoration:none;transition:all .2s}
+.tstrip a:hover{border-color:var(--lnk);color:var(--lnk)}.tstrip a.on{background:var(--lnk);color:var(--card);border-color:var(--lnk)}.tstrip a .n{opacity:.6;font-weight:500;font-variant-numeric:tabular-nums}
+.cols{max-width:none !important;margin:0 !important;padding:8px 26px 0 !important}
+main{max-width:740px !important;margin:0 !important;padding-bottom:60px}
+@media(min-width:980px){
+ .wrap{display:grid;grid-template-columns:330px minmax(0,1fr);column-gap:64px;align-items:start;padding:0 32px}
+ .rail{position:sticky;top:0;height:100vh;overflow-y:auto;display:flex;flex-direction:column;border-right:1px solid var(--line);padding-right:28px;scrollbar-width:none}
+ .rail::-webkit-scrollbar{display:none}
+ .xbar{margin:28px 0 0;border-radius:14px;padding:13px 16px !important}
+ .xhead{padding:56px 0 30px !important}
+ .xhead.hasban{margin-top:18px;border-radius:16px;padding:24px 20px !important;aspect-ratio:4/5;max-height:none;min-height:0}
+ .xhead .brand{font-size:60px !important}
+ .tstrip{flex-direction:column;overflow:visible;padding:0 0 30px}
+ .tstrip::before{content:"Browse by tag";font:700 10.5px system-ui,sans-serif;letter-spacing:.18em;text-transform:uppercase;color:var(--mut);margin:0 0 8px 2px}
+ .tstrip a{border-radius:10px;border-color:transparent;padding:9px 12px}.tstrip a:hover{background:var(--chip);border-color:transparent}
+ .cols{grid-column:2;padding:56px 0 0 !important}
+ .foot{grid-column:2}
+ .mnu{right:0}
+}
+@media(max-width:979px){.xhead .brand{font-size:44px !important}}
+@media(max-width:480px){.xhead{padding:34px 20px 22px !important}.xhead .brand{font-size:38px !important}.tstrip{padding:0 20px 18px}.cols{padding:8px 18px 0 !important}}
+.tlist{gap:0 !important;margin:0 !important}
+.tlist li{display:grid !important;grid-template-columns:64px minmax(0,1fr);column-gap:22px;border:0 !important;border-top:1px solid var(--line) !important;border-radius:0 !important;background:none !important;padding:26px 0 24px !important;box-shadow:none !important;transform:none !important;position:relative}
+.tlist li:first-child{border-top:0 !important;padding-top:4px !important}
+.tlist li::before{content:attr(data-d);grid-column:1;grid-row:1 / span 2;font:700 44px/1 Lora,Georgia,serif;color:var(--ttl,var(--fg));letter-spacing:-.03em;text-align:right;position:static;width:auto;background:none;opacity:1;transition:color .25s}
+.tlist li::after{content:attr(data-m);position:absolute;left:0;width:64px;text-align:right;top:76px;font:700 10.5px system-ui,sans-serif;letter-spacing:.2em;text-transform:uppercase;color:var(--lnk)}
+.tlist li:first-child::after{top:54px}
+.tlist li:hover::before{color:var(--lnk)}
+.tlist a.tla,.tlist .rmore{grid-column:2}
+.tld{font:600 11px/1.4 system-ui,sans-serif !important;letter-spacing:.14em !important;color:var(--mut) !important;margin-bottom:8px !important}
 .tld .rtm{opacity:1;color:var(--lnk)}
-.tlt{font:700 23px/1.28 Lora,Georgia,serif !important;letter-spacing:-.01em}
-.tlist .rmore{padding-top:12px !important;font:700 11.5px system-ui,sans-serif !important;letter-spacing:.12em;text-transform:uppercase;transition:gap .2s}.rmore:hover{gap:8px !important;text-decoration:none !important}
-.bpost{max-width:700px}
-.bp-date{letter-spacing:.16em !important}
-.bp-title{font:700 38px/1.15 Lora,Georgia,serif !important;letter-spacing:-.02em}
-@media(max-width:760px){.bp-title{font-size:30px !important}}
-.bp-meta a,.bp-foot div:last-child a,.lbls a{display:inline-block;padding:2px 10px;margin:2px 2px;border:1px solid var(--line);border-radius:999px;font:600 12px system-ui,sans-serif;text-decoration:none;color:var(--fg) !important}
+.tlt{font:700 27px/1.2 Lora,Georgia,serif !important;letter-spacing:-.015em;transition:color .2s}
+.tlist li:hover .tlt{color:var(--lnk)}
+.tlist .rmore{padding-top:14px !important;font:700 11px system-ui,sans-serif !important;letter-spacing:.16em;text-transform:uppercase;transition:gap .2s;justify-self:start}.rmore:hover{gap:10px !important;text-decoration:none !important}
+@media(max-width:480px){.tlist li{grid-template-columns:46px minmax(0,1fr);column-gap:16px}.tlist li::before{font-size:34px}.tlist li::after{width:46px;top:66px}.tlist li:first-child::after{top:44px}.tlt{font-size:22px !important}}
+.bpost{max-width:720px;margin:0 !important;padding:0 0 20px !important}
+.bp-date{letter-spacing:.18em !important;color:var(--lnk) !important;border:0 !important;margin-bottom:12px !important;padding:0 !important}
+.bp-title{font:700 46px/1.08 Lora,Georgia,serif !important;letter-spacing:-.03em;margin-bottom:14px !important}
+@media(max-width:760px){.bp-title{font-size:34px !important}}
+.bp-meta{padding-bottom:22px;border-bottom:1px solid var(--line);margin-bottom:30px !important}
+.bp-meta a,.bp-foot div:last-child a,.lbls a{display:inline-block;padding:3px 11px;margin:2px;border:1px solid var(--line);border-radius:999px;font:600 12px system-ui,sans-serif;text-decoration:none;color:var(--fg) !important;transition:border-color .2s}
 .bp-meta a:hover,.bp-foot div:last-child a:hover,.lbls a:hover{border-color:var(--lnk)}
-.bp-body blockquote{border-left:3px solid var(--lnk) !important}
-.mood,.bp-cur{display:inline-flex !important;align-items:center;gap:6px;padding:7px 14px !important;border-radius:10px;background:var(--chip);border-left:3px solid var(--lnk);font:13px system-ui,sans-serif}
-.pager a[href="#/archive"]{font:700 11.5px system-ui,sans-serif !important;letter-spacing:.12em;text-transform:uppercase;padding:11px 20px !important}
-.foot{text-align:center;font:12px system-ui,sans-serif;letter-spacing:.08em;color:var(--mut);border-top:1px solid var(--line);margin-top:30px}
+.bp-body>p:first-of-type::first-letter{float:left;font:700 3.6em/.85 Lora,Georgia,serif;margin:.06em .1em 0 0;color:var(--lnk)}
+.bp-body blockquote{border-left:3px solid var(--lnk) !important;background:var(--chip) !important}
+.mood,.bp-cur{display:inline-flex !important;align-items:center;gap:8px;padding:9px 16px !important;border-radius:12px;background:var(--chip);border:0;border-left:3px solid var(--lnk);font:13px system-ui,sans-serif}
+.bp-foot{border-color:var(--line) !important}
+.pager{padding-top:18px !important;border-top:1px solid var(--line)}
+.pager a[href="#/archive"]{font:700 11px system-ui,sans-serif !important;letter-spacing:.16em;text-transform:uppercase;padding:12px 22px !important;border-color:var(--fg) !important;color:var(--fg) !important}.pager a[href="#/archive"]:hover{background:var(--fg);color:var(--bg) !important}
+.foot{text-align:left;font:11px system-ui,sans-serif;letter-spacing:.14em;text-transform:uppercase;color:var(--mut);border-top:1px solid var(--line);margin-top:20px;padding:26px 26px 40px}
 ::selection{background:color-mix(in srgb,var(--lnk) 30%,transparent)}
 @media(prefers-reduced-motion:reduce){*{transition:none !important}}
 </style></head><body data-t="system">
-<div class="wrap"><div class="xbar" id="mbtn"><nav class="xnav"><a href="#/" data-r="home">home</a><a href="#/write" data-r="write">write</a><a href="#/tags" data-r="tags">labels</a></nav><span class="xr"><a class="mnb" id="srb" href="#/search" data-r="search" aria-label="Search posts"><svg class="i" viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6"/><path d="M15 15l5 5"/></svg></a><button class="mnb" id="mnb" aria-label="Menu" aria-expanded="false" aria-controls="mnu"><svg class="i" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button></span>
+<div class="wrap"><aside class="rail"><div class="xbar" id="mbtn"><nav class="xnav"><a href="#/" data-r="home">home</a><a href="#/write" data-r="write">write</a><a href="#/tags" data-r="tags">labels</a></nav><span class="xr"><a class="mnb" id="srb" href="#/search" data-r="search" aria-label="Search posts"><svg class="i" viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6"/><path d="M15 15l5 5"/></svg></a><button class="mnb" id="mnb" aria-label="Menu" aria-expanded="false" aria-controls="mnu"><svg class="i" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button></span>
 <div class="mnu" id="mnu" hidden><a href="#/custom" data-r="custom" class="mi"><svg class="i" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M12 4a8 8 0 0 0 0 16c1.5 0 2-1 2-2s-1-1.5-1-2.5 1-1.5 2-1.5h2a3 3 0 0 0 3-3"/></svg>Customize</a><a href="#/profile" data-r="profile" class="mi"><svg class="i" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c1-4 4-6 8-6s7 2 8 6"/></svg>Profile</a><a href="#/archive" data-r="archive" class="mi"><svg class="i" viewBox="0 0 24 24"><path d="M3.5 5h17v4h-17zM5 9v10h14V9M10 13h4"/></svg>Blog Archive</a><a href="#/year" data-r="year" class="mi"><svg class="i" viewBox="0 0 24 24"><path d="M4 6h16v14H4zM4 10h16M8 3v5M16 3v5"/><path d="M8 14h2M12 14h2M16 14h0M8 17h2M12 17h2"/></svg>Year at a glance</a>
 <div class="mlab">Theme</div><div class="seg" id="seg"><button data-v="light">Light</button><button data-v="dark">Dark</button><button data-v="system">System</button></div>
 <button class="mi" id="mbk"><svg class="i" viewBox="0 0 24 24"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg>Download backup</button>
@@ -307,8 +336,9 @@ body{background:var(--bg)}
 <div class="syncbar sans" id="syncbar" hidden><span id="synct">Showing your saved copy.</span><button id="syncb"><svg class="i" viewBox="0 0 24 24"><path d="M20 12a8 8 0 1 1-2.3-5.6M20 4v5h-5"/></svg>Continue syncing</button></div>
 <div class="xhead" id="xhead"><a class="brand" href="#/">Ashley's Blog</a><div class="xsub" id="xsub"></div></div>
 <nav class="tstrip" id="tstrip" hidden></nav>
+</aside>
 <div class="cols"><main id="app"></main><aside id="side"></aside></div>
-<footer class="foot"><div>Ashley's Blog &middot; est. 2026 &middot; Version 2026.11.07b</div></footer></div>
+<footer class="foot"><div>Ashley's Blog &middot; est. 2026 &middot; Version 2026.11.07c</div></footer></div>
 <script>
 /* ===================================================== */
 
@@ -505,7 +535,7 @@ async function search(){app.innerHTML=`<div class="sbox" role="search"><svg clas
 async function home(pg){pg=Math.max(1,+pg||1);app.innerHTML=`<div id="pl" class="empty">Loading</div>`;
   try{const d=await pub(),HP=7,n=Math.max(1,Math.ceil(d.length/HP));pg=Math.min(pg,n);const part=d.slice((pg-1)*HP,pg*HP);
    const nav=d.length>HP?`<nav class="pager" style="justify-content:center"><a href="#/archive">Older posts ${NEXT}</a></nav>`:'';
-   $('#pl').outerHTML=d.length?'<ul class="tlist">'+part.map(p=>`<li><a class="tla" href="#/post/${p.id}"><span class="tld">${LONG(p.created_at)}<span class="rtm"> &middot; ${rt(p.body)}</span></span><span class="tlt">${esc(p.title)||'Untitled'}</span></a><a class="rmore" href="#/post/${p.id}">Read more ${NEXT}</a></li>`).join('')+'</ul>'+nav:'<div class="empty">No posts yet.</div>'}catch(e){$('#pl').outerHTML=fail}}
+   $('#pl').outerHTML=d.length?'<ul class="tlist">'+part.map(p=>`<li data-d="${new Date(p.created_at).getDate()}" data-m="${new Date(p.created_at).toLocaleString('en-US',{month:'short'})}"><a class="tla" href="#/post/${p.id}"><span class="tld">${LONG(p.created_at)}<span class="rtm"> &middot; ${rt(p.body)}</span></span><span class="tlt">${esc(p.title)||'Untitled'}</span></a><a class="rmore" href="#/post/${p.id}">Read more ${NEXT}</a></li>`).join('')+'</ul>'+nav:'<div class="empty">No posts yet.</div>'}catch(e){$('#pl').outerHTML=fail}}
 const PREV='<svg class="i" style="width:12px;height:12px" viewBox="0 0 24 24"><path d="M15 6l-6 6 6 6"/></svg>',NEXT='<svg class="i" style="width:12px;height:12px" viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></svg>';
 const DKEY=d=>new Date(d).toLocaleDateString('en-CA');let GY=new Date().getFullYear();
 function glance(d,y){const by={};d.forEach(p=>{const k=DKEY(p.created_at);(by[k]=by[k]||[]).push(p)});const today=DKEY(new Date());
