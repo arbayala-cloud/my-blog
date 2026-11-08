@@ -1,6 +1,6 @@
 <!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Ashley's Blog</title><meta name="theme-color" content="#ffffff"><link rel="manifest" href="manifest.json?v=2"><link rel="icon" href="icons/icon.svg?v=2" type="image/svg+xml"><link rel="icon" href="icons/favicon-32.png?v=2" sizes="32x32"><link rel="apple-touch-icon" href="icons/apple-touch-icon.png?v=2">
-<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Lora:ital@0;1&family=Varela+Round&family=Fira+Sans:wght@400;600&family=Playfair+Display:ital,wght@0,500;0,600;1,500&family=Jost:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Lora:ital@0;1&family=Varela+Round&family=Fira+Sans:wght@400;600&family=Playfair+Display:ital,wght@0,500;0,600;1,500&family=Jost:wght@400;500;600&family=Caveat:wght@500;600&display=swap" rel="stylesheet">
 <style>
 :root{--bg:#ffffff;--card:#ffffff;--fg:#111111;--mut:#6b6b6b;--acc:#111111;--acc2:#333333;--gold:#555555;--line:#e2e2e2;--chip:#f0f0f0}
 [data-t=dark]{--bg:#000000;--card:#0d0d0d;--fg:#f2f2f2;--mut:#9a9a9a;--acc:#ffffff;--acc2:#dddddd;--gold:#bbbbbb;--line:#2a2a2a;--chip:#1c1c1c}
@@ -371,6 +371,13 @@ body{background:linear-gradient(180deg,color-mix(in srgb,var(--hd) 28%,var(--bg)
 .body a,.bp-meta a:hover{color:var(--lnk)}
 ::selection{background:color-mix(in srgb,var(--lnk) 28%,transparent)}
 #side{display:none !important}.cols{grid-template-columns:1fr !important;max-width:760px !important;margin-left:auto !important;margin-right:auto !important}
+
+/* ---- 2026.11.07j journal touch ---- */
+html body[data-t]{background-image:radial-gradient(rgba(120,90,80,.05) 1px,transparent 1px);background-size:18px 18px}
+.entry,.post,article{background-color:#fffaf4;border-left:3px double rgba(184,115,125,.45)!important;box-shadow:0 2px 10px rgba(94,74,82,.08);border-radius:4px}
+.body{background-image:repeating-linear-gradient(transparent 0 calc(1.9em - 1px),rgba(143,165,142,.18) calc(1.9em - 1px) 1.9em);line-height:1.9em;padding-left:.6em}
+.bp-meta,.bp-meta *{font-family:'Caveat',cursive!important;font-size:1.15rem;letter-spacing:.02em}
+body[data-t="dark"] .entry,body[data-t="dark"] .post,body[data-t="dark"] article{background-color:#262023}
 </style></head><body data-t="system">
 <div class="wrap"><div class="xbar" id="mbtn"><nav class="xnav"><a href="#/" data-r="home">home</a><a href="#/write" data-r="write">write</a><a href="#/tags" data-r="tags">labels</a></nav><span class="xr"><a class="mnb" id="srb" href="#/search" data-r="search" aria-label="Search posts"><svg class="i" viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6"/><path d="M15 15l5 5"/></svg></a><button class="mnb" id="mnb" aria-label="Menu" aria-expanded="false" aria-controls="mnu"><svg class="i" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button></span>
 <div class="mnu" id="mnu" hidden><a href="#/custom" data-r="custom" class="mi"><svg class="i" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M12 4a8 8 0 0 0 0 16c1.5 0 2-1 2-2s-1-1.5-1-2.5 1-1.5 2-1.5h2a3 3 0 0 0 3-3"/></svg>Customize</a><a href="#/archive" data-r="archive" class="mi"><svg class="i" viewBox="0 0 24 24"><path d="M3.5 5h17v4h-17zM5 9v10h14V9M10 13h4"/></svg>Blog Archive</a><a href="#/year" data-r="year" class="mi"><svg class="i" viewBox="0 0 24 24"><path d="M4 6h16v14H4zM4 10h16M8 3v5M16 3v5"/><path d="M8 14h2M12 14h2M16 14h0M8 17h2M12 17h2"/></svg>Year at a glance</a>
@@ -381,7 +388,7 @@ body{background:linear-gradient(180deg,color-mix(in srgb,var(--hd) 28%,var(--bg)
 <div class="syncbar sans" id="syncbar" hidden><span id="synct">Showing your saved copy.</span><button id="syncb"><svg class="i" viewBox="0 0 24 24"><path d="M20 12a8 8 0 1 1-2.3-5.6M20 4v5h-5"/></svg>Continue syncing</button></div>
 <div class="xhead" id="xhead"><a class="brand" href="#/">Ashley's Blog</a><div class="xsub" id="xsub"></div></div>
 <div class="cols"><main id="app"></main><aside id="side"></aside></div>
-<footer class="foot"><div>Ashley's Blog &middot; est. 2026 &middot; Version 2026.11.07i</div></footer></div>
+<footer class="foot"><div>Ashley's Blog &middot; est. 2026 &middot; Version 2026.11.07j</div></footer></div>
 <script>
 /* ===================================================== */
 
