@@ -387,7 +387,7 @@ body[data-t="dark"] .entry,body[data-t="dark"] .post,body[data-t="dark"] article
 <div class="syncbar sans" id="syncbar" hidden><span id="synct">Showing your saved copy.</span><button id="syncb"><svg class="i" viewBox="0 0 24 24"><path d="M20 12a8 8 0 1 1-2.3-5.6M20 4v5h-5"/></svg>Continue syncing</button></div>
 <div class="xhead" id="xhead"><a class="brand" href="#/">Ashley's Blog</a><div class="xsub" id="xsub"></div></div>
 <div class="cols"><main id="app"></main><aside id="side"></aside></div>
-<footer class="foot"><div>Ashley's Blog &middot; est. 2026 &middot; Version 2026.11.09a</div></footer></div>
+<footer class="foot"><div>Ashley's Blog &middot; est. 2026 &middot; Version 2026.11.09b</div></footer></div>
 <script>
 /* ===================================================== */
 
@@ -420,7 +420,7 @@ async function saveAll(posts){const body=JSON.stringify({app:'my-blog',v:1,saved
   if(id)await api(UP+'/'+id+'?uploadType=media',{method:'PATCH',headers:{'Content-Type':'application/json'},body});
   else{const nid=await mpUpload({name:FN,parents:['appDataFolder']},body,'application/json');LS.setItem('blog.fid',nid)}LS.setItem('blog.cache',JSON.stringify(posts));LS.setItem('blog.prof',JSON.stringify(PROFILE))}
 async function change(fn){let cur;try{cur=await loadAll()}catch(e){if(!/auth|offline|timeout|Failed to fetch|NetworkError|Load failed/i.test(e.message))throw e;cur=null}
-  if(cur){const next=fn(cur.slice());await saveAll(next);CACHE=null;STOR=null;return next}
+  if(cur){const next=fn(cur.slice());try{await saveAll(next);CACHE=null;STOR=null;return next}catch(e){}}
   const loc=JSON.parse(LS.getItem('blog.cache')||'[]').map(norm);const next=fn(loc.slice());if(loc.some(p=>!next.find(x=>x.id===p.id)))throw new Error('needsync');
   LS.setItem('blog.cache',JSON.stringify(next));LS.setItem('blog.prof',JSON.stringify(PROFILE));LS.setItem('blog.pprof',JSON.stringify(PROFILE));LS.setItem('blog.pending','1');CACHE=null;needSync();return next}
 const IMG={},ICACHE='blog-img-v1';
