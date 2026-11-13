@@ -201,12 +201,16 @@ h3{font-size:1.35rem;margin:1.1em 0 .35em}
 
 /* Posts */
 .entry{
+  display:flex;
+  flex-direction:column;
+  align-items:flex-start;
   margin:0;
-  padding:0 0 40px;
+  padding:32px 0;
   border-bottom:1px solid #e5e5e5;
 }
-.entry+.entry,.blog-posts .entry+.entry{margin-top:40px}
-.blog-posts .entry:last-child{border-bottom:0;padding-bottom:0}
+.entry+.entry,.blog-posts .entry+.entry{margin-top:0}
+.blog-posts .entry:first-child,.entry:first-child{padding-top:0}
+.blog-posts .entry:last-child,.entry:last-child{border-bottom:0;padding-bottom:0}
 .pt,.tlt,.bp-title,
 .pt a,.tlt a,.bp-title a{
   font:700 1.85rem/1.25 "Playfair Display",Georgia,"Times New Roman",Times,serif;
@@ -217,6 +221,15 @@ h3{font-size:1.35rem;margin:1.1em 0 .35em}
   letter-spacing:-0.015em;
 }
 .pt a:hover,.tlt a:hover,.bp-title a:hover{color:#a85a6a;text-decoration:none}
+.entry .pt,.entry .pt a{
+  margin:0 0 8px;
+  display:-webkit-box;
+  -webkit-box-orient:vertical;
+  -webkit-line-clamp:2;
+  line-clamp:2;
+  overflow:hidden;
+  max-height:2.5em;
+}
 .bp-title{margin:0 0 12px;font-size:2.15rem}
 .date-header,.day,.meta,.ef,.bp-foot,.bp-meta{
   font:11px/1.6 Arial,Helvetica,sans-serif;
@@ -224,10 +237,26 @@ h3{font-size:1.35rem;margin:1.1em 0 .35em}
   text-transform:uppercase;
   letter-spacing:.1em;
 }
-.meta{margin:0 0 22px}
+.meta{margin:0 0 16px}
+.entry .meta{
+  margin:0 0 12px;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  max-width:100%;
+}
 .date-header{margin:0 0 10px;padding:0;border:0}
 .body{font:18px/1.75 Georgia,"Times New Roman",Times,serif;color:#222}
 .body p{margin:0 0 1.15em}
+.entry .ex{
+  display:-webkit-box;
+  -webkit-box-orient:vertical;
+  -webkit-line-clamp:3;
+  line-clamp:3;
+  overflow:hidden;
+  margin:0;
+  max-height:5.25em;
+}
 .body img,.cover{max-width:100%;height:auto;display:block;margin:16px 0}
 img.cover{width:100%;aspect-ratio:16/9;object-fit:cover;margin:0 0 1.4em}
 .body .al-center{text-align:center}
@@ -286,15 +315,15 @@ img.cover{width:100%;aspect-ratio:16/9;object-fit:cover;margin:0 0 1.4em}
 .ef a:hover,.bp-foot a:hover,.meta a:hover{color:#a85a6a;text-decoration:underline}
 .rmore{
   display:inline-block;
-  margin-top:8px;
-  font:13px/1.4 Arial,Helvetica,sans-serif;
+  margin-top:14px;
+  font:12px/1.4 Arial,Helvetica,sans-serif;
   letter-spacing:.04em;
   text-transform:none;
   color:#a85a6a;
   text-decoration:none;
 }
 .rmore:hover{color:#8a4554;text-decoration:none}
-.rmore .arr{margin-left:4px}
+.rmore .arr{margin-left:4px;font-size:13px}
 .s{margin:0 .45em;color:#ccc;letter-spacing:0}
 .rtm{color:#666}
 .heart{
@@ -350,10 +379,11 @@ img.cover{width:100%;aspect-ratio:16/9;object-fit:cover;margin:0 0 1.4em}
 }
 
 /* Sidebar */
-.wg{margin:0 0 36px}
+.wg{margin:0 0 28px}
+.wg:last-child{margin-bottom:0}
 .wg h4{
-  margin:0 0 14px;
-  padding:0 0 8px;
+  margin:0 0 10px;
+  padding:0 0 6px;
   font:11px/1.3 Arial,Helvetica,sans-serif;
   font-weight:700;
   color:#222;
@@ -391,8 +421,8 @@ img.cover{width:100%;aspect-ratio:16/9;object-fit:cover;margin:0 0 1.4em}
 .sf button:hover{color:#a85a6a}
 .wg-tags a{
   display:block;
-  padding:4px 0;
-  font:14px Arial,Helvetica,sans-serif;
+  padding:3px 0;
+  font:13px/1.45 Arial,Helvetica,sans-serif;
   color:#222;
   text-decoration:none;
 }
@@ -400,9 +430,9 @@ img.cover{width:100%;aspect-ratio:16/9;object-fit:cover;margin:0 0 1.4em}
 .wg-arch details{margin:0}
 .wg-arch summary{
   cursor:pointer;
-  font:14px Arial,Helvetica,sans-serif;
+  font:13px/1.45 Arial,Helvetica,sans-serif;
   color:#222;
-  padding:4px 0;
+  padding:3px 0;
   list-style:none;
 }
 .wg-arch summary::-webkit-details-marker{display:none}
@@ -410,7 +440,7 @@ img.cover{width:100%;aspect-ratio:16/9;object-fit:cover;margin:0 0 1.4em}
 .wg-arch details[open]>summary::before{content:"\25BC"}
 .wg-arch .ma{margin-left:16px}
 .wg-arch ul{margin:0;padding:0 0 6px 18px;list-style:none}
-.wg-arch li{padding:2px 0;font:14px Arial,Helvetica,sans-serif}
+.wg-arch li{padding:2px 0;font:13px/1.45 Arial,Helvetica,sans-serif}
 .wg-arch a{color:#222;text-decoration:none}
 .wg-arch a:hover{color:#a85a6a;text-decoration:none}
 
@@ -895,28 +925,32 @@ body[data-t=system] ::selection{background:#5a353c;color:#e8e8e8}
 
 body[data-t=system] option,body[data-t=system] optgroup,body[data-t=system] datalist{background:#1e1e1e;color:#e8e8e8}}
 @media(max-width:800px){
-  .page{padding:0;padding-bottom:max(16px,env(safe-area-inset-bottom))}
+  .page{padding:0;padding-bottom:max(20px,env(safe-area-inset-bottom))}
   .outer{max-width:none}
-  .blog-header{padding:24px 20px 0}
+  .blog-header{padding:28px 22px 0}
   .brand{font-size:30px}
   .tabs-wrap{padding-top:10px}
   .xbar a,.mnb{padding:10px 8px 12px;letter-spacing:.06em;font-size:11px}
   .cols{
     grid-template-columns:1fr;
-    gap:48px;
-    padding:32px 20px 48px;
+    gap:36px;
+    padding:28px 22px 40px;
   }
-  #side{border-top:1px solid #e5e5e5;padding-top:36px}
+  #side{border-top:1px solid #e5e5e5;padding-top:28px}
   body[data-t=dark] #side{border-color:#333}
 
   .pt,.tlt,.bp-title,.pt a,.tlt a,.bp-title a{font-size:1.55rem}
   .bp-title{font-size:1.7rem}
   body{font-size:17px}
   .body{font-size:17px}
-  .foot{padding:20px 20px max(24px,env(safe-area-inset-bottom))}
+  .foot{padding:22px 22px max(28px,env(safe-area-inset-bottom))}
   .bp-nav{flex-wrap:wrap}
-  .entry{padding-bottom:32px}
-  .entry+.entry,.blog-posts .entry+.entry{margin-top:32px}
+  .entry{padding:28px 0}
+  .blog-posts .entry:first-child,.entry:first-child{padding-top:0}
+  .blog-posts .entry:last-child,.entry:last-child{border-bottom:0;padding-bottom:0}
+  .entry+.entry,.blog-posts .entry+.entry{margin-top:0}
+  .wg{margin:0 0 24px}
+  .entry .meta{letter-spacing:.08em}
 }
 </style></head><body data-t="system">
 <div class="page"><div class="outer">
@@ -931,7 +965,7 @@ body[data-t=system] option,body[data-t=system] optgroup,body[data-t=system] data
 <div class="syncbar sans" id="syncbar" hidden><span id="synct">Showing your saved copy.</span><button id="syncb"><svg class="i" viewBox="0 0 24 24"><path d="M20 12a8 8 0 1 1-2.3-5.6M20 4v5h-5"/></svg>Continue syncing</button></div>
 <div class="xhead" id="xhead"></div>
 <div class="cols"><main id="app"></main><aside id="side"></aside></div>
-<footer class="foot"><div>&copy; 2026 Ashley Ayala &middot; Version 2026.11.12e</div></footer>
+<footer class="foot"><div>&copy; 2026 Ashley Ayala &middot; Version 2026.11.12f</div></footer>
 </div></div>
 <script>
 /* ===================================================== */
@@ -1101,10 +1135,11 @@ async function all(){if(CACHE)return CACHE;const c=LS.getItem('blog.cache');
 async function pub(){return (await all()).filter(p=>p.published)}
 const MOODI='<svg class="i" style="width:12px;height:12px" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M9 14c1.5 1.5 4.5 1.5 6 0M9.5 10h0M14.5 10h0"/></svg>',MUSI='<svg class="i" style="width:12px;height:12px" viewBox="0 0 24 24"><path d="M9 18V6l10-2v12"/><circle cx="7" cy="18" r="2"/><circle cx="17" cy="16" r="2"/></svg>';
 function entry(p,full){const labs=(p.tags||[]).map(t=>`<a href="#/tag/${encodeURIComponent(t)}">${esc(t)}</a>`).join(', ');
-  const ex=plain(p.body),long=!full&&ex.length>700;
-  const bodyH=full||!long?render(p.body):(ex?`<p>${esc(ex.slice(0,700).replace(/\s\S*$/,''))}…</p>`:'');
-  const meta=`<div class="meta">${fmt(p.created_at).toUpperCase()} <span class="s">&middot;</span> ${rt(p.body).toUpperCase()}${labs?' <span class="s">&middot;</span> '+labs:''}</div>`;
-  return `<div class="entry"><h2 class="pt"><a href="#/p/${p.id}">${esc(p.title)||'Untitled'}${p.published?'':' <span class="tag">Draft</span>'}</a></h2>${meta}${p.cover?coverTag(p.cover):''}<div class="body">${bodyH}</div>${full?'':`<a class="rmore" href="#/p/${p.id}">Read more <span class="arr" aria-hidden="true">&rarr;</span></a>`}</div>`}
+  const ex=plain(p.body);
+  if(full){const meta=`<div class="meta">${fmt(p.created_at).toUpperCase()} <span class="s">&middot;</span> ${rt(p.body).toUpperCase()}${labs?' <span class="s">&middot;</span> '+labs:''}</div>`;
+    return `<div class="entry"><h2 class="pt"><a href="#/p/${p.id}">${esc(p.title)||'Untitled'}${p.published?'':' <span class="tag">Draft</span>'}</a></h2>${meta}${p.cover?coverTag(p.cover):''}<div class="body">${render(p.body)}</div></div>`}
+  const meta=`<div class="meta">${fmt(p.created_at).toUpperCase()} <span class="s">&middot;</span> ${rt(p.body).toUpperCase()}</div>`;
+  return `<div class="entry"><h2 class="pt"><a href="#/p/${p.id}">${esc(p.title)||'Untitled'}${p.published?'':' <span class="tag">Draft</span>'}</a></h2>${meta}${p.cover?coverTag(p.cover):''}${ex?`<div class="body"><p class="ex">${esc(ex)}</p></div>`:''}<a class="rmore" href="#/p/${p.id}">Read more <span class="arr" aria-hidden="true">&rarr;</span></a></div>`}
 document.addEventListener('click',async e=>{const b=e.target.closest('[data-h]');if(!b)return;const id=b.dataset.h;
   try{await change(a=>a.map(x=>x.id===id?{...x,hearts:(x.hearts||0)+1}:x));const n=(CACHE||await all()).find(x=>x.id===id).hearts;b.classList.add('on');b.lastChild.textContent=n+' eprops'}catch(x){}});
 const card=p=>entry(p,false);
@@ -1262,8 +1297,7 @@ async function side(){applyLook();document.body.classList.toggle('ishome',!locat
   const c={};d.forEach(p=>(p.tags||[]).forEach(t=>c[t]=(c[t]||0)+1));const tg=Object.keys(c).sort((a,b)=>a.localeCompare(b));
   const Y={};d.forEach(p=>{const t=new Date(p.created_at),y=t.getFullYear()+'',m=t.getMonth();((Y[y]=Y[y]||{})[m]=Y[y][m]||[]).push(p)});
   const MN=['January','February','March','April','May','June','July','August','September','October','November','December'];
-  const cy=new Date().getFullYear()+'',cm=new Date().getMonth();
-  const arch=Object.keys(Y).sort((a,b)=>b-a).map(y=>`<details class="ya"${y==cy?' open':''}><summary>${y}</summary>${Object.keys(Y[y]).sort((a,b)=>b-a).map(m=>`<details class="ma"${y==cy&&+m==cm?' open':''}><summary>${MN[m]} (${Y[y][m].length})</summary><ul>${Y[y][m].map(p=>`<li><a href="#/p/${p.id}">${esc(p.title)||LONG(p.created_at)}</a></li>`).join('')}</ul></details>`).join('')}</details>`).join('')||'<span class="mutd">No posts yet.</span>';
+  const arch=Object.keys(Y).sort((a,b)=>b-a).map(y=>`<details class="ya"><summary>${y}</summary>${Object.keys(Y[y]).sort((a,b)=>b-a).map(m=>`<details class="ma"><summary>${MN[m]} (${Y[y][m].length})</summary><ul>${Y[y][m].map(p=>`<li><a href="#/p/${p.id}">${esc(p.title)||LONG(p.created_at)}</a></li>`).join('')}</ul></details>`).join('')}</details>`).join('')||'<span class="mutd">No posts yet.</span>';
   S.innerHTML=`<section class="wg"><h4>Search</h4><div class="wi"><form id="sf" class="sf"><input id="si" type="text" aria-label="Search this blog"><button type="submit">Search</button></form></div></section>`+
   `<section class="wg"><h4><a href="#/archive">Blog Archive</a></h4><div class="wi wg-arch">${arch}</div></section>`+
   (tg.length?`<section class="wg"><h4><a href="#/tags">Labels</a></h4><div class="wi wg-tags">${tg.map(t=>`<a href="#/tag/${encodeURIComponent(t)}">${esc(t)} (${c[t]})</a>`).join('')}</div></section>`:'');
