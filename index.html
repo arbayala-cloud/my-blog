@@ -615,22 +615,285 @@ body.tw .body,body.tw .body p,body.tw .body li,body.tw .body blockquote,body.tw 
 }
 body.tw .pvw,body.tw #bo,body.tw .bp-body{font-size:16px;line-height:1.75}
 
-/* Dark theme */
-body[data-t=dark]{background:#161616;color:#eee}
-body[data-t=dark] .outer,body[data-t=dark] .cols,body[data-t=dark] .foot,body[data-t=dark] .mnu,body[data-t=dark] .pvw,body[data-t=dark] .cbox,body[data-t=dark] .mod,body[data-t=dark] .blog-header,body[data-t=dark] .sf,body[data-t=dark] .sf button,body[data-t=dark] .sbox{background:#1c1c1c;border-color:#333}
-body[data-t=dark] .brand,body[data-t=dark] .xbar a,body[data-t=dark] .mnb,body[data-t=dark] h1,body[data-t=dark] h2,body[data-t=dark] h3,body[data-t=dark] .pt,body[data-t=dark] .pt a,body[data-t=dark] .bp-title,body[data-t=dark] .mi,body[data-t=dark] .msync b,body[data-t=dark] .wg h4,body[data-t=dark] .wg h4 a,body[data-t=dark] .st,body[data-t=dark] .wg-tags a,body[data-t=dark] .wg-arch a,body[data-t=dark] .wg-arch summary{color:#eee}
-body[data-t=dark] .xbar a.cur,body[data-t=dark] .mnb[aria-expanded=true]{box-shadow:inset 0 -1px 0 #eee;color:#eee}
-body[data-t=dark] .entry,body[data-t=dark] .wg h4,body[data-t=dark] .foot,body[data-t=dark] .bp-nav,body[data-t=dark] .blog-header,body[data-t=dark] .sres li,body[data-t=dark] .list .it,body[data-t=dark] .msync,body[data-t=dark] .sf,body[data-t=dark] .sf button{border-color:#333}
-body[data-t=dark] a,body[data-t=dark] .rmore,body[data-t=dark] .body a{color:#c98994}
-body[data-t=dark] a:hover,body[data-t=dark] .pt a:hover,body[data-t=dark] .rmore:hover{color:#d4a3ac}
-body[data-t=dark] input,body[data-t=dark] textarea,body[data-t=dark] .sf input{background:#1c1c1c;color:#eee;border-color:#333}
-body[data-t=dark] button,body[data-t=dark] .btn{background:#1c1c1c;color:#eee;border-color:#333}
-body[data-t=dark] button.pri{background:#eee;color:#161616;border-color:#eee}
-body[data-t=dark] .mi:hover,body[data-t=dark] .fmt button:hover{background:#2a2a2a}
-body[data-t=dark] .syncbar,body[data-t=dark] .dnote{background:#222;border-color:#333;color:#eee}
-body[data-t=dark] .meta,body[data-t=dark] .ef,body[data-t=dark] .bp-foot,body[data-t=dark] .mutd,body[data-t=dark] .foot{color:#999}
-body[data-t=dark] .body,body[data-t=dark] .sn{color:#eee}
+/* Dark theme — explicit Dark, or System when the device prefers dark.
+   Light mode (and explicit Light) is unchanged. */
+body[data-t=light]{color-scheme:light}
 
+body[data-t=dark]{
+  color-scheme:dark;
+  background:#121212;
+  color:#e8e8e8;
+}
+body[data-t=dark] .outer,body[data-t=dark] .cols,body[data-t=dark] .foot,body[data-t=dark] .mnu,body[data-t=dark] .pvw,body[data-t=dark] .cbox,body[data-t=dark] .mod,
+body[data-t=dark] .blog-header,body[data-t=dark] .sf,body[data-t=dark] .sf button,body[data-t=dark] .sbox,body[data-t=dark] .gyb{
+  background:#1e1e1e;
+  border-color:#333;
+  color:#e8e8e8;
+}
+body[data-t=dark] .blog-header{color:#e8e8e8}
+body[data-t=dark] .brand,body[data-t=dark] .brand:hover,body[data-t=dark] .xbar a,body[data-t=dark] .xbar a.cur,body[data-t=dark] .xbar a.cur:hover,
+body[data-t=dark] .mnb,body[data-t=dark] .mnb[aria-expanded=true]{
+  color:#e8e8e8;
+  background:transparent;
+  border:0;
+}
+body[data-t=dark] .xbar a:hover,body[data-t=dark] .mnb:hover{color:#d98a9a;background:transparent}
+body[data-t=dark] .xbar a.cur,body[data-t=dark] .mnb[aria-expanded=true]{box-shadow:inset 0 -1px 0 #e8e8e8;color:#e8e8e8}
+body[data-t=dark] .xsub{color:#999}
+
+body[data-t=dark] h1,body[data-t=dark] h2,body[data-t=dark] h3,body[data-t=dark] h4,
+body[data-t=dark] .pt,body[data-t=dark] .pt a,body[data-t=dark] .tlt,body[data-t=dark] .tlt a,body[data-t=dark] .bp-title,body[data-t=dark] .bp-title a,
+body[data-t=dark] .st,body[data-t=dark] .wi,body[data-t=dark] .body,body[data-t=dark] .sn,body[data-t=dark] .list .it,body[data-t=dark] .list .it span,
+body[data-t=dark] .sres a,body[data-t=dark] .arch a,body[data-t=dark] .cbox h4,body[data-t=dark] .mod h4,body[data-t=dark] .gy,
+body[data-t=dark] .msync b,body[data-t=dark] .saved.on{
+  color:#e8e8e8;
+}
+body[data-t=dark] .pt a:hover,body[data-t=dark] .tlt a:hover,body[data-t=dark] .bp-title a:hover,
+body[data-t=dark] .list a.it:hover span:first-child,body[data-t=dark] .sres a:hover .st,
+body[data-t=dark] .arch a:hover,body[data-t=dark] .wg h4 a:hover,body[data-t=dark] .wg-tags a:hover,body[data-t=dark] .wg-arch a:hover{
+  color:#d98a9a;
+}
+
+body[data-t=dark] .wg h4,body[data-t=dark] .wg h4 a,body[data-t=dark] .wg-tags a,body[data-t=dark] .wg-arch a,body[data-t=dark] .wg-arch summary{color:#e8e8e8}
+body[data-t=dark] .wg-arch summary::before{color:#777}
+
+body[data-t=dark] a,body[data-t=dark] .rmore,body[data-t=dark] .body a,body[data-t=dark] .more,body[data-t=dark] .mod a{color:#d98a9a}
+body[data-t=dark] a:hover,body[data-t=dark] .rmore:hover,body[data-t=dark] .body a:hover,body[data-t=dark] .more:hover{color:#e4a8b3}
+
+body[data-t=dark] .meta,body[data-t=dark] .ef,body[data-t=dark] .bp-foot,body[data-t=dark] .bp-meta,body[data-t=dark] .date-header,body[data-t=dark] .day,
+body[data-t=dark] .mutd,body[data-t=dark] .foot,body[data-t=dark] .pagehead p,body[data-t=dark] .empty,body[data-t=dark] .mlab,body[data-t=dark] .msync,
+body[data-t=dark] .scount,body[data-t=dark] .sd,body[data-t=dark] .gml,body[data-t=dark] .gt,body[data-t=dark] .cnt,body[data-t=dark] .ya .cnt,body[data-t=dark] .ma .cnt,
+body[data-t=dark] .msg,body[data-t=dark] .rtm,body[data-t=dark] .tag,body[data-t=dark] .date,body[data-t=dark] .l,body[data-t=dark] label.l,body[data-t=dark] .xsub,
+body[data-t=dark] .mood,body[data-t=dark] .bp-cur,body[data-t=dark] .cur2,body[data-t=dark] .heart,body[data-t=dark] .saved,body[data-t=dark] .cc,body[data-t=dark] .pf .pl b,
+body[data-t=dark] .body h4.chap,body[data-t=dark] .body .vn,body[data-t=dark] .sbox .i,body[data-t=dark] .mi .i{
+  color:#999;
+}
+body[data-t=dark] .ef a,body[data-t=dark] .bp-foot a,body[data-t=dark] .meta a,body[data-t=dark] .bp-nav a{color:#999}
+body[data-t=dark] .ef a:hover,body[data-t=dark] .bp-foot a:hover,body[data-t=dark] .meta a:hover,body[data-t=dark] .bp-nav a:hover{color:#d98a9a;text-decoration:none}
+body[data-t=dark] .s{color:#555}
+body[data-t=dark] .body blockquote{color:#c8c8c8;border-color:#333}
+
+body[data-t=dark] .entry,body[data-t=dark] .wg h4,body[data-t=dark] .foot,body[data-t=dark] .bp-nav,body[data-t=dark] .blog-header,
+body[data-t=dark] .sres li,body[data-t=dark] .list .it,body[data-t=dark] .msync,body[data-t=dark] .sf,body[data-t=dark] .sf button,
+body[data-t=dark] .etabs,body[data-t=dark] .mod,body[data-t=dark] .mod h4,body[data-t=dark] .cbox,body[data-t=dark] .dnote,body[data-t=dark] .syncbar,
+body[data-t=dark] .tag,body[data-t=dark] .chip,body[data-t=dark] .body h4.chap,body[data-t=dark] .pvw,body[data-t=dark] .gyb{
+  border-color:#333;
+}
+body[data-t=dark] #side{border-color:#333}
+
+body[data-t=dark] input,body[data-t=dark] textarea,body[data-t=dark] select,body[data-t=dark] #ti,body[data-t=dark] #bo,body[data-t=dark] textarea#bo,
+body[data-t=dark] #tg,body[data-t=dark] #md,body[data-t=dark] #ls,body[data-t=dark] #st,body[data-t=dark] #sq,body[data-t=dark] [contenteditable]{
+  background:#161616;
+  color:#e8e8e8;
+  border-color:#3a3a3a;
+  caret-color:#e8e8e8;
+}
+body[data-t=dark] .sf input{background:#161616;color:#e8e8e8;border-color:#3a3a3a;caret-color:#e8e8e8}
+body[data-t=dark] .sbox input{background:transparent !important;color:#e8e8e8;caret-color:#e8e8e8}
+body[data-t=dark] input::placeholder,body[data-t=dark] textarea::placeholder,
+body[data-t=dark] #ti::placeholder,body[data-t=dark] #bo::placeholder,body[data-t=dark] #tg::placeholder,
+body[data-t=dark] [contenteditable]:empty:before{color:#8a8a8a;opacity:1}
+body[data-t=dark] input:focus,body[data-t=dark] textarea:focus,body[data-t=dark] #ti:focus,body[data-t=dark] #bo:focus,
+body[data-t=dark] [contenteditable]:focus{outline:1px solid #888;outline-offset:0}
+body[data-t=dark] input:-webkit-autofill,
+body[data-t=dark] textarea:-webkit-autofill{
+  -webkit-text-fill-color:#e8e8e8;
+  caret-color:#e8e8e8;
+  box-shadow:0 0 0 1000px #161616 inset;
+  -webkit-box-shadow:0 0 0 1000px #161616 inset;
+}
+
+body[data-t=dark] button,body[data-t=dark] .btn{
+  background:#1e1e1e;
+  color:#e8e8e8;
+  border-color:#3a3a3a;
+}
+body[data-t=dark] button.pri{background:#e8e8e8;color:#121212;border-color:#e8e8e8}
+body[data-t=dark] button.pri:hover{background:#fff;color:#121212}
+body[data-t=dark] button.icon,body[data-t=dark] .heart,body[data-t=dark] .mnb{
+  background:transparent;
+  border:0;
+  color:#e8e8e8;
+}
+body[data-t=dark] .heart{color:#999}
+body[data-t=dark] .seg button.on{background:#e8e8e8;color:#121212;border-color:#e8e8e8}
+
+body[data-t=dark] .mi{background:none;color:#e8e8e8;border:0}
+body[data-t=dark] .mi:hover{background:#2a2a2a;color:#e8e8e8;text-decoration:none}
+body[data-t=dark] .mlab{color:#999}
+
+body[data-t=dark] .etabs button{background:none;border:0;color:#999}
+body[data-t=dark] .etabs button.on{color:#e8e8e8;font-weight:700;box-shadow:inset 0 -1px 0 #e8e8e8;background:none}
+body[data-t=dark] .fmt{background:#1e1e1e;border-color:#333}
+body[data-t=dark] .fmt button,body[data-t=dark] .fmt label.btn{
+  background:none;
+  border:0;
+  color:#e8e8e8;
+}
+body[data-t=dark] .fmt button:hover,body[data-t=dark] .fmt button:active,body[data-t=dark] .fmt label.btn:hover,
+body[data-t=dark] .mi:hover{background:#2a2a2a}
+body[data-t=dark] .fmt .sep{background:#333}
+body[data-t=dark] .fmt .i,body[data-t=dark] .fmt button .i,body[data-t=dark] svg.i{stroke:currentColor;color:inherit}
+
+body[data-t=dark] .chip{background:#2a2a2a;color:#e8e8e8;border-color:#3a3a3a}
+body[data-t=dark] .chip:hover{border-color:#d98a9a;color:#d98a9a}
+body[data-t=dark] .syncbar,body[data-t=dark] .dnote{background:#1a1a1a;border-color:#333;color:#e8e8e8}
+body[data-t=dark] .pvw{background:#1e1e1e;border-color:#333;color:#e8e8e8}
+
+body[data-t=dark] .skin{background:#1e1e1e;border-color:#333}
+body[data-t=dark] .skin.on{outline-color:#e8e8e8}
+body[data-t=dark] .cc input[type=color]{background:#1e1e1e;border-color:#3a3a3a}
+body[data-t=dark] .meter{background:#333}
+body[data-t=dark] .meter span{background:#e8e8e8}
+body[data-t=dark] .g0,body[data-t=dark] .gg a,body[data-t=dark] .gg span{background:#2a2a2a}
+body[data-t=dark] .g1{background:#5a353c}
+body[data-t=dark] .g2{background:#8a5560}
+body[data-t=dark] .g3{background:#a85a6a}
+body[data-t=dark] .gg .td{outline-color:#e8e8e8}
+body[data-t=dark] mark{background:#5a353c;color:inherit}
+body[data-t=dark] ::selection{background:#5a353c;color:#e8e8e8}
+
+body[data-t=dark] option,body[data-t=dark] optgroup,body[data-t=dark] datalist{background:#1e1e1e;color:#e8e8e8}
+
+@media(prefers-color-scheme:dark){
+/* Dark theme — explicit Dark, or System when the device prefers dark.
+   Light mode (and explicit Light) is unchanged. */
+
+body[data-t=system]{
+  color-scheme:dark;
+  background:#121212;
+  color:#e8e8e8;
+}
+body[data-t=system] .outer,body[data-t=system] .cols,body[data-t=system] .foot,body[data-t=system] .mnu,body[data-t=system] .pvw,body[data-t=system] .cbox,body[data-t=system] .mod,
+body[data-t=system] .blog-header,body[data-t=system] .sf,body[data-t=system] .sf button,body[data-t=system] .sbox,body[data-t=system] .gyb{
+  background:#1e1e1e;
+  border-color:#333;
+  color:#e8e8e8;
+}
+body[data-t=system] .blog-header{color:#e8e8e8}
+body[data-t=system] .brand,body[data-t=system] .brand:hover,body[data-t=system] .xbar a,body[data-t=system] .xbar a.cur,body[data-t=system] .xbar a.cur:hover,
+body[data-t=system] .mnb,body[data-t=system] .mnb[aria-expanded=true]{
+  color:#e8e8e8;
+  background:transparent;
+  border:0;
+}
+body[data-t=system] .xbar a:hover,body[data-t=system] .mnb:hover{color:#d98a9a;background:transparent}
+body[data-t=system] .xbar a.cur,body[data-t=system] .mnb[aria-expanded=true]{box-shadow:inset 0 -1px 0 #e8e8e8;color:#e8e8e8}
+body[data-t=system] .xsub{color:#999}
+
+body[data-t=system] h1,body[data-t=system] h2,body[data-t=system] h3,body[data-t=system] h4,
+body[data-t=system] .pt,body[data-t=system] .pt a,body[data-t=system] .tlt,body[data-t=system] .tlt a,body[data-t=system] .bp-title,body[data-t=system] .bp-title a,
+body[data-t=system] .st,body[data-t=system] .wi,body[data-t=system] .body,body[data-t=system] .sn,body[data-t=system] .list .it,body[data-t=system] .list .it span,
+body[data-t=system] .sres a,body[data-t=system] .arch a,body[data-t=system] .cbox h4,body[data-t=system] .mod h4,body[data-t=system] .gy,
+body[data-t=system] .msync b,body[data-t=system] .saved.on{
+  color:#e8e8e8;
+}
+body[data-t=system] .pt a:hover,body[data-t=system] .tlt a:hover,body[data-t=system] .bp-title a:hover,
+body[data-t=system] .list a.it:hover span:first-child,body[data-t=system] .sres a:hover .st,
+body[data-t=system] .arch a:hover,body[data-t=system] .wg h4 a:hover,body[data-t=system] .wg-tags a:hover,body[data-t=system] .wg-arch a:hover{
+  color:#d98a9a;
+}
+
+body[data-t=system] .wg h4,body[data-t=system] .wg h4 a,body[data-t=system] .wg-tags a,body[data-t=system] .wg-arch a,body[data-t=system] .wg-arch summary{color:#e8e8e8}
+body[data-t=system] .wg-arch summary::before{color:#777}
+
+body[data-t=system] a,body[data-t=system] .rmore,body[data-t=system] .body a,body[data-t=system] .more,body[data-t=system] .mod a{color:#d98a9a}
+body[data-t=system] a:hover,body[data-t=system] .rmore:hover,body[data-t=system] .body a:hover,body[data-t=system] .more:hover{color:#e4a8b3}
+
+body[data-t=system] .meta,body[data-t=system] .ef,body[data-t=system] .bp-foot,body[data-t=system] .bp-meta,body[data-t=system] .date-header,body[data-t=system] .day,
+body[data-t=system] .mutd,body[data-t=system] .foot,body[data-t=system] .pagehead p,body[data-t=system] .empty,body[data-t=system] .mlab,body[data-t=system] .msync,
+body[data-t=system] .scount,body[data-t=system] .sd,body[data-t=system] .gml,body[data-t=system] .gt,body[data-t=system] .cnt,body[data-t=system] .ya .cnt,body[data-t=system] .ma .cnt,
+body[data-t=system] .msg,body[data-t=system] .rtm,body[data-t=system] .tag,body[data-t=system] .date,body[data-t=system] .l,body[data-t=system] label.l,body[data-t=system] .xsub,
+body[data-t=system] .mood,body[data-t=system] .bp-cur,body[data-t=system] .cur2,body[data-t=system] .heart,body[data-t=system] .saved,body[data-t=system] .cc,body[data-t=system] .pf .pl b,
+body[data-t=system] .body h4.chap,body[data-t=system] .body .vn,body[data-t=system] .sbox .i,body[data-t=system] .mi .i{
+  color:#999;
+}
+body[data-t=system] .ef a,body[data-t=system] .bp-foot a,body[data-t=system] .meta a,body[data-t=system] .bp-nav a{color:#999}
+body[data-t=system] .ef a:hover,body[data-t=system] .bp-foot a:hover,body[data-t=system] .meta a:hover,body[data-t=system] .bp-nav a:hover{color:#d98a9a;text-decoration:none}
+body[data-t=system] .s{color:#555}
+body[data-t=system] .body blockquote{color:#c8c8c8;border-color:#333}
+
+body[data-t=system] .entry,body[data-t=system] .wg h4,body[data-t=system] .foot,body[data-t=system] .bp-nav,body[data-t=system] .blog-header,
+body[data-t=system] .sres li,body[data-t=system] .list .it,body[data-t=system] .msync,body[data-t=system] .sf,body[data-t=system] .sf button,
+body[data-t=system] .etabs,body[data-t=system] .mod,body[data-t=system] .mod h4,body[data-t=system] .cbox,body[data-t=system] .dnote,body[data-t=system] .syncbar,
+body[data-t=system] .tag,body[data-t=system] .chip,body[data-t=system] .body h4.chap,body[data-t=system] .pvw,body[data-t=system] .gyb{
+  border-color:#333;
+}
+body[data-t=system] #side{border-color:#333}
+
+body[data-t=system] input,body[data-t=system] textarea,body[data-t=system] select,body[data-t=system] #ti,body[data-t=system] #bo,body[data-t=system] textarea#bo,
+body[data-t=system] #tg,body[data-t=system] #md,body[data-t=system] #ls,body[data-t=system] #st,body[data-t=system] #sq,body[data-t=system] [contenteditable]{
+  background:#161616;
+  color:#e8e8e8;
+  border-color:#3a3a3a;
+  caret-color:#e8e8e8;
+}
+body[data-t=system] .sf input{background:#161616;color:#e8e8e8;border-color:#3a3a3a;caret-color:#e8e8e8}
+body[data-t=system] .sbox input{background:transparent !important;color:#e8e8e8;caret-color:#e8e8e8}
+body[data-t=system] input::placeholder,body[data-t=system] textarea::placeholder,
+body[data-t=system] #ti::placeholder,body[data-t=system] #bo::placeholder,body[data-t=system] #tg::placeholder,
+body[data-t=system] [contenteditable]:empty:before{color:#8a8a8a;opacity:1}
+body[data-t=system] input:focus,body[data-t=system] textarea:focus,body[data-t=system] #ti:focus,body[data-t=system] #bo:focus,
+body[data-t=system] [contenteditable]:focus{outline:1px solid #888;outline-offset:0}
+body[data-t=system] input:-webkit-autofill,
+body[data-t=system] textarea:-webkit-autofill{
+  -webkit-text-fill-color:#e8e8e8;
+  caret-color:#e8e8e8;
+  box-shadow:0 0 0 1000px #161616 inset;
+  -webkit-box-shadow:0 0 0 1000px #161616 inset;
+}
+
+body[data-t=system] button,body[data-t=system] .btn{
+  background:#1e1e1e;
+  color:#e8e8e8;
+  border-color:#3a3a3a;
+}
+body[data-t=system] button.pri{background:#e8e8e8;color:#121212;border-color:#e8e8e8}
+body[data-t=system] button.pri:hover{background:#fff;color:#121212}
+body[data-t=system] button.icon,body[data-t=system] .heart,body[data-t=system] .mnb{
+  background:transparent;
+  border:0;
+  color:#e8e8e8;
+}
+body[data-t=system] .heart{color:#999}
+body[data-t=system] .seg button.on{background:#e8e8e8;color:#121212;border-color:#e8e8e8}
+
+body[data-t=system] .mi{background:none;color:#e8e8e8;border:0}
+body[data-t=system] .mi:hover{background:#2a2a2a;color:#e8e8e8;text-decoration:none}
+body[data-t=system] .mlab{color:#999}
+
+body[data-t=system] .etabs button{background:none;border:0;color:#999}
+body[data-t=system] .etabs button.on{color:#e8e8e8;font-weight:700;box-shadow:inset 0 -1px 0 #e8e8e8;background:none}
+body[data-t=system] .fmt{background:#1e1e1e;border-color:#333}
+body[data-t=system] .fmt button,body[data-t=system] .fmt label.btn{
+  background:none;
+  border:0;
+  color:#e8e8e8;
+}
+body[data-t=system] .fmt button:hover,body[data-t=system] .fmt button:active,body[data-t=system] .fmt label.btn:hover,
+body[data-t=system] .mi:hover{background:#2a2a2a}
+body[data-t=system] .fmt .sep{background:#333}
+body[data-t=system] .fmt .i,body[data-t=system] .fmt button .i,body[data-t=system] svg.i{stroke:currentColor;color:inherit}
+
+body[data-t=system] .chip{background:#2a2a2a;color:#e8e8e8;border-color:#3a3a3a}
+body[data-t=system] .chip:hover{border-color:#d98a9a;color:#d98a9a}
+body[data-t=system] .syncbar,body[data-t=system] .dnote{background:#1a1a1a;border-color:#333;color:#e8e8e8}
+body[data-t=system] .pvw{background:#1e1e1e;border-color:#333;color:#e8e8e8}
+
+body[data-t=system] .skin{background:#1e1e1e;border-color:#333}
+body[data-t=system] .skin.on{outline-color:#e8e8e8}
+body[data-t=system] .cc input[type=color]{background:#1e1e1e;border-color:#3a3a3a}
+body[data-t=system] .meter{background:#333}
+body[data-t=system] .meter span{background:#e8e8e8}
+body[data-t=system] .g0,body[data-t=system] .gg a,body[data-t=system] .gg span{background:#2a2a2a}
+body[data-t=system] .g1{background:#5a353c}
+body[data-t=system] .g2{background:#8a5560}
+body[data-t=system] .g3{background:#a85a6a}
+body[data-t=system] .gg .td{outline-color:#e8e8e8}
+body[data-t=system] mark{background:#5a353c;color:inherit}
+body[data-t=system] ::selection{background:#5a353c;color:#e8e8e8}
+
+body[data-t=system] option,body[data-t=system] optgroup,body[data-t=system] datalist{background:#1e1e1e;color:#e8e8e8}}
 @media(max-width:800px){
   .page{padding:0;padding-bottom:max(16px,env(safe-area-inset-bottom))}
   .outer{max-width:none}
@@ -644,6 +907,8 @@ body[data-t=dark] .body,body[data-t=dark] .sn{color:#eee}
     padding:32px 20px 48px;
   }
   #side{border-top:1px solid #e5e5e5;padding-top:36px}
+  body[data-t=dark] #side{border-color:#333}
+
   .pt,.tlt,.bp-title,.pt a,.tlt a,.bp-title a{font-size:1.55rem}
   .bp-title{font-size:1.7rem}
   body{font-size:17px}
@@ -666,7 +931,7 @@ body[data-t=dark] .body,body[data-t=dark] .sn{color:#eee}
 <div class="syncbar sans" id="syncbar" hidden><span id="synct">Showing your saved copy.</span><button id="syncb"><svg class="i" viewBox="0 0 24 24"><path d="M20 12a8 8 0 1 1-2.3-5.6M20 4v5h-5"/></svg>Continue syncing</button></div>
 <div class="xhead" id="xhead"></div>
 <div class="cols"><main id="app"></main><aside id="side"></aside></div>
-<footer class="foot"><div>&copy; 2026 Ashley Ayala &middot; Version 2026.11.12d</div></footer>
+<footer class="foot"><div>&copy; 2026 Ashley Ayala &middot; Version 2026.11.12e</div></footer>
 </div></div>
 <script>
 /* ===================================================== */
