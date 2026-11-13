@@ -965,7 +965,7 @@ body[data-t=system] option,body[data-t=system] optgroup,body[data-t=system] data
 <div class="syncbar sans" id="syncbar" hidden><span id="synct">Showing your saved copy.</span><button id="syncb"><svg class="i" viewBox="0 0 24 24"><path d="M20 12a8 8 0 1 1-2.3-5.6M20 4v5h-5"/></svg>Continue syncing</button></div>
 <div class="xhead" id="xhead"></div>
 <div class="cols"><main id="app"></main><aside id="side"></aside></div>
-<footer class="foot"><div>&copy; 2026 Ashley Ayala &middot; Version 2026.11.12f</div></footer>
+<footer class="foot"><div>&copy; 2026 Ashley Ayala &middot; Version 2026.11.12g</div></footer>
 </div></div>
 <script>
 /* ===================================================== */
@@ -1161,7 +1161,15 @@ async function search(){app.innerHTML=`<div class="sbox" role="search"><svg clas
   $('#sqx').onclick=()=>{q.value='';run();q.focus()};run();q.focus()}
 async function home(pg){app.innerHTML=`<div id="pl" class="empty">Loading</div>`;
   try{const d=await pub();
-   $('#pl').outerHTML=d.length?'<div class="blog-posts">'+d.map(p=>entry(p,false)).join('')+'</div>':'<div class="empty">No posts yet.</div>'}catch(e){$('#pl').outerHTML=fail}}
+    const per=6,pages=Math.max(1,Math.ceil(d.length/per)),n=Math.min(Math.max(1,parseInt(pg,10)||1),pages);
+    const slice=d.slice((n-1)*per,n*per);
+    const posts=slice.length?'<div class="blog-posts">'+slice.map(x=>entry(x,false)).join('')+'</div>':'<div class="empty">No posts yet.</div>';
+    let nav='';
+    if(d.length>per){const newer=n>1?`<a href="${n===2?'#/':'#/page/'+(n-1)}">Newer posts</a>`:'<span></span>';
+      const mid=n>1?'<a href="#/">Home</a>':'<span></span>';
+      const older=n<pages?`<a href="#/page/${n+1}">Older posts</a>`:'<span></span>';
+      nav=`<nav class="bp-nav" aria-label="More posts">${newer}${mid}${older}</nav>`}
+    $('#pl').outerHTML=posts+nav}catch(e){$('#pl').outerHTML=fail}}
 const PREV='<svg class="i" style="width:12px;height:12px" viewBox="0 0 24 24"><path d="M15 6l-6 6 6 6"/></svg>',NEXT='<svg class="i" style="width:12px;height:12px" viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></svg>';
 const DKEY=d=>new Date(d).toLocaleDateString('en-CA');let GY=new Date().getFullYear();
 function glance(d,y){const by={};d.forEach(p=>{const k=DKEY(p.created_at);(by[k]=by[k]||[]).push(p)});const today=DKEY(new Date());
@@ -1293,7 +1301,7 @@ async function storage(){const el=$('#stor');if(!el)return;try{if(!STOR){let tot
   const {tot,cnt,q}=STOR;let x=`<div><b>Blog:</b> ${SZ(tot)}</div><div class="mutd">${cnt} file${cnt===1?'':'s'} (posts and photos)</div>`;
   if(q&&q.limit){const u=+q.usage,l=+q.limit,pc=Math.min(100,u/l*100);x+=`<div style="margin-top:8px"><b>Google:</b> ${SZ(u)} of ${SZ(l)}</div><div class="meter"><span style="width:${pc.toFixed(1)}%"></span></div>`}
   else if(q&&q.usage)x+=`<div style="margin-top:8px"><b>Google:</b> ${SZ(+q.usage)} used</div>`;el.innerHTML=x}catch(e){el.textContent='Not available right now'}}
-async function side(){applyLook();document.body.classList.toggle('ishome',!location.hash||location.hash==='#/'||location.hash==='#');const S=$('#side');if(!S)return;let d=[];try{d=await pub()}catch(e){d=[]}
+async function side(){applyLook();document.body.classList.toggle('ishome',!location.hash||location.hash==='#/'||location.hash==='#'||location.hash.startsWith('#/page/'));const S=$('#side');if(!S)return;let d=[];try{d=await pub()}catch(e){d=[]}
   const c={};d.forEach(p=>(p.tags||[]).forEach(t=>c[t]=(c[t]||0)+1));const tg=Object.keys(c).sort((a,b)=>a.localeCompare(b));
   const Y={};d.forEach(p=>{const t=new Date(p.created_at),y=t.getFullYear()+'',m=t.getMonth();((Y[y]=Y[y]||{})[m]=Y[y][m]||[]).push(p)});
   const MN=['January','February','March','April','May','June','July','August','September','October','November','December'];
